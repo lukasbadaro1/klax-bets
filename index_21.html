@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KLAX Weather Bets</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  :root {
+    --bg:      #000;
+    --bg1:     #111;
+    --bg2:     #1a1a1a;
+    --bg3:     #222;
+    --border:  #2a2a2a;
+    --border2: #333;
+    --border3: #3d3d3d;
+    --text:    #f0f0f0;
+    --text2:   #aaa;
+    --muted:   #666;
+    --dim:     #333;
+    --green:      #22c55e;
+    --green-soft: rgba(34,197,94,0.08);
+    --green-bd:   rgba(34,197,94,0.2);
+    --red:        #ef4444;
+    --red-soft:   rgba(239,68,68,0.08);
+    --red-bd:     rgba(239,68,68,0.2);
+    --gold:    #eab308;
+    --blue:    #3b82f6;
+    --indigo:  #6366f1;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  input, select, button { font-family: inherit; }
+
+  input:focus, select:focus {
+    outline: none !important;
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.12) !important;
+  }
+
+  input[type=number]::-webkit-inner-spin-button { opacity: 1; }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes pulseDot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+  .fade-in { animation: fadeUp 0.2s ease forwards; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+
+  /* ── Labels ── */
+  .label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── Nav tabs ── */
+  .nav-tab {
+    padding: 7px 16px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+  .nav-tab.active  { background: #fff; color: #000; }
+  .nav-tab.inactive { background: transparent; color: var(--muted); }
+  .nav-tab.inactive:hover { color: var(--text); }
+
+  /* ── Buttons ── */
+  .btn { border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .btn-primary { background: #fff; color: #000; padding: 10px 20px; font-size: 13px; }
+  .btn-primary:hover { background: #e5e5e5; }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    padding: 6px 14px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--border3); color: var(--text); }
+
+  /* ── Inputs ── */
+  .input-dark {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 12px;
+    width: 100%;
+    transition: border-color 0.15s;
+  }
+  .input-dark::placeholder { color: var(--muted); }
+  .input-dark:hover { border-color: var(--border2); }
+
+  /* ── Calendar days ── */
+  .cal-day {
+    border-radius: 10px;
+    padding: 8px 4px;
+    text-align: center;
+    min-height: 76px;
+    transition: all 0.15s;
+    cursor: default;
+    border: 1px solid transparent;
+  }
+  .cal-day.has-data { cursor: pointer; }
+  .cal-day.has-data:hover { filter: brightness(1.15); }
+  .cal-day.win  { background: var(--green-soft); border-color: var(--green-bd); }
+  .cal-day.loss { background: var(--red-soft);   border-color: var(--red-bd); }
+  .cal-day.today  { border-color: var(--gold) !important; }
+  .cal-day.selected { border-color: #fff !important; background: rgba(255,255,255,0.05) !important; }
+  .cal-day.empty  { background: var(--bg1); border-color: var(--border); }
+
+  /* ── Trade rows ── */
+  .trade-row {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+  }
+  .trade-row:hover { border-color: var(--border2); }
+  .trade-row.win-row  { border-left: 2px solid var(--green); }
+  .trade-row.loss-row { border-left: 2px solid var(--red); }
+
+  /* ── Pills ── */
+  .pill {
+    display: inline-flex; align-items: center;
+    padding: 2px 8px; border-radius: 99px;
+    font-size: 11px; font-weight: 600;
+  }
+  .pill-green { background: var(--green-soft); color: var(--green); }
+  .pill-red   { background: var(--red-soft);   color: var(--red);   }
+  .pill-muted { background: var(--bg2); color: var(--muted); border: 1px solid var(--border); }
+  .pill-blue  { background: rgba(59,130,246,0.1); color: var(--blue); }
+  .pill-gold  { background: rgba(234,179,8,0.1);  color: var(--gold); }
+
+  /* ── Bar ── */
+  .bar-track { height: 3px; background: var(--bg3); border-radius: 99px; overflow: hidden; }
+  .bar-fill-green { height: 100%; background: var(--green); border-radius: 99px; }
+  .bar-fill-red   { height: 100%; background: var(--red);   border-radius: 99px; }
+
+  /* ── Misc ── */
+  .divider { height: 1px; background: var(--border); }
+
+  /* ══════════════════════════════════════════════════════
+     MOBILE — everything below 640px
+  ══════════════════════════════════════════════════════ */
+  @media (max-width: 640px) {
+
+    body { font-size: 13px; }
+
+    /* Nav — stack vertically */
+    .nav-inner {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 10px !important;
+    }
+    .nav-inner > div:last-child {
+      width: 100% !important;
+      justify-content: space-between !important;
+    }
+    .nav-inner > div:first-child > div:last-child {
+      font-size: 10px !important;
+    }
+
+    /* Tabs — fill full width */
+    .nav-inner > div:last-child > div:first-child {
+      flex: 1 !important;
+    }
+    .nav-tab { flex: 1 !important; text-align: center !important; padding: 8px 10px !important; }
+
+    /* Hide countdown on mobile — saves space */
+    .countdown-wrap { display: none !important; }
+
+    /* Padding reduction */
+    .card { padding: 13px 13px !important; border-radius: 10px !important; }
+
+    /* Stat grids: 4-col → 2x2 */
+    .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+    .stats-grid .mono { font-size: 16px !important; }
+    .wx-tiles { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+
+    /* Calendar day headers */
+    .cal-header-row > div { font-size: 7px !important; letter-spacing: 0 !important; }
+
+    /* Calendar cells — smaller */
+    .cal-grid { gap: 3px !important; }
+    .cal-grid > div { min-height: 58px !important; padding: 5px 2px !important; }
+    .cal-grid > div .mono { font-size: 10px !important; }
+    .cal-grid > div > div:first-child { font-size: 10px !important; }
+
+    /* Analyzer inputs: 3-col → 2-col then overflow to next row */
+    .analyzer-inputs { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+
+    /* Analyzer output: side-by-side → stacked */
+    .analyzer-main { grid-template-columns: 1fr !important; gap: 14px !important; }
+    .analyzer-main > div:first-child { display: flex !important; justify-content: center !important; }
+    .profit-panel { text-align: left !important; min-width: unset !important; width: 100% !important; }
+    .profit-panel .mono { font-size: 20px !important; }
+
+    /* Signals: 3-col → 1-col */
+    .signals-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
+
+    /* Market grid: auto → 3 per row */
+    .market-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
+
+    /* Contracts grid: auto → 4 per row */
+    .contracts-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 5px !important; }
+
+    /* Day detail summary: 3-col → 1-col */
+    .day-summary { grid-template-columns: 1fr !important; gap: 6px !important; }
+
+    /* CRITICAL: prevent iOS auto-zoom on inputs */
+    input, select, textarea { font-size: 16px !important; }
+    .input-dark { font-size: 16px !important; }
+
+    /* Hourly table — horizontal scroll */
+    .hourly-table-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
+
+    /* Page padding */
+    .fade-in { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect } = React;
+const STORAGE_KEY = "klax_v4";
+const CONTRACT_LINES = [78,77,76,75,74,73,72,71,70,69,68,67,66];
+const REFRESH_INTERVAL = 300; // 5 minutes
+
+// ── Open-Meteo fetch — KLAX coordinates ──────────────────────────────────────
+// lat=33.9425 lon=-118.4081  (LAX airport weather station)
+// WMO codes → cloud cover, humidity, wind speed/direction, temp
+const WMO_COND = {
+  0:"Clear",1:"Mainly Clear",2:"Partly Cloudy",3:"Overcast",
+  45:"Foggy",48:"Icy Fog",51:"Light Drizzle",53:"Drizzle",55:"Heavy Drizzle",
+  61:"Light Rain",63:"Rain",65:"Heavy Rain",71:"Light Snow",73:"Snow",80:"Showers",
+  81:"Heavy Showers",95:"Thunderstorm",99:"Heavy Thunderstorm"
+};
+const WIND_DIRS = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+function degToDir(deg){ return WIND_DIRS[Math.round(deg/22.5)%16]; }
+function fmtHour(iso){
+  const h=parseInt(iso.slice(11,13));
+  if(h===0)return"12:00 am";
+  if(h<12)return`${h}:00 am`;
+  if(h===12)return"12:00 pm";
+  return`${h-12}:00 pm`;
+}
+function celsiusToF(c){ return Math.round(c*9/5+32); }
+
+async function fetchWeather(){
+  // ── Priority 1: WU live data scraped by Chrome extension ──────────────────
+  // The Chrome extension scrapes wunderground.com/hourly/KLAX and saves to localStorage
+  try {
+    const raw = localStorage.getItem('klax_wu_live');
+    if(raw){
+      const wu = JSON.parse(raw);
+      const ageMs = Date.now() - (wu.ts || 0);
+      // Use WU data if it's less than 15 minutes old
+      if(ageMs < 15 * 60 * 1000 && wu.hourly && wu.hourly.length > 0){
+        return {
+          date:      wu.date,
+          scrapedAt: wu.scrapedAt,
+          hourly:    wu.hourly,
+          source:    'WU live',
+        };
+      }
+    }
+  } catch(e){ /* ignore */ }
+
+  // ── Priority 2: Open-Meteo API (good proxy for KLAX, free, no CORS) ───────
+  const url = "https://api.open-meteo.com/v1/forecast"
+    +"?latitude=33.9425&longitude=-118.4081"
+    +"&hourly=temperature_2m,relativehumidity_2m,cloudcover,windspeed_10m,winddirection_10m,weathercode"
+    +"&temperature_unit=fahrenheit"
+    +"&windspeed_unit=mph"
+    +"&timezone=America%2FLos_Angeles"
+    +"&forecast_days=1";
+
+  const res = await fetch(url);
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const data = await res.json();
+  if(!data.hourly || !data.hourly.time) throw new Error("No data");
+
+  const h = data.hourly;
+  const hours = h.time.slice(0,24).map((t,i)=>({
+    time:  fmtHour(t),
+    temp:  Math.round(h.temperature_2m[i]),
+    hum:   Math.round(h.relativehumidity_2m[i]),
+    cloud: Math.round(h.cloudcover[i]),
+    wind:  Math.round(h.windspeed_10m[i]),
+    dir:   degToDir(h.winddirection_10m[i]),
+    cond:  WMO_COND[h.weathercode[i]] || "Cloudy",
+  }));
+
+  return {
+    date:      new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"}),
+    scrapedAt: new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}),
+    hourly:    hours,
+    source:    'Open-Meteo',
+  };
+}
+
+// ── Static fallback WU DATA (Jun 25 2026 — scraped 10:40 PM) ─────────────────
+const WU_FALLBACK = {
+  date:"June 25, 2026", scrapedAt:"10:40 PM · WU", source:"WU fallback",
+  hourly:[
+    {time:"12:00 am",temp:62,cloud:73, hum:87,wind:5, dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"1:00 am", temp:62,cloud:90, hum:87,wind:4, dir:"WSW",cond:"Cloudy"},
+    {time:"2:00 am", temp:62,cloud:80, hum:87,wind:3, dir:"WSW",cond:"Cloudy"},
+    {time:"3:00 am", temp:62,cloud:85, hum:86,wind:4, dir:"WSW",cond:"Cloudy"},
+    {time:"4:00 am", temp:62,cloud:78, hum:87,wind:4, dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"5:00 am", temp:62,cloud:83, hum:85,wind:3, dir:"SW", cond:"Cloudy"},
+    {time:"6:00 am", temp:62,cloud:86, hum:85,wind:3, dir:"S",  cond:"Cloudy"},
+    {time:"7:00 am", temp:63,cloud:87, hum:84,wind:3, dir:"SSE",cond:"Cloudy"},
+    {time:"8:00 am", temp:64,cloud:80, hum:80,wind:3, dir:"SSW",cond:"Cloudy"},
+    {time:"9:00 am", temp:65,cloud:78, hum:77,wind:5, dir:"SW", cond:"Mostly Cloudy"},
+    {time:"10:00 am",temp:66,cloud:87, hum:72,wind:6, dir:"WSW",cond:"Cloudy"},
+    {time:"11:00 am",temp:68,cloud:52, hum:70,wind:8, dir:"WSW",cond:"Partly Cloudy"},
+    {time:"12:00 pm",temp:69,cloud:48, hum:68,wind:11,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"1:00 pm", temp:69,cloud:45, hum:66,wind:12,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"2:00 pm", temp:70,cloud:40, hum:65,wind:13,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"3:00 pm", temp:70,cloud:34, hum:64,wind:14,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"4:00 pm", temp:70,cloud:34, hum:65,wind:14,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"5:00 pm", temp:69,cloud:34, hum:68,wind:14,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"6:00 pm", temp:67,cloud:39, hum:73,wind:13,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"7:00 pm", temp:66,cloud:46, hum:76,wind:13,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"8:00 pm", temp:64,cloud:50, hum:82,wind:12,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"9:00 pm", temp:63,cloud:60, hum:85,wind:10,dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"10:00 pm",temp:63,cloud:70, hum:84,wind:9, dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"11:00 pm",temp:62,cloud:76, hum:85,wind:8, dir:"WSW",cond:"Mostly Cloudy"},
+  ]
+};
+
+// ── REALIZED P&L — exactly as shown on Robinhood "Realized profit & loss" screen ──
+// Source: Weather account ••••6251 · Prediction Markets · MAX view
+// action = the profit/loss number Robinhood displays. NOT raw cash flow.
+const RH_TRADES = [
+  // Jun 24 payout → date Jun 23 (settles next morning)
+  {date:"2026-06-23",contract:">72 No",type:"payout",contracts:4526,buyPrice:83,sellPrice:100,action:+749.42,pct:+19.84},
+  // Jun 22
+  {date:"2026-06-22",contract:">71 No",type:"payout",contracts:3500,buyPrice:84, sellPrice:100,action:+573.00,pct:+19.58},
+  // Jun 22
+  {date:"2026-06-21",contract:">70 No",type:"sell",  contracts:150, buyPrice:60, sellPrice:70, action:+15.00,  pct:+16.67},
+  {date:"2026-06-21",contract:">71 No",type:"payout",contracts:2000,buyPrice:85, sellPrice:100,action:+270.00, pct:+15.61},
+  // Jun 21
+  {date:"2026-06-20",contract:">70 No",type:"sell",  contracts:1223,buyPrice:51, sellPrice:68, action:+36.19,  pct:+4.55},
+  {date:"2026-06-20",contract:">69 No",type:"sell",  contracts:100, buyPrice:15, sellPrice:16, action:+1.00,   pct:+6.67},
+  {date:"2026-06-20",contract:">70 No",type:"payout",contracts:1400,buyPrice:68, sellPrice:100,action:+277.00, pct:+24.67},
+  {date:"2026-06-20",contract:">71 No",type:"payout",contracts:1000,buyPrice:85, sellPrice:100,action:+150.00, pct:+17.65},
+  // Jun 20
+  {date:"2026-06-19",contract:">69 No",type:"sell",  contracts:200, buyPrice:30, sellPrice:32, action:+4.00,   pct:+6.67},
+  {date:"2026-06-19",contract:">70 No",type:"payout",contracts:1000,buyPrice:83, sellPrice:100,action:+150.00, pct:+17.65},
+  // Jun 19 — net -$87.00
+  {date:"2026-06-18",contract:">69 No",type:"sell",  contracts:100, buyPrice:52, sellPrice:70, action:+18.00,  pct:+34.62},
+  {date:"2026-06-18",contract:">70 No",type:"payout",contracts:1000,buyPrice:75, sellPrice:100,action:+180.00, pct:+21.95},
+  {date:"2026-06-18",contract:">69 No",type:"payout",contracts:2850,buyPrice:100,sellPrice:0,  action:-285.00, pct:-100.00},
+  // Jun 18 — net +$411.36
+  {date:"2026-06-17",contract:">69 No",type:"sell",  contracts:500, buyPrice:57, sellPrice:75, action:+90.00,  pct:+31.58},
+  {date:"2026-06-17",contract:">69 No",type:"payout",contracts:1000,buyPrice:57, sellPrice:0,  action:-70.64,  pct:-100.00},
+  {date:"2026-06-17",contract:">71 No",type:"payout",contracts:800, buyPrice:85, sellPrice:100,action:+120.00, pct:+17.65},
+  {date:"2026-06-17",contract:">70 No",type:"payout",contracts:1200,buyPrice:82, sellPrice:100,action:+272.00, pct:+29.31},
+  // Jun 17
+  {date:"2026-06-16",contract:">71 No",type:"payout",contracts:200, buyPrice:75, sellPrice:100,action:+50.00,  pct:+33.33},
+  {date:"2026-06-16",contract:">72 No",type:"payout",contracts:600, buyPrice:85, sellPrice:100,action:+90.00,  pct:+17.65},
+];
+
+// Group trades by date and compute daily net cash flow
+function groupByDate(trades){
+  const m={};
+  trades.forEach(t=>{
+    if(!m[t.date])m[t.date]=[];
+    m[t.date].push(t);
+  });
+  return m;
+}
+const BY_DATE = groupByDate(RH_TRADES);
+const dayNet = d => (BY_DATE[d]||[]).reduce((s,t)=>s+t.action,0);
+
+// ── Model ─────────────────────────────────────────────────────────────────────
+// marineScore now takes full hourly array — defined in model section above
+
+// ════════════════════════════════════════════════════════════════════════════
+// ── EDGE MODEL — built from real KLAX knowledge ──────────────────────────────
+// Sources: WU (primary, what Robinhood settles against) + marine layer physics
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Wind direction score ──────────────────────────────────────────────────────
+// SW/WSW = direct onshore from coast = strongest marine layer push
+// W/SSW = partial coastal = moderate cooling
+// S/SE/NW = inland or parallel = weaker marine layer
+// NE/E/N = offshore = marine layer suppressed, temps can spike
+function windDirScore(dir){
+  const d=(dir||"").toUpperCase().trim();
+  if(d==="SW"||d==="WSW") return 3;  // best — direct coastal onshore flow
+  if(d==="SSW"||d==="W") return 2;   // good onshore
+  if(d==="WNW"||d==="S") return 1;   // partial
+  if(d==="NW"||d==="SE"||d==="SSE") return 0;  // neutral
+  if(d==="NE"||d==="E"||d==="ENE"||d==="N"||d==="NNE") return -2; // offshore — spike risk
+  return 0;
+}
+
+// ── Afternoon wind pickup check ───────────────────────────────────────────────
+// Key insight: if wind doesn't pick up after noon, temp won't cool as quickly
+// Compare morning avg wind vs afternoon avg wind from WU hourly data
+function afternoonWindPickup(hourly){
+  if(!hourly||hourly.length<16) return null;
+  const morning   = hourly.slice(6,12);   // 6am–noon
+  const afternoon = hourly.slice(12,18);  // noon–6pm
+  const avgMorn   = morning.reduce((s,h)=>s+h.wind,0)/morning.length;
+  const avgAfter  = afternoon.reduce((s,h)=>s+h.wind,0)/afternoon.length;
+  return {
+    morningAvg:   Math.round(avgMorn*10)/10,
+    afternoonAvg: Math.round(avgAfter*10)/10,
+    pickup:       avgAfter - avgMorn,       // positive = wind increased = more cooling
+    coolingEffect: avgAfter >= avgMorn + 2  // meaningful pickup = cooling likely
+  };
+}
+
+// ── WU temperature spike risk ─────────────────────────────────────────────────
+// CRITICAL LESSON Jun 25 2026:
+// WU said 70°F all day. Actual spiked to 71→72°F intraday without WU updating.
+// CAUSE: SSE/SE wind in the morning (offshore component) + rapid cloud burnoff.
+// Even though afternoon shifted to WSW, the morning offshore pattern allowed
+// temp to spike before the marine layer could engage.
+// RULE: If morning wind has ANY offshore component (SE/SSE/E/NE), treat as spike risk
+//       regardless of afternoon direction.
+function spikeRisk(hourly){
+  if(!hourly||hourly.length===0) return {score:0,factors:[]};
+  const morning   = hourly.slice(0,10);  // midnight–10am
+  const earlyMorn = hourly.slice(5,10);  // 5am–10am — key window
+  const afternoon = hourly.slice(12,17); // noon–5pm
+  const factors   = [];
+  let score       = 0;
+
+  // ── HIGHEST PRIORITY: Morning offshore wind (Jun 25 lesson) ───────────────
+  // SSE/SE/E/NE in the morning = offshore component = spike risk
+  // Even if afternoon shifts WSW, morning offshore allows early heating
+  const morningDirs = earlyMorn.map(h => h.dir || "");
+  const hasOffshoreAM = morningDirs.some(d =>
+    ["SE","SSE","ESE","E","ENE","NE","NNE"].includes(d.toUpperCase())
+  );
+  if(hasOffshoreAM){
+    score += 4; // HIGH weight — this was the Jun 25 killer
+    const offshoreHours = morningDirs.filter(d=>["SE","SSE","ESE","E","ENE","NE","NNE"].includes(d.toUpperCase())).join(", ");
+    factors.push(`⚠️ Morning offshore wind (${offshoreHours}) — spike risk before marine layer engages`);
+  }
+
+  // ── Afternoon offshore wind ───────────────────────────────────────────────
+  const peakHour  = afternoon[2] || afternoon[0];
+  const dirScore  = windDirScore(peakHour?.dir || "");
+  if(dirScore <= -2){
+    score += 3;
+    factors.push(`Offshore PM wind (${peakHour?.dir}) — warm air, marine layer suppressed`);
+  } else if(dirScore === 0 && !hasOffshoreAM){
+    score += 1;
+    factors.push("Neutral afternoon wind direction");
+  }
+
+  // ── Rapid cloud burnoff ───────────────────────────────────────────────────
+  // High morning clouds that drop fast = marine layer not anchored = spike
+  const morningCloud = morning.reduce((s,h)=>s+(h.cloud||0),0)/morning.length;
+  const peakCloud    = afternoon.reduce((s,h)=>s+(h.cloud||0),0)/afternoon.length;
+  const cloudDrop    = morningCloud - peakCloud;
+
+  if(cloudDrop >= 50 && morningCloud >= 70){
+    score += 3;
+    factors.push(`Rapid cloud burnoff (${Math.round(morningCloud)}% AM → ${Math.round(peakCloud)}% PM) — marine layer burns off, spike risk`);
+  } else if(cloudDrop >= 30 && morningCloud >= 60){
+    score += 1;
+    factors.push(`Moderate cloud burnoff (${Math.round(morningCloud)}% → ${Math.round(peakCloud)}%)`);
+  }
+
+  // ── No afternoon wind pickup ──────────────────────────────────────────────
+  const windPickup = afternoonWindPickup(hourly);
+  if(windPickup && !windPickup.coolingEffect){
+    score += 2;
+    factors.push(`No PM wind pickup (${windPickup.morningAvg}→${windPickup.afternoonAvg}mph) — slow cooling`);
+  }
+
+  // ── Low afternoon humidity ────────────────────────────────────────────────
+  const peakHum = peakHour?.hum || 70;
+  if(peakHum < 60){
+    score += 1;
+    factors.push("Low afternoon humidity — dry air, less marine cooling");
+  }
+
+  return {score, factors};
+}
+
+// ── Full marine layer score ───────────────────────────────────────────────────
+// Uses morning conditions (when marine layer is strongest) as proxy
+function marineScore(hourly){
+  if(!hourly||hourly.length===0) return 0;
+  const morning  = hourly.slice(0,10);
+  const maxHum   = Math.max(...morning.map(h=>h.hum||0));
+  const maxCloud = Math.max(...morning.map(h=>h.cloud||0));
+  const maxWind  = Math.max(...morning.map(h=>h.wind||0));
+
+  // Use peak-hour wind direction for coastal flow check
+  const afterHours = hourly.slice(12,16);
+  const peakDir    = afterHours[1]?.dir || afterHours[0]?.dir || "";
+  const dirScore   = windDirScore(peakDir);
+
+  let s = 0;
+  // Humidity (dew point proxy)
+  if(maxHum>=85) s+=2; else if(maxHum>=70) s+=1;
+  // Cloud cover — heavy morning clouds = marine layer present
+  if(maxCloud>=85) s+=2; else if(maxCloud>=60) s+=1;
+  // Wind speed
+  if(maxWind>=15) s+=2; else if(maxWind>=10) s+=1;
+  // Wind direction — SW/WSW is the money direction
+  s += Math.max(0, dirScore); // only add, don't subtract here (subtracted in spike risk)
+
+  return Math.min(s, 8);
+}
+
+// ── ML temperature discount ───────────────────────────────────────────────────
+// How much the marine layer typically suppresses temp below WU forecast
+function mlDiscount(mlScore, spikeScore, windPickup){
+  let base = 0;
+  if(mlScore>=7) base=5.0;
+  else if(mlScore>=5) base=3.5;
+  else if(mlScore>=3) base=2.0;
+  else base=0.5;
+
+  // Spike risk reduces the discount (temp won't cool as much)
+  if(spikeScore>=4) base = Math.max(0, base - 2.5);
+  else if(spikeScore>=2) base = Math.max(0, base - 1.0);
+
+  // If wind doesn't pick up in afternoon, cooling is reduced
+  if(windPickup&&!windPickup.coolingEffect) base = Math.max(0, base - 1.0);
+
+  return parseFloat(base.toFixed(1));
+}
+
+// ── Core probability engine ───────────────────────────────────────────────────
+// Rule 1: WU is the primary source — Robinhood settles against WU
+// Rule 2: NWS is the backup — passed in as nwsHigh when available
+//
+// Core question: what is P(actual high > line)?
+//
+// STEP 1: Establish expected high from WU (primary) and NWS (backup)
+// STEP 2: Compute gap = expected high - line
+// STEP 3: Apply marine layer / wind modifiers to that gap
+// STEP 4: Convert adjusted gap to probability
+//
+// Key calibration facts from real KLAX data:
+// - WU is usually within ±2°F of actual
+// - SW/WSW wind = marine layer engaged = actual tends to be 1-3°F BELOW WU
+// - No afternoon wind pickup = actual stays closer to WU forecast
+// - Offshore wind = actual can be 1-3°F ABOVE WU
+// - June Gloom marine layer = suppresses highs vs forecast
+
+function probOver(wuHigh, line, mlScore, spikeScore, windPickup, dirScore, nwsHigh, peakCount){
+  // ── CALIBRATION LOG ────────────────────────────────────────────────────────
+  // Jun 24, 2026: WU said 72°F (morning) → drifted 71°F (4h) → actual settled ≤70°F
+  //   ML strong, WSW 12-14mph all afternoon. No >70 won.
+  //   LESSON: WU morning forecast is a CEILING when ML is strong + wide flat peak.
+  //   Wide flat peak (4-5h same temp) + WSW = plateau pattern, actual ≤ WU.
+  // ──────────────────────────────────────────────────────────────────────────
+
+  // WU primary (70%) + NWS backup (30%)
+  const anchor = nwsHigh ? (wuHigh * 0.70 + nwsHigh * 0.30) : wuHigh;
+  let gap = anchor - line;
+
+  // Marine layer: SW/WSW suppresses actual below WU
+  const mlAdjust = mlScore >= 7 ? -2.5
+                 : mlScore >= 5 ? -1.8
+                 : mlScore >= 3 ? -1.0
+                 : 0;
+
+  // Wide flat peak discount (NEW — Jun 24 calibration)
+  // 3+ hours at same WU peak temp + WSW = plateau, actual ≤ WU peak
+  const pc = peakCount || 1;
+  const flatPeakAdj = (pc >= 4 && dirScore >= 2) ? -0.8
+                    : (pc >= 3 && dirScore >= 1) ? -0.4
+                    : 0;
+
+  // WU morning drift (NEW — Jun 24 calibration)
+  // WU forecast drifts DOWN during the day when ML is strong — morning WU is ceiling
+  const morningDriftAdj = (mlScore >= 5 && dirScore >= 2) ? -0.5 : 0;
+
+  // Spike risk
+  const spikeAdjust = spikeScore >= 4 ? +2.0
+                    : spikeScore >= 2 ? +0.8
+                    : 0;
+
+  // No afternoon wind pickup = ML not engaging = less cooling
+  const windAdjust = (windPickup && !windPickup.coolingEffect && mlScore >= 3) ? +0.8 : 0;
+
+  // Wind direction bonus/penalty
+  const dirAdjust = dirScore >= 3 ? -0.5 : dirScore < 0 ? +0.5 : 0;
+
+  const adjGap = gap + mlAdjust + flatPeakAdj + morningDriftAdj + spikeAdjust + windAdjust + dirAdjust;
+
+  if(adjGap >= 5)    return 0.97;
+  if(adjGap >= 4)    return 0.93;
+  if(adjGap >= 3)    return 0.87;
+  if(adjGap >= 2)    return 0.78;
+  if(adjGap >= 1.5)  return 0.70;
+  if(adjGap >= 1)    return 0.62;
+  if(adjGap >= 0.5)  return 0.54;
+  if(adjGap >= 0)    return 0.46;
+  if(adjGap >= -0.5) return 0.38;
+  if(adjGap >= -1)   return 0.30;
+  if(adjGap >= -1.5) return 0.22;
+  if(adjGap >= -2)   return 0.16;
+  if(adjGap >= -3)   return 0.09;
+  if(adjGap >= -4)   return 0.05;
+  return 0.02;
+}
+
+function fairCents(p){return Math.max(2,Math.min(98,Math.round(p*100)));}
+
+function riskLabel(mlScore, spikeScore){
+  if(spikeScore>=4) return{txt:"⚠️ Spike risk — offshore wind",col:"var(--red)"};
+  if(mlScore>=7)    return{txt:"Strong marine layer — SW/WSW",col:"var(--blue)"};
+  if(mlScore>=5)    return{txt:"Moderate marine layer",col:"var(--green)"};
+  if(mlScore>=3)    return{txt:"Weak marine layer",col:"var(--gold)"};
+  return              {txt:"Marine layer unlikely",col:"var(--muted)"};
+}
+
+function noLabel(p){
+  if(p>=0.90) return{txt:"Strong No",col:"var(--green)"};
+  if(p>=0.75) return{txt:"Good No",  col:"var(--gold)"};
+  if(p>=0.60) return{txt:"Lean No",  col:"#f97316"};
+  if(p>=0.50) return{txt:"Weak No",  col:"var(--muted)"};
+  return       {txt:"Skip",          col:"var(--muted)"};
+}
+
+// ── Master computeStats ───────────────────────────────────────────────────────
+function computeStats(hourly, nwsHigh){
+  const WU_HIGH    = Math.max(...hourly.map(h=>h.temp));
+  const PEAK_HOURS = hourly.filter(h=>h.temp===WU_HIGH);
+  const PEAK_START = PEAK_HOURS[0].time;
+  const PEAK_END   = PEAK_HOURS[PEAK_HOURS.length-1].time;
+  const PEAK_COUNT = PEAK_HOURS.length;
+
+  const ML_SCORE   = marineScore(hourly);
+  const SPIKE      = spikeRisk(hourly);
+  const WIND_PU    = afternoonWindPickup(hourly);
+  const DISC       = mlDiscount(ML_SCORE, SPIKE.score, WIND_PU);
+  const ADJ        = parseFloat((WU_HIGH - DISC).toFixed(1));
+
+  const peakHr     = hourly.slice(12,17)[1] || hourly[14];
+  const PEAK_DIR   = peakHr?.dir || "";
+  const PEAK_WIND  = peakHr?.wind || 0;
+  const DIR_SCORE  = windDirScore(PEAK_DIR);
+
+  // pOverWU: uses WU as anchor + all modifiers including peak count
+  const pOverWU = (line) => probOver(WU_HIGH, line, ML_SCORE, SPIKE.score, WIND_PU, DIR_SCORE, nwsHigh||null, PEAK_COUNT);
+
+  return {
+    WU_HIGH, PEAK_HOURS, PEAK_START, PEAK_END, PEAK_COUNT,
+    ML_SCORE, DISC, ADJ,
+    SPIKE_SCORE: SPIKE.score, SPIKE_FACTORS: SPIKE.factors,
+    WIND_PICKUP: WIND_PU,
+    PEAK_DIR, PEAK_WIND, DIR_SCORE,
+    pOverWU,
+  };
+}
+
+const fmt  = v => v.toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2});
+const fmtN = v => (v>=0?"+":"")+fmt(v);
+
+function CountdownRing({s,t}){
+  const r=14,c=2*Math.PI*r,d=(s/t)*c;
+  const col=s<60?"var(--red)":s<180?"var(--gold)":"var(--muted)";
+  const m=Math.floor(s/60),ss=s%60;
+  return React.createElement("div",{style:{display:"flex",flexDirection:"column",alignItems:"center",gap:2}},
+    React.createElement("svg",{width:40,height:40,viewBox:"0 0 40 40"},
+      React.createElement("circle",{cx:20,cy:20,r,fill:"none",stroke:"var(--border2)",strokeWidth:2}),
+      React.createElement("circle",{cx:20,cy:20,r,fill:"none",stroke:col,strokeWidth:2,
+        strokeDasharray:`${d} ${c}`,strokeDashoffset:c/4,strokeLinecap:"round",
+        style:{transition:"stroke-dasharray 1s linear"}}),
+      React.createElement("text",{x:20,y:24,textAnchor:"middle",fill:col,fontSize:9,fontWeight:600,fontFamily:"JetBrains Mono"},
+        `${m}:${String(ss).padStart(2,"0")}`)
+    )
+  );
+}
+
+// ── Hourly chart ──────────────────────────────────────────────────────────────
+function HourlyChart({hourly,adj}){
+  const W=580,H=100,PL=26,PR=40,PT=10,PB=20,iW=W-PL-PR,iH=H-PT-PB,minT=60,maxT=74;
+  const px=i=>PL+(i/(hourly.length-1))*iW,py=t=>PT+iH-((t-minT)/(maxT-minT))*iH;
+  const path=hourly.map((h,i)=>`${i===0?"M":"L"}${px(i).toFixed(1)},${py(h.temp).toFixed(1)}`).join(" ");
+  const area=`${path} L${px(hourly.length-1)},${H-PB} L${px(0)},${H-PB} Z`;
+  const maxT2=Math.max(...hourly.map(h=>h.temp));
+  const pi=hourly.findIndex(h=>h.temp===maxT2),lpi=hourly.map(h=>h.temp).lastIndexOf(maxT2);
+  return React.createElement("svg",{viewBox:`0 0 ${W} ${H}`,style:{width:"100%",height:"auto",display:"block"}},
+    React.createElement("defs",null,
+      React.createElement("linearGradient",{id:"tg",x1:0,y1:0,x2:0,y2:1},
+        React.createElement("stop",{offset:"0%",stopColor:"var(--green)",stopOpacity:.15}),
+        React.createElement("stop",{offset:"100%",stopColor:"var(--green)",stopOpacity:0})
+      )
+    ),
+    [60,65,70].map(t=>React.createElement("g",{key:t},
+      React.createElement("line",{x1:PL,x2:W-PR,y1:py(t),y2:py(t),stroke:"var(--border)",strokeWidth:1}),
+      React.createElement("text",{x:PL-4,y:py(t)+3,textAnchor:"end",fill:"var(--muted)",fontSize:8,fontFamily:"JetBrains Mono"},`${t}°`)
+    )),
+    adj&&React.createElement("line",{x1:PL,x2:W-PR,y1:py(adj),y2:py(adj),stroke:"var(--blue)",strokeWidth:1,strokeDasharray:"4,3",opacity:.5}),
+    adj&&React.createElement("text",{x:W-PR+4,y:py(adj)+3,fill:"var(--blue)",fontSize:8,fontFamily:"JetBrains Mono"},`${adj.toFixed(0)}°`),
+    React.createElement("path",{d:area,fill:"url(#tg)"}),
+    React.createElement("path",{d:path,fill:"none",stroke:"var(--green)",strokeWidth:1.5,strokeLinejoin:"round"}),
+    hourly.filter((_,i)=>i%6===0).map((h,i)=>{
+      const idx=hourly.indexOf(h);
+      return React.createElement("text",{key:i,x:px(idx),y:H-PB+12,textAnchor:"middle",fill:"var(--muted)",fontSize:8,fontFamily:"JetBrains Mono"},
+        h.time.replace(":00 ","").replace(" ","").toLowerCase());
+    }),
+    [pi,lpi].filter((v,i,a)=>a.indexOf(v)===i).map(idx=>React.createElement("g",{key:idx},
+      React.createElement("circle",{cx:px(idx),cy:py(maxT2),r:3,fill:"var(--gold)"}),
+      React.createElement("text",{x:px(idx),y:py(maxT2)-7,textAnchor:"middle",fill:"var(--gold)",fontSize:9,fontWeight:600,fontFamily:"JetBrains Mono"},`${maxT2}°`)
+    ))
+  );
+}
+
+// ── Trade helpers ─────────────────────────────────────────────────────────────
+function tradeIcon(t){if(t.type==="payout")return t.action>0?"✅":"❌";if(t.type==="sell")return "💰";return "🛒";}
+function tradeLabel(t){
+  if(t.type==="payout") return t.action>0?"Won · Settlement payout":"Lost · Expired worthless";
+  if(t.type==="sell")   return `Sold early @ ${t.sellPrice}¢`;
+  return `Bought @ ${t.buyPrice}¢`;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// ── DAY DETAIL PANEL ─────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+function DayDetail({dateStr, onClose, manual, delManual, editManual}){
+  const rhTrades  = BY_DATE[dateStr] || [];
+  const manTrades = (manual||[]).filter(e=>e.date===dateStr).map(e=>({...e,source:"manual"}));
+  const trades    = [...rhTrades,...manTrades];
+
+  // Recompute net from actual trade actions + manual
+  const rhNet  = (BY_DATE[dateStr]||[]).reduce((s,t)=>s+t.action,0);
+  const manNet = (manual||[]).filter(e=>e.date===dateStr).reduce((s,e)=>s+(parseFloat(e.action)||0),0);
+  const net    = rhNet + manNet;
+
+  const isWin     = net >= 0;
+  const dateLabel = new Date(dateStr+"T12:00:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  const maxAbs    = Math.max(...trades.map(t=>Math.abs(t.action)), 1);
+  const wins      = trades.filter(t=>t.action>0);
+  const losses    = trades.filter(t=>t.action<0);
+  const grossW    = wins.reduce((s,t)=>s+t.action,0);
+  const grossL    = losses.reduce((s,t)=>s+t.action,0);
+
+  // ── Edit state ──────────────────────────────────────────────────────────────
+  const [editing, setEditing] = useState(null); // trade id being edited
+  const [editForm, setEditForm] = useState({});
+
+  const startEdit = (t) => {
+    setEditing(t.id);
+    setEditForm({
+      contract:  t.contract  || "",
+      contracts: t.contracts != null ? String(t.contracts) : "",
+      buyPrice:  t.buyPrice  != null ? String(t.buyPrice)  : "",
+      sellPrice: t.sellPrice != null ? String(t.sellPrice) : "",
+      type:      t.type      || "payout",
+      fees:      t.fees      != null ? String(t.fees)      : "",
+    });
+  };
+
+  const saveEdit = (id) => {
+    const n    = parseFloat(editForm.contracts) || 0;
+    const buy  = parseFloat(editForm.buyPrice)  || 0;
+    const sell = parseFloat(editForm.sellPrice) || 0;
+    const fees = parseFloat(editForm.fees)      || 0;
+    const cost = n * buy / 100;
+    let gross;
+    if(editForm.type==="payout") gross = n - cost;
+    else if(editForm.type==="sell") gross = n * sell / 100 - cost;
+    else gross = -cost;
+    const action = gross - fees;
+    const pct = cost > 0 ? parseFloat(((action / cost)*100).toFixed(2)) : 0;
+    editManual(id, {
+      contract:  editForm.contract,
+      contracts: n,
+      buyPrice:  buy,
+      sellPrice: editForm.type==="sell" ? sell : editForm.type==="payout" ? 100 : 0,
+      type:      editForm.type,
+      fees,
+      action,
+      pct,
+    });
+    setEditing(null);
+  };
+
+  // Group by contract
+  const byContract={};
+  trades.forEach(t=>{
+    if(!byContract[t.contract])byContract[t.contract]={contract:t.contract,trades:[],net:0};
+    byContract[t.contract].trades.push(t);
+    byContract[t.contract].net+=t.action;
+  });
+  const contracts=Object.values(byContract).sort((a,b)=>b.net-a.net);
+
+  const inpStyle = {
+    background:"var(--bg)",border:"1px solid var(--border2)",borderRadius:6,
+    color:"var(--text)",fontSize:13,fontWeight:600,padding:"6px 9px",
+    fontFamily:"JetBrains Mono",width:"100%",outline:"none"
+  };
+
+  const totalContracts = trades.reduce((s,t) => s + (parseFloat(t.contracts)||0), 0);
+
+  return React.createElement("div",{className:"card fade-in",style:{
+    border:`1.5px solid ${isWin?"var(--green-bd)":"var(--red-bd)"}`,marginBottom:16,
+    background:isWin?"linear-gradient(160deg,rgba(34,197,94,0.04),var(--bg1))":"linear-gradient(160deg,rgba(239,68,68,0.04),var(--bg1))",
+  }},
+
+    // Header
+    React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:10}},
+      React.createElement("div",null,
+        React.createElement("div",{style:{fontSize:16,fontWeight:700,color:"var(--text)",marginBottom:6}},dateLabel),
+        React.createElement("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},
+          React.createElement("span",{className:"pill pill-muted"},`${trades.length} trade${trades.length>1?"s":""}`),
+          totalContracts>0&&React.createElement("span",{className:"pill pill-blue"},`${totalContracts.toLocaleString()} contracts`),
+          wins.length>0&&React.createElement("span",{className:"pill pill-green"},`${wins.length} win${wins.length>1?"s":""}`),
+          losses.length>0&&React.createElement("span",{className:"pill pill-red"},`${losses.length} loss${losses.length>1?"es":""}`)
+        )
+      ),
+      React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
+        React.createElement("div",{style:{textAlign:"right"}},
+          React.createElement("div",{className:"label",style:{marginBottom:2}},"Net P&L"),
+          React.createElement("div",{className:"mono",style:{fontSize:26,fontWeight:700,color:isWin?"var(--green)":"var(--red)",letterSpacing:"-0.02em"}},fmtN(net))
+        ),
+        React.createElement("button",{onClick:onClose,className:"btn-ghost",style:{fontSize:18,padding:"4px 10px"}},"✕")
+      )
+    ),
+
+    // Summary strip — 4 cards including total contracts
+    React.createElement("div",{className:"day-summary",style:{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10,marginBottom:16}},
+      [{l:"Contracts",    v:totalContracts.toLocaleString(), c:"var(--blue)", bd:"rgba(59,130,246,0.2)"},
+       {l:"Gross wins",   v:fmtN(grossW),                    c:"var(--green)",bd:"var(--green-bd)"},
+       {l:"Gross losses", v:fmtN(grossL),                    c:"var(--red)",  bd:"var(--red-bd)"},
+       {l:"Net P&L",      v:fmtN(net),c:isWin?"var(--green)":"var(--red)",   bd:isWin?"var(--green-bd)":"var(--red-bd)"},
+      ].map(({l,v,c,bd})=>React.createElement("div",{key:l,style:{background:"var(--bg2)",border:`1px solid ${bd}`,borderRadius:8,padding:"10px 14px",textAlign:"center"}},
+        React.createElement("div",{className:"label",style:{marginBottom:4}},l),
+        React.createElement("div",{className:"mono",style:{fontSize:15,fontWeight:700,color:c}},v)
+      ))
+    ),
+
+    // Per-contract groups
+    React.createElement("div",{className:"label",style:{marginBottom:10}},"Breakdown by contract"),
+    React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:10}},
+      contracts.map((cg,ci)=>{
+        const cNet=cg.net, isCP=cNet>=0;
+        return React.createElement("div",{key:ci,style:{background:"var(--bg2)",border:`1px solid ${isCP?"var(--green-bd)":"var(--red-bd)"}`,borderRadius:10,overflow:"hidden"}},
+
+          // Contract header
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:"1px solid var(--border)"}},
+            React.createElement("span",{className:"mono",style:{fontSize:15,fontWeight:700,color:isCP?"var(--green)":"var(--red)"}},cg.contract),
+            React.createElement("span",{className:"mono",style:{fontSize:14,fontWeight:700,color:isCP?"var(--green)":"var(--red)"}},fmtN(cNet))
+          ),
+
+          // Trades
+          React.createElement("div",null,
+            cg.trades.map((t,ti)=>{
+              const isP   = t.action >= 0;
+              const barPct= Math.abs(t.action)/maxAbs*100;
+              const isEdit= editing === t.id;
+
+              return React.createElement("div",{key:ti,style:{borderBottom:ti<cg.trades.length-1?"1px solid var(--border)":"none"}},
+
+                // ── View mode ──────────────────────────────────────────────
+                !isEdit&&React.createElement("div",{style:{
+                  display:"flex",alignItems:"center",gap:12,padding:"12px 14px",
+                  position:"relative",overflow:"hidden"
+                }},
+                  // Background bar
+                  React.createElement("div",{style:{position:"absolute",left:0,top:0,bottom:0,width:`${barPct}%`,background:isP?"rgba(34,197,94,0.04)":"rgba(239,68,68,0.04)",pointerEvents:"none"}}),
+
+                  // Icon
+                  React.createElement("div",{style:{fontSize:16,flexShrink:0,width:24,textAlign:"center",position:"relative"}},tradeIcon(t)),
+
+                  // Info
+                  React.createElement("div",{style:{flex:1,position:"relative"}},
+                    React.createElement("div",{style:{fontSize:13,fontWeight:600,color:"var(--text)",marginBottom:5}},tradeLabel(t)),
+                    React.createElement("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
+                      t.contracts>0&&React.createElement("span",{className:"pill pill-muted"},`${t.contracts.toLocaleString()} contracts`),
+                      t.buyPrice>0&&React.createElement("span",{className:"pill pill-red"},`bought @ ${t.buyPrice}¢`),
+                      t.type==="sell"&&t.sellPrice>0&&React.createElement("span",{className:"pill pill-green"},`sold @ ${t.sellPrice}¢`),
+                      t.type==="payout"&&isP&&React.createElement("span",{className:"pill pill-green"},"settled @ $1.00"),
+                      t.type==="payout"&&!isP&&React.createElement("span",{className:"pill pill-red"},"expired @ $0.00"),
+                      t.fees>0&&React.createElement("span",{className:"pill pill-muted"},`fees −${fmt(t.fees)}`),
+                      t.pct!=null&&React.createElement("span",{className:`pill ${t.pct>=0?"pill-green":"pill-red"}`},`${t.pct>=0?"+":""}${t.pct}% ROI`)
+                    )
+                  ),
+
+                  // Amount + actions
+                  React.createElement("div",{style:{flexShrink:0,textAlign:"right",position:"relative"}},
+                    React.createElement("div",{style:{height:3,background:"var(--border)",borderRadius:99,overflow:"hidden",marginBottom:6,width:70}},
+                      React.createElement("div",{style:{height:"100%",width:`${barPct}%`,background:isP?"var(--green)":"var(--red)",borderRadius:99}})
+                    ),
+                    React.createElement("div",{className:"mono",style:{fontSize:15,fontWeight:700,color:isP?"var(--green)":"var(--red)",marginBottom:6}},fmtN(t.action)),
+                    // Edit + remove buttons (manual only)
+                    t.source==="manual"&&React.createElement("div",{style:{display:"flex",gap:4,justifyContent:"flex-end"}},
+                      React.createElement("button",{
+                        onClick:e2=>{e2.stopPropagation();startEdit(t);},
+                        style:{background:"var(--bg3)",border:"1px solid var(--border2)",borderRadius:5,color:"var(--text2)",fontSize:10,padding:"2px 8px",cursor:"pointer",fontFamily:"Inter"}
+                      },"Edit"),
+                      React.createElement("button",{
+                        onClick:e2=>{e2.stopPropagation();delManual(t.id);},
+                        style:{background:"none",border:"1px solid var(--red-bd)",borderRadius:5,color:"var(--red)",fontSize:10,padding:"2px 8px",cursor:"pointer",fontFamily:"Inter"}
+                      },"Remove")
+                    ),
+                    t.source==="rh"&&React.createElement("div",{style:{fontSize:9,color:"var(--muted)",marginTop:2}})
+                  )
+                ),
+
+                // ── Edit mode ──────────────────────────────────────────────
+                isEdit&&React.createElement("div",{style:{padding:"14px",background:"rgba(99,102,241,0.04)",borderTop:"1px solid rgba(99,102,241,0.15)"}},
+                  React.createElement("div",{className:"label",style:{color:"var(--indigo)",marginBottom:12}},"Edit Trade"),
+
+                  // Row 1: contract + type
+                  React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:10}},
+                    React.createElement("div",null,
+                      React.createElement("div",{className:"label",style:{marginBottom:4}},"Contract"),
+                      React.createElement("select",{value:editForm.contract,onChange:e=>setEditForm(p=>({...p,contract:e.target.value})),style:{...inpStyle,fontSize:14}},
+                        [">66 No",">67 No",">68 No",">69 No",">70 No",">71 No",">72 No",">73 No",">74 No",">75 No"]
+                        .map(c=>React.createElement("option",{key:c,value:c},c))
+                      )
+                    ),
+                    React.createElement("div",null,
+                      React.createElement("div",{className:"label",style:{marginBottom:4}},"Outcome"),
+                      React.createElement("select",{value:editForm.type,onChange:e=>setEditForm(p=>({...p,type:e.target.value})),style:{...inpStyle,fontSize:14}},
+                        React.createElement("option",{value:"payout"},"Won — payout @ $1.00"),
+                        React.createElement("option",{value:"sell"},"Sold early"),
+                        React.createElement("option",{value:"expired"},"Expired worthless")
+                      )
+                    )
+                  ),
+
+                  // Row 2: contracts + buy price + sell price (conditional) + fees
+                  React.createElement("div",{style:{display:"grid",gridTemplateColumns:editForm.type==="sell"?"1fr 1fr 1fr 1fr":"1fr 1fr 1fr",gap:10,marginBottom:12}},
+                    React.createElement("div",null,
+                      React.createElement("div",{className:"label",style:{marginBottom:4}},"# Contracts"),
+                      React.createElement("input",{type:"number",value:editForm.contracts,onChange:e=>setEditForm(p=>({...p,contracts:e.target.value})),style:inpStyle})
+                    ),
+                    React.createElement("div",null,
+                      React.createElement("div",{className:"label",style:{marginBottom:4}},"Buy Price (¢)"),
+                      React.createElement("input",{type:"number",value:editForm.buyPrice,onChange:e=>setEditForm(p=>({...p,buyPrice:e.target.value})),style:inpStyle})
+                    ),
+                    editForm.type==="sell"&&React.createElement("div",null,
+                      React.createElement("div",{className:"label",style:{marginBottom:4}},"Sell Price (¢)"),
+                      React.createElement("input",{type:"number",value:editForm.sellPrice,onChange:e=>setEditForm(p=>({...p,sellPrice:e.target.value})),style:inpStyle})
+                    ),
+                    React.createElement("div",null,
+                      React.createElement("div",{className:"label",style:{marginBottom:4}},"Fees ($)"),
+                      React.createElement("input",{type:"number",step:"0.01",value:editForm.fees,onChange:e=>setEditForm(p=>({...p,fees:e.target.value})),style:inpStyle})
+                    )
+                  ),
+
+                  // Preview net
+                  (()=>{
+                    const n2=parseFloat(editForm.contracts)||0,b2=parseFloat(editForm.buyPrice)||0,s2=parseFloat(editForm.sellPrice)||0,f2=parseFloat(editForm.fees)||0;
+                    const c2=n2*b2/100;
+                    const g2=editForm.type==="payout"?n2-c2:editForm.type==="sell"?n2*s2/100-c2:-c2;
+                    const net2=g2-f2;
+                    return n2>0&&b2>0&&React.createElement("div",{style:{fontSize:12,color:"var(--muted)",marginBottom:12}},
+                      "Net: ",React.createElement("span",{className:"mono",style:{fontWeight:700,color:net2>=0?"var(--green)":"var(--red)"}},fmtN(net2)),
+                      f2>0&&React.createElement("span",null,` (gross ${fmtN(g2)} − fees ${fmt(f2)})`)
+                    );
+                  })(),
+
+                  // Save / cancel
+                  React.createElement("div",{style:{display:"flex",gap:8}},
+                    React.createElement("button",{
+                      onClick:()=>saveEdit(t.id),
+                      style:{background:"var(--green)",border:"none",borderRadius:7,color:"#000",fontSize:12,fontWeight:700,padding:"8px 18px",cursor:"pointer",fontFamily:"Inter"}
+                    },"Save"),
+                    React.createElement("button",{
+                      onClick:()=>setEditing(null),
+                      style:{background:"transparent",border:"1px solid var(--border2)",borderRadius:7,color:"var(--muted)",fontSize:12,padding:"8px 14px",cursor:"pointer",fontFamily:"Inter"}
+                    },"Cancel")
+                  )
+                )
+              );
+            })
+          )
+        );
+      })
+    ),
+
+    // Proportion bar
+    React.createElement("div",{style:{marginTop:16}},
+      React.createElement("div",{className:"label",style:{marginBottom:6}},"Trade contribution"),
+      React.createElement("div",{style:{display:"flex",height:8,borderRadius:99,overflow:"hidden",gap:2}},
+        trades.map((t,i)=>{
+          const tot=trades.reduce((s,x)=>s+Math.abs(x.action),0);
+          const pct=tot>0?Math.abs(t.action)/tot*100:0;
+          return React.createElement("div",{key:i,style:{width:`${pct}%`,background:t.action>=0?`hsl(${145+i*18},90%,${52+i*3}%)`:`hsl(${350-i*15},90%,${55+i*3}%)`,borderRadius:3},title:`${t.contract}: ${fmtN(t.action)}`});
+        })
+      ),
+      React.createElement("div",{style:{display:"flex",gap:12,marginTop:8,flexWrap:"wrap"}},
+        trades.map((t,i)=>{
+          const tot=trades.reduce((s,x)=>s+Math.abs(x.action),0);
+          const pct=tot>0?Math.round(Math.abs(t.action)/tot*100):0;
+          return React.createElement("div",{key:i,style:{display:"flex",alignItems:"center",gap:5,fontSize:10,color:"var(--muted)"}},
+            React.createElement("div",{style:{width:8,height:8,borderRadius:2,background:t.action>=0?`hsl(${145+i*18},90%,${52+i*3}%)`:`hsl(${350-i*15},90%,${55+i*3}%)`,flexShrink:0}}),
+            React.createElement("span",{style:{color:"var(--text)",fontWeight:600}},t.contract),
+            React.createElement("span",null,`${pct}%`)
+          );
+        })
+      )
+    )
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// ── CALENDAR PAGE ────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+function CalendarPage(){
+  const [manual,setManual]=useState(()=>{try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):[]}catch{return [];}});
+  const [viewMonth,setViewMonth]=useState("2026-06");
+  const [selected,setSelected]=useState(null);
+  useEffect(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(manual));}catch(e){}}, [manual]);
+
+  // Merge RH trades net per day + manual entries
+  const allDates=new Set([...Object.keys(BY_DATE),...manual.map(e=>e.date)]);
+  const getNet=d=>{
+    const rhNet=dayNet(d);
+    const manNet=manual.filter(e=>e.date===d).reduce((s,e)=>s+(parseFloat(e.action)||parseFloat(e.profit)||0),0);
+    return rhNet+manNet;
+  };
+
+  const [y,mo]=viewMonth.split("-").map(Number);
+  const firstDay=new Date(y,mo-1,1).getDay();
+  const dim=new Date(y,mo,0).getDate();
+  const mLabel=new Date(y,mo-1,2).toLocaleDateString("en-US",{month:"long",year:"numeric"});
+  const dayStr=d=>`${viewMonth}-${String(d).padStart(2,"0")}`;
+  const prev=()=>{const d=new Date(y,mo-2,1);setViewMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`);setSelected(null);};
+  const next=()=>{const d=new Date(y,mo,1);setViewMonth(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`);setSelected(null);};
+
+  const mDates=[...allDates].filter(d=>d.startsWith(viewMonth));
+  const mProfit=mDates.reduce((s,d)=>s+getNet(d),0);
+  const mWins=mDates.filter(d=>getNet(d)>0).length;
+  const mLoss=mDates.filter(d=>getNet(d)<0).length;
+  const allProfit=[...allDates].reduce((s,d)=>s+getNet(d),0);
+
+  // Add manual form — smart calculator
+  const [form,setForm]=useState({
+    date:new Date().toISOString().slice(0,10),
+    contract:"",
+    contracts:"",
+    buyPrice:"",
+    outcome:"payout",
+    sellPrice:"",
+    fees:"",
+    totalCost:"",
+  });
+
+  const calcProfit = (f) => {
+    const n    = parseFloat(f.contracts) || 0;
+    const buy  = parseFloat(f.buyPrice)  || 0;
+    const sell = parseFloat(f.sellPrice) || 0;
+    const cost = n * buy / 100;
+    if(f.outcome==="payout")  return n * 1.00 - cost;
+    if(f.outcome==="sell")    return n * sell / 100 - cost;
+    if(f.outcome==="expired") return -(parseFloat(f.totalCost) || cost); // use total cost if entered
+    return 0;
+  };
+
+  // For expired: auto-calc fees as (totalCost - contracts*buyPrice/100) if totalCost > cost basis
+  const expiredCostBasis = (parseFloat(form.contracts)||0) * (parseFloat(form.buyPrice)||0) / 100;
+  const expiredTotalCost = parseFloat(form.totalCost) || 0;
+  const autoFees = form.outcome==="expired" && expiredTotalCost > expiredCostBasis
+    ? expiredTotalCost - expiredCostBasis
+    : 0;
+
+  const previewGross  = calcProfit(form);
+  const feeAmt        = form.outcome==="expired" ? autoFees : parseFloat(form.fees) || 0;
+  const previewProfit = previewGross; // for expired, totalCost already includes fees
+  const previewValid  = (parseFloat(form.contracts)||0) > 0 && (parseFloat(form.buyPrice)||0) > 0;
+
+  const addEntry=()=>{
+    if(!previewValid) return;
+    const profit = previewProfit - (form.outcome==="expired" ? 0 : feeAmt);
+    const t = {
+      id:`m_${Date.now()}`,
+      date:form.date,
+      contract:form.contract||"Unknown",
+      type:"payout",
+      contracts: parseFloat(form.contracts),
+      buyPrice:  parseFloat(form.buyPrice),
+      sellPrice: form.outcome==="sell" ? parseFloat(form.sellPrice)||0 : form.outcome==="payout"?100:0,
+      fees: feeAmt,
+      totalCost: form.outcome==="expired" ? expiredTotalCost : 0,
+      action: form.outcome==="expired" ? previewProfit : previewProfit - feeAmt,
+      pct: form.outcome==="expired" ? -100 : (parseFloat(form.buyPrice)||0)>0 ? parseFloat((((previewProfit-feeAmt)/expiredCostBasis)*100).toFixed(2)) : 0,
+      source:"manual"
+    };
+    setManual(p=>[...p,t]);
+    setForm(p=>({...p,contract:"",contracts:"",buyPrice:"",sellPrice:"",fees:"",totalCost:"",outcome:"payout"}));
+  };
+  const delManual  = id => setManual(p => p.filter(e => e.id !== id));
+  const editManual = (id, updates) => setManual(p => p.map(e => e.id === id ? {...e, ...updates} : e));
+
+  // Avg profit per winning day (this month)
+  const avgProfit = mWins > 0 ? mProfit / mDates.length : 0;
+  const bestDay   = mDates.length > 0 ? mDates.reduce((best, d) => getNet(d) > getNet(best) ? d : best, mDates[0]) : null;
+  const bestDayVal= bestDay ? getNet(bestDay) : 0;
+
+  // Total capital deployed: initial $2,724.65 (Jun 16) + deposits $800 + $1,000 + $333 + $400 additional = $5,257.65
+  // Note: Jun 25 loss of ~$5,200 wiped most of the account
+  const INITIAL_INVESTMENT = 2724.65 + 800 + 1000 + 333;
+  const allTimeYield = (allProfit / INITIAL_INVESTMENT * 100);
+
+  return React.createElement("div",{className:"fade-in",style:{maxWidth:900,margin:"0 auto",padding:"0 16px 80px"}},
+
+    // Stats
+    React.createElement("div",{className:"stats-grid",style:{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12,marginTop:20,marginBottom:20}},
+      [
+        {label:"All-Time P&L",    val:fmtN(allProfit),              col:allProfit>=0?"var(--green)":"var(--red)",
+         sub:`+${allTimeYield.toFixed(1)}% on $4,857.65 total capital`},
+        {label:"This Month",       val:fmtN(mProfit),                col:mProfit>=0?"var(--green)":"var(--red)",  sub:mLabel},
+        {label:"Avg Profit / Day", val:fmtN(avgProfit),              col:avgProfit>=0?"var(--green)":"var(--red)",sub:`across ${mDates.length} day${mDates.length!==1?"s":""}  ·  ${mWins}W ${mLoss}L`},
+        {label:"Best Day",         val:bestDay?fmtN(bestDayVal):"—", col:"var(--gold)",                          sub:bestDay?new Date(bestDay+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"}):"no data yet"},
+      ].map(({label,val,col,sub})=>React.createElement("div",{key:label,className:"card"},
+        React.createElement("div",{className:"label",style:{marginBottom:8}},label),
+        React.createElement("div",{className:"mono",style:{fontSize:20,fontWeight:700,color:col,letterSpacing:"-0.02em"}},val),
+        React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:4}},sub)
+      ))
+    ),
+
+    // Calendar
+    React.createElement("div",{className:"card",style:{background:"linear-gradient(160deg,var(--bg1),var(--bg2))",border:"1px solid var(--border2)",marginBottom:16}},
+      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},
+        React.createElement("button",{onClick:prev,className:"btn-ghost"},"‹"),
+        React.createElement("div",{style:{fontSize:18,fontWeight:800,color:"var(--text)",letterSpacing:-0.5}},mLabel),
+        React.createElement("button",{onClick:next,className:"btn-ghost"},"›")
+      ),
+      React.createElement("div",{className:"cal-header-row",style:{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:6,marginBottom:8}},
+        ["SUN","MON","TUE","WED","THU","FRI","SAT"].map(d=>React.createElement("div",{key:d,style:{textAlign:"center",fontSize:8,letterSpacing:0,color:"var(--muted)",fontWeight:700,padding:"2px 0"}},d))
+      ),
+      React.createElement("div",{className:"cal-grid",style:{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:6}},
+        [...Array(firstDay)].map((_,i)=>React.createElement("div",{key:`e${i}`})),
+        [...Array(dim)].map((_,i)=>{
+          const d=i+1,ds=dayStr(d);
+          const net=getNet(ds);
+          const has=allDates.has(ds)&&Math.abs(net)>0.01;
+          const isSel=selected===ds;
+          const todayLocal = new Date();
+          const todayStr2  = `${todayLocal.getFullYear()}-${String(todayLocal.getMonth()+1).padStart(2,"0")}-${String(todayLocal.getDate()).padStart(2,"0")}`;
+          const isToday=ds===todayStr2;
+          const win=net>0,lose=net<0;
+
+          // Yield % for the day
+          // For RH trades: use weighted avg of each trade's ROI (pct field)
+          // For manual trades: compute from contracts × buyPrice
+          const dayTrades = BY_DATE[ds] || [];
+          const manualTrades = manual.filter(e=>e.date===ds);
+
+          // Try to get cost basis from manual trades
+          const manCost = manualTrades.reduce((s,e)=>{
+            const n=(parseFloat(e.contracts)||0),b=(parseFloat(e.buyPrice)||0);
+            return s + (n>0&&b>0 ? n*b/100 : 0);
+          }, 0);
+          const manNet2 = manualTrades.reduce((s,e)=>s+(parseFloat(e.action)||0),0);
+
+          // For RH trades: back-calculate cost from profit and pct (profit = cost * pct/100)
+          const rhCost = dayTrades.reduce((s,t)=>{
+            if(t.pct && t.pct!==0 && t.action!==0){
+              // profit = cost * pct/100  =>  cost = profit / (pct/100)
+              const cost = Math.abs(t.action) / (Math.abs(t.pct)/100);
+              return s + cost;
+            }
+            return s;
+          }, 0);
+          const rhNetDay = dayTrades.reduce((s,t)=>s+t.action,0);
+
+          const totalCost = rhCost + manCost;
+          const yield_ = totalCost > 0.01 ? (net / totalCost * 100) : null;
+
+          return React.createElement("div",{key:d,onClick:()=>{
+              setSelected(isSel?null:ds);
+              // Pre-fill the add trade form with this date
+              if(!isSel) setForm(p=>({...p,date:ds}));
+            },style:{
+            background:isSel?"rgba(99,102,241,0.08)":win?"linear-gradient(135deg,rgba(0,255,65,0.1),rgba(0,204,102,0.06))":lose?"linear-gradient(135deg,rgba(255,0,68,0.1),rgba(204,17,68,0.06))":"var(--bg2)",
+            border:`1.5px solid ${isSel?"var(--indigo)":isToday?"var(--gold)":win?"rgba(0,255,65,0.35)":lose?"rgba(255,0,68,0.35)":"var(--border)"}`,
+            borderRadius:12,padding:"8px 5px",textAlign:"center",cursor:"pointer",
+            minHeight:84,transition:"all 0.15s",
+            boxShadow:win&&has?"0 0 14px rgba(0,255,65,0.08)":lose&&has?"0 0 14px rgba(255,0,68,0.08)":"none",
+          }},
+            React.createElement("div",{style:{fontSize:11,color:isToday?"var(--gold)":has?win?"rgba(0,255,136,0.85)":"rgba(255,51,102,0.85)":"var(--muted)",fontWeight:700,marginBottom:4}},d),
+            has&&React.createElement("div",{className:"mono",style:{fontSize:12,fontWeight:700,color:win?"var(--green)":"var(--red)",lineHeight:1.2}},fmtN(net)),
+            has&&yield_!==null&&React.createElement("div",{className:"mono",style:{fontSize:10,fontWeight:600,color:win?"rgba(34,197,94,0.7)":"rgba(239,68,68,0.7)",marginTop:3}},
+              `${win?"+":""}${yield_.toFixed(1)}%`
+            ),
+            !has&&isSel&&React.createElement("div",{style:{fontSize:9,color:"var(--indigo)",marginTop:6}},"+  add trade")
+          );
+        })
+      ),
+      React.createElement("div",{style:{display:"flex",gap:16,marginTop:14,paddingTop:12,borderTop:"1px solid var(--border)"}},
+        [{bg:"rgba(0,255,65,0.2)",bd:"var(--green)",lbl:"Profit day"},{bg:"rgba(255,0,68,0.2)",bd:"var(--red)",lbl:"Loss day"},{bg:"transparent",bd:"var(--gold)",lbl:"Today"}]
+        .map(({bg,bd,lbl})=>React.createElement("div",{key:lbl,style:{display:"flex",alignItems:"center",gap:5}},React.createElement("div",{style:{width:10,height:10,borderRadius:3,background:bg,border:`1px solid ${bd}`}}),React.createElement("span",{style:{fontSize:9,color:"var(--muted)"}},lbl)))
+      )
+    ),
+
+    // Day detail panel — show for days with trades OR just selected (to add)
+    selected&&(BY_DATE[selected]||manual.some(e=>e.date===selected))
+      ?React.createElement(DayDetail,{dateStr:selected,onClose:()=>setSelected(null),manual,delManual,editManual})
+      :selected&&React.createElement("div",{className:"card fade-in",style:{marginBottom:16,border:"1px solid rgba(99,102,241,0.25)",background:"linear-gradient(135deg,rgba(99,102,241,0.04),var(--bg1))"}},
+        React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+          React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)"}},
+            new Date(selected+"T12:00:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})
+          ),
+          React.createElement("button",{onClick:()=>setSelected(null),className:"btn-ghost",style:{fontSize:18,padding:"4px 10px"}},"✕")
+        ),
+        React.createElement("div",{style:{fontSize:12,color:"var(--muted)",marginTop:8}},"No trades on this day. Use the form below to add one — date is pre-filled.")
+      ),
+
+    // ── Smart Trade Calculator ────────────────────────────────────────────────
+    React.createElement("div",{className:"card",style:{border:"1px solid rgba(99,102,241,0.25)",background:"linear-gradient(135deg,rgba(99,102,241,0.05),var(--bg1))"}},
+      React.createElement("div",{className:"label",style:{color:"var(--indigo)",marginBottom:14}},"➕ ADD TRADE · AUTO-CALCULATES PROFIT"),
+
+      // Row 1: Date + Contract + Outcome
+      React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:12}},
+
+        // Date
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"DATE"),
+          React.createElement("input",{type:"date",value:form.date,onChange:e=>setForm(p=>({...p,date:e.target.value})),className:"input-dark"})
+        ),
+
+        // Contract
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"CONTRACT"),
+          React.createElement("select",{value:form.contract,onChange:e=>setForm(p=>({...p,contract:e.target.value})),className:"input-dark"},
+            React.createElement("option",{value:""},"Select…"),
+            [">66 No",">67 No",">68 No",">69 No",">70 No",">71 No",">72 No",">73 No",">74 No",">75 No"]
+            .map(c=>React.createElement("option",{key:c,value:c},c))
+          )
+        ),
+
+        // Outcome
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"OUTCOME"),
+          React.createElement("select",{value:form.outcome,onChange:e=>setForm(p=>({...p,outcome:e.target.value})),className:"input-dark"},
+            React.createElement("option",{value:"payout"}, "✅ Won — settled @ $1.00"),
+            React.createElement("option",{value:"sell"},   "💰 Sold early"),
+            React.createElement("option",{value:"expired"},"❌ Expired worthless")
+          )
+        )
+      ),
+
+      // Row 2: inputs
+      React.createElement("div",{style:{display:"grid",gridTemplateColumns:form.outcome==="sell"?"1fr 1fr 1fr":form.outcome==="expired"?"1fr 1fr 1fr":"1fr 1fr",gap:12,marginBottom:16}},
+
+        // # Contracts
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"# CONTRACTS"),
+          React.createElement("input",{type:"number",min:1,placeholder:"e.g. 3500",value:form.contracts,
+            onChange:e=>setForm(p=>({...p,contracts:e.target.value})),
+            className:"input-dark",style:{fontFamily:"JetBrains Mono",fontSize:16,fontWeight:800}})
+        ),
+
+        // Buy price
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"BUY PRICE (¢)"),
+          React.createElement("input",{type:"number",min:1,max:99,placeholder:"e.g. 85",value:form.buyPrice,
+            onChange:e=>setForm(p=>({...p,buyPrice:e.target.value})),
+            className:"input-dark",style:{fontFamily:"JetBrains Mono",fontSize:16,fontWeight:800}})
+        ),
+
+        // Sell price (sold early) OR Total cost paid (expired)
+        form.outcome==="sell"&&React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"SELL PRICE (¢)"),
+          React.createElement("input",{type:"number",min:1,max:99,placeholder:"e.g. 92",value:form.sellPrice,
+            onChange:e=>setForm(p=>({...p,sellPrice:e.target.value})),
+            className:"input-dark",style:{fontFamily:"JetBrains Mono",fontSize:16,fontWeight:800}})
+        ),
+        form.outcome==="expired"&&React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"TOTAL COST PAID ($)"),
+          React.createElement("input",{type:"number",min:0,step:"0.01",placeholder:"e.g. 5200.00",value:form.totalCost||"",
+            onChange:e=>setForm(p=>({...p,totalCost:e.target.value})),
+            className:"input-dark",style:{fontFamily:"JetBrains Mono",fontSize:16,fontWeight:800}})
+        )
+      ),
+
+      // Fees row — hidden for expired (auto-calculated from total cost)
+      form.outcome!=="expired"&&React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12,marginBottom:16,alignItems:"end"}},
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"FEES ($)"),
+          React.createElement("input",{type:"number",min:0,step:"0.01",placeholder:"e.g. 2.50",value:form.fees,
+            onChange:e=>setForm(p=>({...p,fees:e.target.value})),
+            className:"input-dark",style:{fontFamily:"JetBrains Mono",fontSize:16,fontWeight:700}})
+        ),
+        React.createElement("div",{style:{fontSize:11,color:"var(--muted)",paddingBottom:10,lineHeight:1.6}},
+          "Optional — enter total fees for net profit calculation."
+        )
+      ),
+
+      // Live profit preview
+      previewValid&&React.createElement("div",{style:{
+        background: previewProfit>=0?"rgba(34,197,94,0.05)":"rgba(239,68,68,0.05)",
+        border:`1px solid ${previewProfit>=0?"var(--green-bd)":"var(--red-bd)"}`,
+        borderRadius:10, padding:"16px 18px", marginBottom:14,
+      }},
+        React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:14}},
+          React.createElement("div",null,
+            React.createElement("div",{className:"label",style:{marginBottom:4}},
+              form.outcome==="expired"?"TOTAL LOSS":feeAmt>0?"NET PROFIT (AFTER FEES)":"CALCULATED PROFIT"
+            ),
+            React.createElement("div",{className:"mono",style:{
+              fontSize:32,fontWeight:700,letterSpacing:"-0.02em",
+              color:previewProfit>=0?"var(--green)":"var(--red)"
+            }},fmtN(previewProfit)),
+            React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:3}},
+              form.outcome==="expired"
+                ? `${(parseFloat(form.contracts)||0).toLocaleString()} contracts × ${form.buyPrice}¢ · settled $0.00`
+                : `ROI: ${expiredCostBasis>0?((previewProfit-feeAmt)/expiredCostBasis*100).toFixed(2):0}%`
+            )
+          ),
+          React.createElement("button",{onClick:addEntry,style:{
+            background:previewProfit>=0?"var(--green)":"var(--red)",
+            border:"none",borderRadius:8,color:"#000",
+            fontSize:13,fontWeight:700,padding:"11px 20px",cursor:"pointer",
+            fontFamily:"Inter",whiteSpace:"nowrap",marginTop:4
+          }},previewProfit>=0?"+ Add to Calendar":"+ Add Loss")
+        ),
+
+        // Breakdown for expired
+        form.outcome==="expired"&&React.createElement("div",{style:{borderTop:"1px solid var(--border)",paddingTop:12,display:"flex",flexDirection:"column",gap:6}},
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12}},
+            React.createElement("span",{style:{color:"var(--muted)"}},"Cost basis"),
+            React.createElement("span",{className:"mono",style:{color:"var(--text)",fontWeight:600}},`−${fmt(expiredCostBasis)}`)
+          ),
+          autoFees>0&&React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12}},
+            React.createElement("span",{style:{color:"var(--muted)"}},"Fees (auto-calc)"),
+            React.createElement("span",{className:"mono",style:{color:"var(--red)",fontWeight:600}},`−${fmt(autoFees)}`)
+          ),
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12}},
+            React.createElement("span",{style:{color:"var(--muted)"}},"Settled at"),
+            React.createElement("span",{className:"mono",style:{color:"var(--muted)",fontWeight:600}},"$0.00")
+          ),
+          React.createElement("div",{style:{height:1,background:"var(--border)",margin:"2px 0"}}),
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:13}},
+            React.createElement("span",{style:{color:"var(--text)",fontWeight:600}},"Net loss"),
+            React.createElement("span",{className:"mono",style:{color:"var(--red)",fontWeight:700}},fmtN(previewProfit))
+          )
+        ),
+
+        // Breakdown for won/sold with fees
+        form.outcome!=="expired"&&feeAmt>0&&React.createElement("div",{style:{borderTop:"1px solid var(--border)",paddingTop:12,display:"flex",flexDirection:"column",gap:6}},
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12}},
+            React.createElement("span",{style:{color:"var(--muted)"}},"Gross profit"),
+            React.createElement("span",{className:"mono",style:{color:"var(--text)",fontWeight:600}},fmtN(previewGross))
+          ),
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12}},
+            React.createElement("span",{style:{color:"var(--muted)"}},"Fees"),
+            React.createElement("span",{className:"mono",style:{color:"var(--red)",fontWeight:600}},`−${fmt(feeAmt)}`)
+          ),
+          React.createElement("div",{style:{height:1,background:"var(--border)",margin:"2px 0"}}),
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:13}},
+            React.createElement("span",{style:{color:"var(--text)",fontWeight:600}},"Net profit"),
+            React.createElement("span",{className:"mono",style:{color:"var(--green)",fontWeight:700}},fmtN(previewProfit-feeAmt))
+          )
+        )
+      ),
+
+      // Placeholder when not enough info yet
+      !previewValid&&React.createElement("div",{style:{textAlign:"center",padding:"12px 0",fontSize:11,color:"var(--dim)"}},
+        "Fill in contracts and buy price above to see auto-calculated profit"
+      )
+    )
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// ── TRACKER PAGE ─────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+function TrackerPage({wxData, nwsHigh}){
+
+  // ── Date selector: today or tomorrow ─────────────────────────────────────
+  const todayDate    = new Date();
+  const tomorrowDate = new Date(); tomorrowDate.setDate(tomorrowDate.getDate()+1);
+  const fmtDate = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const fmtLabel = d => d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+
+  const [viewDate,    setViewDate]   = useState("today"); // "today" | "tomorrow"
+  const [tomorrowWx,  setTomorrowWx] = useState(null);
+  const [tomorrowLoading, setTomorrowLoading] = useState(false);
+  const [tomorrowErr, setTomorrowErr] = useState(false);
+
+  // Fetch tomorrow's forecast from Open-Meteo when user switches to it
+  useEffect(()=>{
+    if(viewDate !== "tomorrow" || tomorrowWx) return;
+    setTomorrowLoading(true);
+    const tmrStr = fmtDate(tomorrowDate);
+    const url = "https://api.open-meteo.com/v1/forecast"
+      +"?latitude=33.9425&longitude=-118.4081"
+      +"&hourly=temperature_2m,relativehumidity_2m,cloudcover,windspeed_10m,winddirection_10m,weathercode"
+      +"&temperature_unit=fahrenheit&windspeed_unit=mph"
+      +"&timezone=America%2FLos_Angeles&forecast_days=2";
+    fetch(url).then(r=>r.json()).then(data=>{
+      const h = data.hourly;
+      // Take hours 24-47 = tomorrow
+      const hours = h.time.slice(24,48).map((t,i)=>({
+        time:  fmtHour(t),
+        temp:  Math.round(h.temperature_2m[i+24]),
+        hum:   Math.round(h.relativehumidity_2m[i+24]),
+        cloud: Math.round(h.cloudcover[i+24]),
+        wind:  Math.round(h.windspeed_10m[i+24]),
+        dir:   degToDir(h.winddirection_10m[i+24]),
+        cond:  WMO_COND[h.weathercode[i+24]] || "Cloudy",
+      }));
+      setTomorrowWx({
+        date: fmtLabel(tomorrowDate),
+        scrapedAt: new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}),
+        hourly: hours,
+        source: "Open-Meteo",
+      });
+      setTomorrowLoading(false);
+    }).catch(()=>{ setTomorrowErr(true); setTomorrowLoading(false); });
+  },[viewDate]);
+
+  const activeWx   = viewDate==="tomorrow" ? (tomorrowWx || wxData) : wxData;
+  const WU_DATA    = activeWx;
+  const stats      = computeStats(WU_DATA.hourly, viewDate==="today"?nwsHigh:null);
+  const {WU_HIGH, ADJ, DISC, ML_SCORE, PEAK_HOURS, PEAK_START, PEAK_END, PEAK_COUNT,
+         SPIKE_SCORE, SPIKE_FACTORS, WIND_PICKUP, PEAK_DIR, PEAK_WIND, DIR_SCORE,
+         pOverWU} = stats;
+  const risk = riskLabel(ML_SCORE, SPIKE_SCORE);
+
+  const [line,      setLine]      = useState(WU_HIGH + 1);
+  const [noPrice,   setNoPrice]   = useState("");
+  const [contracts, setContracts] = useState("");
+  const [showTable, setShowTable] = useState(false);
+
+  // Live Robinhood market prices — keyed by contract line
+  const [mktPrices, setMktPrices] = useState({});
+  const setMkt = (l, v) => setMktPrices(p => ({...p, [l]: v}));
+
+  const n      = parseFloat(contracts) || 0;
+  const price  = parseFloat(noPrice)   || 0;
+  const lineN  = parseFloat(line)      || WU_HIGH + 1;
+
+  const pOver      = pOverWU(lineN);
+  const pNo        = 1 - pOver;
+  const pNoPct     = Math.round(pNo * 100);
+  const isEntry    = price >= 85 && pNo >= 0.85;
+  const verdictObj = noLabel(pNo);
+  const verdict    = verdictObj.txt;
+  const verdictCol = verdictObj.col;
+
+  const cost       = n * price / 100;
+  const profitWin  = n - cost;
+  const roiGross   = cost > 0 ? (profitWin / cost * 100) : 0;
+  const fairNoPrice= Math.round(pNo * 100);
+  const edge       = price > 0 ? fairNoPrice - price : null;
+
+  return React.createElement("div",{className:"fade-in",style:{maxWidth:860,margin:"0 auto",padding:"20px 16px 80px"}},
+
+    // ── Date switcher ──────────────────────────────────────────────────────
+    React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10,marginBottom:14}},
+      // Toggle buttons
+      React.createElement("div",{style:{display:"flex",background:"var(--bg2)",border:"1px solid var(--border)",borderRadius:8,padding:3,gap:3}},
+        [
+          {id:"today",    label:`Today · ${fmtLabel(todayDate)}`},
+          {id:"tomorrow", label:`Tomorrow · ${fmtLabel(tomorrowDate)}`},
+        ].map(({id,label})=>React.createElement("button",{
+          key:id,
+          onClick:()=>setViewDate(id),
+          style:{
+            padding:"7px 14px", borderRadius:6, fontSize:12, fontWeight:600,
+            cursor:"pointer", border:"none", transition:"all 0.15s",
+            background: viewDate===id?"#fff":"transparent",
+            color:       viewDate===id?"#000":"var(--muted)",
+            fontFamily:"Inter"
+          }
+        },label))
+      ),
+      // Status
+      viewDate==="tomorrow"&&tomorrowLoading&&React.createElement("span",{style:{fontSize:11,color:"var(--gold)"}},"Fetching tomorrow's forecast…"),
+      viewDate==="tomorrow"&&tomorrowErr&&React.createElement("span",{style:{fontSize:11,color:"var(--red)"}},"Fetch failed — showing today's data"),
+      viewDate==="tomorrow"&&tomorrowWx&&React.createElement("span",{style:{fontSize:11,color:"var(--green)"}},"✓ Tomorrow's Open-Meteo forecast"),
+      viewDate==="tomorrow"&&!tomorrowWx&&!tomorrowLoading&&!tomorrowErr&&React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},"Tap to load"),
+      // Night-before tip
+      viewDate==="tomorrow"&&React.createElement("span",{style:{
+        marginLeft:"auto",fontSize:10,color:"var(--muted)",
+        background:"rgba(99,102,241,0.08)",border:"1px solid rgba(99,102,241,0.2)",
+        borderRadius:99,padding:"2px 10px"
+      }},"📋 Place limit orders tonight")
+    ),
+
+    // ── 4 stat tiles ────────────────────────────────────────────────────────
+    React.createElement("div",{className:"wx-tiles",style:{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10,marginBottom:14}},
+      [
+        {label:"WU High",      val:`${WU_HIGH}°F`,         sub:"wunderground.com · primary",       col:"var(--text)"},
+        {label:"NWS Backup",   val:nwsHigh?`${nwsHigh}°F`:"—", sub:"weather.gov · secondary",       col:nwsHigh?"var(--blue)":"var(--muted)"},
+        {label:"Peak Window",  val:PEAK_COUNT===1?PEAK_START:`${PEAK_START}–${PEAK_END}`,sub:`${PEAK_COUNT}h at ${WU_HIGH}°F`, col:"var(--gold)"},
+        {label:"Marine Layer", val:`${ML_SCORE}/8`,         sub:risk.txt,                 col:risk.col},
+      ].map(({label,val,sub,col})=>
+        React.createElement("div",{key:label,className:"card"},
+          React.createElement("div",{className:"label",style:{marginBottom:6}},label),
+          React.createElement("div",{className:"mono",style:{fontSize:17,fontWeight:700,color:col,marginBottom:3}},val),
+          React.createElement("div",{style:{fontSize:11,color:"var(--muted)"}},sub)
+        )
+      )
+    ),
+
+    // ── Edge signals panel ───────────────────────────────────────────────────
+    React.createElement("div",{className:"card",style:{marginBottom:14,padding:"14px 18px"}},
+      React.createElement("div",{style:{fontSize:12,fontWeight:600,color:"var(--text)",marginBottom:12}},"Model Signals"),
+      React.createElement("div",{className:"signals-grid",style:{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,marginBottom:12}},
+
+        // Wind direction
+        React.createElement("div",{style:{background:"var(--bg2)",border:`1px solid ${DIR_SCORE>=2?"var(--green-bd)":DIR_SCORE<0?"var(--red-bd)":"var(--border)"}`,borderRadius:8,padding:"12px 14px"}},
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"Wind Direction"),
+          React.createElement("div",{className:"mono",style:{fontSize:18,fontWeight:700,color:DIR_SCORE>=2?"var(--green)":DIR_SCORE<0?"var(--red)":"var(--muted)"}},
+            PEAK_DIR||"—"
+          ),
+          React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:3}},
+            DIR_SCORE>=3?"SW/WSW — direct coastal, strongest marine layer":
+            DIR_SCORE>=2?"Onshore — good cooling":
+            DIR_SCORE>=1?"Partial onshore":
+            DIR_SCORE===0?"Neutral direction":
+            "⚠️ Offshore — spike risk, temp may exceed WU"
+          )
+        ),
+
+        // Wind pickup
+        React.createElement("div",{style:{background:"var(--bg2)",border:`1px solid ${WIND_PICKUP?.coolingEffect?"var(--green-bd)":"var(--red-bd)"}`,borderRadius:8,padding:"12px 14px"}},
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"Afternoon Wind"),
+          React.createElement("div",{className:"mono",style:{fontSize:18,fontWeight:700,color:WIND_PICKUP?.coolingEffect?"var(--green)":"var(--red)"}},
+            WIND_PICKUP?`${WIND_PICKUP.morningAvg}→${WIND_PICKUP.afternoonAvg}mph`:"—"
+          ),
+          React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:3}},
+            WIND_PICKUP?.coolingEffect
+              ?"Wind picks up PM — cooling likely"
+              :"Wind stays flat PM — slow cooling, temp holds higher"
+          )
+        ),
+
+        // Spike risk
+        React.createElement("div",{style:{background:"var(--bg2)",border:`1px solid ${SPIKE_SCORE>=4?"var(--red-bd)":SPIKE_SCORE>=2?"rgba(249,115,22,0.25)":"var(--green-bd)"}`,borderRadius:8,padding:"12px 14px"}},
+          React.createElement("div",{className:"label",style:{marginBottom:5}},"Spike Risk"),
+          React.createElement("div",{className:"mono",style:{fontSize:18,fontWeight:700,color:SPIKE_SCORE>=4?"var(--red)":SPIKE_SCORE>=2?"#f97316":"var(--green)"}},
+            SPIKE_SCORE>=4?"High":SPIKE_SCORE>=2?"Moderate":"Low"
+          ),
+          React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:3}},
+            SPIKE_SCORE>=4?"Temp may spike above WU forecast":
+            SPIKE_SCORE>=2?"Some risk of exceeding WU forecast":
+            "Conditions support WU or lower"
+          )
+        )
+      ),
+
+      // Spike warning factors
+      SPIKE_FACTORS.length>0&&React.createElement("div",{style:{background:"rgba(239,68,68,0.04)",border:"1px solid var(--red-bd)",borderRadius:8,padding:"10px 14px"}},
+        React.createElement("div",{className:"label",style:{marginBottom:6,color:"var(--red)"}},"Spike Warning Factors"),
+        React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:4}},
+          SPIKE_FACTORS.map((f,i)=>React.createElement("div",{key:i,style:{fontSize:11,color:"var(--text2)",display:"flex",alignItems:"center",gap:6}},
+            React.createElement("span",{style:{color:"var(--red)",flexShrink:0}},"·"),f
+          ))
+        )
+      ),
+
+      // Wind pickup detail
+      WIND_PICKUP&&React.createElement("div",{style:{marginTop:10,fontSize:11,color:"var(--muted)",lineHeight:1.7}},
+        React.createElement("span",{style:{fontWeight:600,color:"var(--text2)"}},"Cooling logic: "),
+        `Morning avg ${WIND_PICKUP.morningAvg}mph → Afternoon avg ${WIND_PICKUP.afternoonAvg}mph`,
+        " (Δ",WIND_PICKUP.pickup>=0?"+":"",(WIND_PICKUP.pickup).toFixed(1),"mph). ",
+        WIND_PICKUP.coolingEffect
+          ?"Wind increase supports afternoon cooling — marine layer engaged."
+          :"No wind pickup means the marine layer sea breeze isn't kicking in — temp will hold or drop slowly."
+      )
+    ),
+
+    // ── Robinhood Live Market ────────────────────────────────────────────────
+    React.createElement("div",{className:"card",style:{marginBottom:14}},
+      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}},
+        React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)"}},"Robinhood Live Market"),
+        React.createElement("div",{style:{fontSize:11,color:"var(--muted)"}},"Enter current No prices from the app — updates analysis live")
+      ),
+      React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginBottom:16}},"Type the No price (¢) for each contract. Color = model vs market agreement."),
+
+      // Grid of all contract lines
+      React.createElement("div",{className:"market-grid",style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",gap:8}},
+        CONTRACT_LINES.map(l => {
+          const mkt     = parseFloat(mktPrices[l]) || 0;
+          const pNo     = 1 - pOverWU(l);
+          const fairNo  = Math.round(pNo * 100);
+          const edge    = mkt > 0 ? fairNo - mkt : null; // positive = underpriced = value
+          const isSel   = l === lineN;
+
+          // Agreement: does our model agree with market direction?
+          const modelLikesNo  = pNo >= 0.70;
+          const marketLikesNo = mkt >= 70;
+          const agree = mkt > 0 && modelLikesNo === marketLikesNo;
+          const bigEdge = edge !== null && Math.abs(edge) >= 10;
+
+          const borderCol = mkt === 0
+            ? (isSel ? "rgba(255,255,255,0.3)" : "var(--border)")
+            : edge > 10 ? "var(--green-bd)"
+            : edge < -10 ? "var(--red-bd)"
+            : "var(--border2)";
+
+          return React.createElement("div",{key:l,style:{
+            background: isSel ? "rgba(255,255,255,0.04)" : "var(--bg2)",
+            border:`1px solid ${borderCol}`,
+            borderRadius:8, padding:"10px 10px", position:"relative"
+          }},
+            // Contract label + tap to select
+            React.createElement("div",{
+              onClick:()=>setLine(l),
+              style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8,cursor:"pointer"}
+            },
+              React.createElement("span",{style:{fontSize:12,fontWeight:600,color:isSel?"var(--text)":"var(--text2)"}},`No >${l}`),
+              React.createElement("span",{className:"mono",style:{fontSize:11,color:"var(--muted)"}},`${fairNo}¢ fair`)
+            ),
+
+            // Price input
+            React.createElement("input",{
+              type:"number", min:1, max:99,
+              placeholder:"—  ¢",
+              value: mktPrices[l] || "",
+              onChange: e => {
+                setMkt(l, e.target.value);
+                // Auto-load into analyzer when typed
+                setLine(l);
+                setNoPrice(e.target.value);
+              },
+              style:{
+                width:"100%", background:"#000",
+                border:`1px solid ${mkt>0?"var(--border2)":"var(--border)"}`,
+                borderRadius:6, color:"var(--text)",
+                fontSize:18, fontWeight:700, padding:"6px 8px",
+                fontFamily:"JetBrains Mono", textAlign:"center",
+                outline:"none"
+              }
+            }),
+
+            // Edge indicator
+            mkt>0&&React.createElement("div",{style:{
+              marginTop:6, fontSize:10, fontWeight:600, textAlign:"center",
+              color: edge>10?"var(--green)":edge<-10?"var(--red)":"var(--muted)"
+            }},
+              edge>10  ? `+${edge}¢ edge ✓` :
+              edge<-10 ? `${edge}¢ overpriced` :
+              `≈ fair (${edge>0?"+":""}${edge}¢)`
+            )
+          );
+        })
+      ),
+
+      // Market summary — which contracts have value right now
+      (()=>{
+        const withValue = CONTRACT_LINES
+          .map(l => ({ l, mkt: parseFloat(mktPrices[l])||0, pNo: 1-pOverWU(l) }))
+          .filter(x => x.mkt > 0);
+        const bestBets = withValue
+          .map(x => ({...x, edge: Math.round(x.pNo*100) - x.mkt}))
+          .filter(x => x.edge >= 8 && x.pNo >= 0.65)
+          .sort((a,b) => b.edge - a.edge);
+        const avoid = withValue
+          .map(x => ({...x, edge: Math.round(x.pNo*100) - x.mkt}))
+          .filter(x => x.edge < -8);
+
+        if(withValue.length === 0) return null;
+
+        return React.createElement("div",{style:{marginTop:14,paddingTop:14,borderTop:"1px solid var(--border)"}},
+          React.createElement("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},
+            bestBets.length>0&&React.createElement("div",{style:{flex:1}},
+              React.createElement("div",{className:"label",style:{marginBottom:6,color:"var(--green)"}},"Value Bets"),
+              React.createElement("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
+                bestBets.map(x=>React.createElement("div",{
+                  key:x.l,
+                  onClick:()=>{setLine(x.l);setNoPrice(String(x.mkt));},
+                  style:{
+                    background:"rgba(34,197,94,0.06)",border:"1px solid var(--green-bd)",
+                    borderRadius:6,padding:"6px 10px",cursor:"pointer",
+                    display:"flex",flexDirection:"column",alignItems:"center",gap:2
+                  }
+                },
+                  React.createElement("span",{style:{fontSize:11,fontWeight:600,color:"var(--green)"}},`No >${x.l}`),
+                  React.createElement("span",{className:"mono",style:{fontSize:10,color:"var(--text2)"}},`${x.mkt}¢ mkt · ${Math.round(x.pNo*100)}% model`),
+                  React.createElement("span",{style:{fontSize:10,color:"var(--green)",fontWeight:700}},`+${Math.round(x.pNo*100)-x.mkt}¢ edge`)
+                ))
+              )
+            ),
+            avoid.length>0&&React.createElement("div",{style:{flex:1}},
+              React.createElement("div",{className:"label",style:{marginBottom:6,color:"var(--red)"}},"Avoid"),
+              React.createElement("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
+                avoid.map(x=>React.createElement("div",{key:x.l,style:{
+                  background:"rgba(239,68,68,0.06)",border:"1px solid var(--red-bd)",
+                  borderRadius:6,padding:"6px 10px",
+                  display:"flex",flexDirection:"column",alignItems:"center",gap:2
+                }},
+                  React.createElement("span",{style:{fontSize:11,fontWeight:600,color:"var(--red)"}},`No >${x.l}`),
+                  React.createElement("span",{className:"mono",style:{fontSize:10,color:"var(--text2)"}},`${x.mkt}¢ mkt · ${Math.round(x.pNo*100)}% model`),
+                  React.createElement("span",{style:{fontSize:10,color:"var(--red)",fontWeight:700}},`${Math.round(x.pNo*100)-x.mkt}¢ overpriced`)
+                ))
+              )
+            )
+          )
+        );
+      })()
+    ),
+
+    // ── Bet Analyzer ─────────────────────────────────────────────────────────
+    React.createElement("div",{className:"card",style:{marginBottom:14}},
+      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}},
+        React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)"}},"Bet Analyzer"),
+        React.createElement("div",{style:{fontSize:11,color:"var(--muted)"}},"Tap any contract in the market panel above to load it here")
+      ),
+
+      // Inputs row
+      React.createElement("div",{className:"analyzer-inputs",style:{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:14,marginBottom:22}},
+
+        // Contract line selector
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:6}},"Contract Line"),
+          React.createElement("select",{value:line,onChange:e=>{setLine(e.target.value);setNoPrice(mktPrices[parseInt(e.target.value)]||"");},className:"input-dark",style:{fontSize:18,fontWeight:700,fontFamily:"JetBrains Mono"}},
+            CONTRACT_LINES.map(l=>React.createElement("option",{key:l,value:l},`No > ${l}°F`))
+          ),
+          React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:5}},`WU high ${WU_HIGH}°F · typical: No >${WU_HIGH+1}`)
+        ),
+
+        // No price — pre-fills from market panel
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:6}},"No Price (¢)"),
+          React.createElement("input",{type:"number",min:1,max:99,placeholder:"e.g. 85",value:noPrice,
+            onChange:e=>{setNoPrice(e.target.value);setMkt(lineN,e.target.value);},
+            className:"input-dark",
+            style:{fontSize:22,fontWeight:700,fontFamily:"JetBrains Mono"}}),
+          price>0&&React.createElement("div",{style:{
+            fontSize:11,marginTop:5,fontWeight:600,
+            color:edge>0?"var(--green)":edge<0?"var(--red)":"var(--muted)"
+          }},
+            edge>5?`+${edge}¢ edge — underpriced ✓`:
+            edge<-5?`${edge}¢ — overpriced`:
+            `≈ fair value`
+          )
+        ),
+
+        // Contracts
+        React.createElement("div",null,
+          React.createElement("div",{className:"label",style:{marginBottom:6}},"# Contracts"),
+          React.createElement("input",{type:"number",min:1,placeholder:"e.g. 3500",value:contracts,
+            onChange:e=>setContracts(e.target.value),className:"input-dark",
+            style:{fontSize:22,fontWeight:700,fontFamily:"JetBrains Mono"}}),
+          n>0&&price>0&&React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:5}},`Cost: ${fmt(cost)}`)
+        )
+      ),
+
+      // Divider
+      React.createElement("div",{className:"divider",style:{marginBottom:22}}),
+
+      // Output: probability + breakdown + profit
+      React.createElement("div",{className:"analyzer-main",style:{display:"grid",gridTemplateColumns:"120px 1fr auto",gap:24,alignItems:"center"}},
+
+        // Probability donut
+        React.createElement("div",{style:{textAlign:"center",flexShrink:0}},
+          React.createElement("svg",{width:110,height:110,viewBox:"0 0 110 110"},
+            (()=>{
+              const r=44,c=2*Math.PI*r,fill=pNoPct/100*c;
+              return [
+                React.createElement("circle",{key:"bg",cx:55,cy:55,r,fill:"none",stroke:"var(--border2)",strokeWidth:8}),
+                React.createElement("circle",{key:"fg",cx:55,cy:55,r,fill:"none",stroke:verdictCol,strokeWidth:8,
+                  strokeDasharray:`${fill} ${c}`,strokeDashoffset:c/4,strokeLinecap:"round",
+                  style:{transition:"all 0.35s ease"}}),
+                React.createElement("text",{key:"n",x:55,y:48,textAnchor:"middle",fill:verdictCol,fontSize:22,fontWeight:700,fontFamily:"JetBrains Mono"},`${pNoPct}%`),
+                React.createElement("text",{key:"l",x:55,y:66,textAnchor:"middle",fill:"var(--muted)",fontSize:10,fontFamily:"Inter"},"win prob"),
+              ];
+            })()
+          )
+        ),
+
+        // Verdict + factor breakdown
+        React.createElement("div",null,
+          React.createElement("div",{style:{fontSize:20,fontWeight:700,color:verdictCol,marginBottom:10}},verdict),
+
+          // Probability bar
+          React.createElement("div",{style:{marginBottom:12}},
+            React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11,color:"var(--muted)",marginBottom:5}},
+              React.createElement("span",null,`No >${lineN}°F`),
+              React.createElement("span",null,`${pNoPct}% No  ·  ${100-pNoPct}% Yes`)
+            ),
+            React.createElement("div",{className:"bar-track",style:{height:5}},
+              React.createElement("div",{className:"bar-fill-green",style:{width:`${pNoPct}%`,transition:"width 0.35s ease"}})
+            )
+          ),
+
+          // What's driving the number
+          React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:5}},
+            // WU factor
+            React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11}},
+              React.createElement("span",{style:{color:"var(--muted)"}},"WU high vs line:"),
+              React.createElement("span",{className:"mono",style:{color:WU_HIGH<lineN?"var(--green)":WU_HIGH===lineN?"var(--gold)":"var(--red)",fontWeight:600}},
+                `${WU_HIGH}°F vs >${lineN}°F (${WU_HIGH<lineN?`${lineN-WU_HIGH}°F below`:WU_HIGH===lineN?"at line":`${WU_HIGH-lineN}°F above`})`
+              )
+            ),
+            // ML factor
+            React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11}},
+              React.createElement("span",{style:{color:"var(--muted)"}},"ML adjusted high:"),
+              React.createElement("span",{className:"mono",style:{color:"var(--blue)",fontWeight:600}},`${ADJ.toFixed(1)}°F (−${DISC}°F marine discount)`)
+            ),
+            // Market factor
+            price>0&&React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11}},
+              React.createElement("span",{style:{color:"var(--muted)"}},"Market implied No:"),
+              React.createElement("span",{className:"mono",style:{color:edge>0?"var(--green)":edge<0?"var(--red)":"var(--muted)",fontWeight:600}},
+                `${price}¢ mkt · ${fairNoPrice}¢ model (${edge>=0?"+":""}${edge}¢)`
+              )
+            ),
+            // Wind factor
+            React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11}},
+              React.createElement("span",{style:{color:"var(--muted)"}},"Wind:"),
+              React.createElement("span",{className:"mono",style:{color:DIR_SCORE>=2?"var(--green)":DIR_SCORE<0?"var(--red)":"var(--muted)",fontWeight:600}},
+                `${PEAK_DIR} ${PEAK_WIND}mph · ${DIR_SCORE>=2?"coastal onshore ✓":DIR_SCORE<0?"offshore ⚠":"neutral"}`
+              )
+            ),
+            // Spike factor
+            SPIKE_SCORE>=2&&React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:11}},
+              React.createElement("span",{style:{color:"var(--muted)"}},"Spike risk:"),
+              React.createElement("span",{className:"mono",style:{color:SPIKE_SCORE>=4?"var(--red)":"#f97316",fontWeight:600}},
+                `${SPIKE_SCORE>=4?"High":"Moderate"} — ${SPIKE_FACTORS[0]||""}`
+              )
+            )
+          )
+        ),
+
+        // Profit panel
+        React.createElement("div",{className:"profit-panel",style:{textAlign:"right",minWidth:150}},
+          n>0&&price>0
+            ?React.createElement("div",null,
+              React.createElement("div",{className:"label",style:{marginBottom:4}},"If No wins"),
+              React.createElement("div",{className:"mono",style:{
+                fontSize:26,fontWeight:700,color:"var(--green)",
+                marginBottom:2,letterSpacing:"-0.02em"
+              }},fmtN(profitWin)),
+              React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginBottom:14}},`ROI ${roiGross.toFixed(1)}%`),
+              React.createElement("div",{style:{height:1,background:"var(--border)",marginBottom:12}}),
+              React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:5}},
+                React.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:16,fontSize:12}},
+                  React.createElement("span",{style:{color:"var(--muted)"}},"Payout"),
+                  React.createElement("span",{className:"mono",style:{color:"var(--text)",fontWeight:600}},fmt(n))
+                ),
+                React.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:16,fontSize:12}},
+                  React.createElement("span",{style:{color:"var(--muted)"}},"Cost"),
+                  React.createElement("span",{className:"mono",style:{color:"var(--text)",fontWeight:600}},`−${fmt(cost)}`)
+                ),
+                React.createElement("div",{style:{height:1,background:"var(--border)",margin:"2px 0"}}),
+                React.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:16,fontSize:13}},
+                  React.createElement("span",{style:{color:"var(--text)",fontWeight:600}},"Profit"),
+                  React.createElement("span",{className:"mono",style:{color:"var(--green)",fontWeight:700}},fmtN(profitWin))
+                )
+              )
+            )
+            :React.createElement("div",{style:{fontSize:11,color:"var(--muted)",lineHeight:1.8}},
+              "Enter price &",React.createElement("br"),"contracts above"
+            )
+        )
+      ),
+
+      // Entry signal banner
+      isEntry&&React.createElement("div",{style:{
+        marginTop:18,padding:"12px 16px",
+        background:"rgba(34,197,94,0.06)",border:"1px solid var(--green-bd)",
+        borderRadius:8,display:"flex",justifyContent:"space-between",alignItems:"center"
+      }},
+        React.createElement("span",{style:{fontSize:13,fontWeight:600,color:"var(--green)"}},"✓ Entry signal met"),
+        React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},`${price}¢ ≥ 85¢  ·  ${pNoPct}% win probability`)
+      ),
+
+      // Overpriced warning
+      price>0&&edge<-10&&React.createElement("div",{style:{
+        marginTop:12,padding:"10px 14px",
+        background:"rgba(239,68,68,0.06)",border:"1px solid var(--red-bd)",
+        borderRadius:8,display:"flex",justifyContent:"space-between",alignItems:"center"
+      }},
+        React.createElement("span",{style:{fontSize:12,fontWeight:600,color:"var(--red)"}},"⚠ Market overpriced for No"),
+        React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},`Model says ${fairNoPrice}¢ fair · market at ${price}¢`)
+      )
+    ),
+
+    // ── Hourly chart ──────────────────────────────────────────────────────────
+    React.createElement("div",{className:"card",style:{marginBottom:14}},
+      React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)",marginBottom:14}},"Hourly Forecast · KLAX"),
+      React.createElement(HourlyChart,{hourly:WU_DATA.hourly,adj:ADJ}),
+      React.createElement("div",{style:{display:"flex",gap:16,alignItems:"center",flexWrap:"wrap",marginTop:12,paddingTop:12,borderTop:"1px solid var(--border)"}},
+        React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},"Peak:"),
+        React.createElement("span",{className:"mono",style:{fontSize:13,fontWeight:600,color:"var(--gold)"}},
+          PEAK_COUNT===1?PEAK_START:`${PEAK_START} – ${PEAK_END}`
+        ),
+        React.createElement("span",{className:"pill pill-gold"},`${PEAK_COUNT}h at ${WU_HIGH}°F`),
+        React.createElement("span",{style:{fontSize:11,color:"var(--muted)",marginLeft:"auto"}},
+          "ML adj: ",React.createElement("span",{className:"mono",style:{color:"var(--blue)",fontWeight:600}},`${ADJ.toFixed(1)}°F`)
+        )
+      ),
+      React.createElement("button",{onClick:()=>setShowTable(p=>!p),
+        style:{marginTop:10,background:"none",border:"none",color:"var(--muted)",fontSize:12,cursor:"pointer",padding:0,textDecoration:"underline"}},
+        showTable?"Hide table":"Show full 24h table"
+      ),
+      showTable&&React.createElement("div",{style:{overflowX:"auto",marginTop:10}},
+        React.createElement("table",{style:{width:"100%",borderCollapse:"collapse",fontSize:12}},
+          React.createElement("thead",null,React.createElement("tr",null,
+            ["Time","Temp","Cloud","Humidity","Wind","Conditions"].map(h=>
+              React.createElement("th",{key:h,style:{padding:"6px 10px",fontSize:10,fontWeight:600,color:"var(--muted)",textAlign:"left",borderBottom:"1px solid var(--border)"}},h)
+            )
+          )),
+          React.createElement("tbody",null,WU_DATA.hourly.map((h,i)=>{
+            const ip=h.temp===WU_HIGH;
+            return React.createElement("tr",{key:i,style:{background:ip?"rgba(234,179,8,0.05)":"transparent"}},
+              React.createElement("td",{className:"mono",style:{padding:"5px 10px",color:ip?"var(--gold)":"var(--muted)",fontWeight:ip?600:400}},h.time),
+              React.createElement("td",{className:"mono",style:{padding:"5px 10px",fontWeight:600,color:ip?"var(--gold)":"var(--text)"}},`${h.temp}°F`),
+              React.createElement("td",{style:{padding:"5px 10px",color:"var(--muted)"}},`${h.cloud}%`),
+              React.createElement("td",{style:{padding:"5px 10px",color:"var(--muted)"}},`${h.hum}%`),
+              React.createElement("td",{style:{padding:"5px 10px",color:"var(--muted)"}},`${h.wind}mph`),
+              React.createElement("td",{style:{padding:"5px 10px",color:"var(--muted)"}},h.cond)
+            );
+          }))
+        )
+      )
+    ),
+
+    // ── All contracts quick reference ─────────────────────────────────────────
+    React.createElement("div",{className:"card"},
+      React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)",marginBottom:14}},"All Contracts"),
+      React.createElement("div",{className:"contracts-grid",style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(90px,1fr))",gap:8}},
+        CONTRACT_LINES.map(l=>{
+          const p=1-pOverWU(l);
+          const isSel=l===lineN;
+          const col=p>=0.85?"var(--green)":p>=0.70?"var(--gold)":p>=0.55?"#f97316":"var(--muted)";
+          return React.createElement("div",{key:l,onClick:()=>setLine(l),style:{
+            background:isSel?"rgba(255,255,255,0.06)":"transparent",
+            border:`1px solid ${isSel?"rgba(255,255,255,0.2)":"var(--border)"}`,
+            borderRadius:8,padding:"10px 8px",textAlign:"center",cursor:"pointer",transition:"all 0.12s"
+          }},
+            React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginBottom:4}},`No >${l}`),
+            React.createElement("div",{className:"mono",style:{fontSize:16,fontWeight:700,color:col,marginBottom:2}},`${Math.round(p*100)}%`),
+            React.createElement("div",{style:{fontSize:10,color:"var(--muted)"}},p>=0.85?"Strong":p>=0.70?"Good":p>=0.55?"Lean":"Skip")
+          );
+        })
+      ),
+      React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginTop:12}},
+        "Tap any row to load into analyzer · Based on WU ",
+        React.createElement("span",{className:"mono"},`${WU_HIGH}°F`),
+        " → ML adj ",
+        React.createElement("span",{className:"mono",style:{color:"var(--blue)"}},`${ADJ.toFixed(1)}°F`),
+        ` · Marine ${ML_SCORE}/8 · Spike risk: ${SPIKE_SCORE>=4?"High":SPIKE_SCORE>=2?"Moderate":"Low"}`
+      )
+    )
+  );
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// ── ROOT ─────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════════
+function App(){
+  const [page,      setPage]      = useState("calendar");
+  const [countdown, setCountdown] = useState(REFRESH_INTERVAL);
+  const [wxData,    setWxData]    = useState(WU_FALLBACK);
+  const [wxStatus,  setWxStatus]  = useState("loading");
+  const [nwsHigh,   setNwsHigh]   = useState(null);
+
+  // Fetch NWS hourly forecast for KLAX
+  const fetchNWS = async () => {
+    try {
+      const r1 = await fetch("https://api.weather.gov/points/33.9425,-118.4081");
+      if(!r1.ok) return;
+      const d1 = await r1.json();
+      const hourlyUrl = d1.properties?.forecastHourly;
+      if(!hourlyUrl) return;
+      const r2 = await fetch(hourlyUrl);
+      if(!r2.ok) return;
+      const d2 = await r2.json();
+      const periods = d2.properties?.periods || [];
+      // Get today's forecast periods and find max temp
+      const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD
+      const todayPeriods = periods.filter(p => p.startTime.startsWith(today) && p.isDaytime);
+      if(todayPeriods.length > 0){
+        const maxTemp = Math.max(...todayPeriods.map(p => p.temperature));
+        setNwsHigh(maxTemp);
+      }
+    } catch(e){ /* NWS is backup, ignore errors */ }
+  };
+
+  // Fetch weather from Open-Meteo and update state
+  const refresh = async () => {
+    try {
+      setWxStatus("loading");
+      const data = await fetchWeather();
+      if(data && data.hourly && data.hourly.length > 0){
+        setWxData(data);
+        setWxStatus("live");
+      } else {
+        throw new Error("Empty response");
+      }
+    } catch(e) {
+      console.error("Weather fetch failed:", e.message);
+      setWxStatus("error");
+      // Keep showing last good data (fallback or previous fetch)
+    }
+  };
+
+  // Auto-refresh every 5 minutes + countdown tick
+  useEffect(()=>{
+    refresh();
+    fetchNWS();
+    const wxId = setInterval(()=>{
+      refresh();
+      fetchNWS();
+      setCountdown(REFRESH_INTERVAL);
+    }, REFRESH_INTERVAL * 1000);
+    const cdId = setInterval(()=>setCountdown(p=>p<=1?REFRESH_INTERVAL:p-1), 1000);
+    return()=>{clearInterval(wxId);clearInterval(cdId);};
+  },[]);
+
+  const allDates  = new Set(Object.keys(BY_DATE));
+  const allProfit = [...allDates].reduce((s,d)=>s+dayNet(d),0);
+  const WU_HIGH   = wxData.hourly.length ? Math.max(...wxData.hourly.map(h=>h.temp)) : "—";
+
+  // Live clock — updates every second
+  const [now, setNow] = useState(new Date());
+  useEffect(()=>{
+    const id = setInterval(()=>setNow(new Date()), 1000);
+    return ()=>clearInterval(id);
+  },[]);
+  const dateStr = now.toLocaleDateString("en-US",{weekday:"short",month:"long",day:"numeric",year:"numeric"});
+  const timeStr = now.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true});
+
+  return React.createElement("div",{style:{minHeight:"100vh"}},
+    React.createElement("div",{style:{background:"#000",borderBottom:"1px solid var(--border)",padding:"14px 24px",position:"sticky",top:0,zIndex:50,backdropFilter:"blur(12px)"}},
+      React.createElement("div",{className:"nav-inner",style:{display:"flex",justifyContent:"space-between",alignItems:"center",maxWidth:900,margin:"0 auto"}},
+        React.createElement("div",null,
+          // Title row
+          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:4}},
+            React.createElement("div",{style:{
+              width:7,height:7,borderRadius:"50%",flexShrink:0,
+              background:wxStatus==="live"?"var(--green)":wxStatus==="error"?"var(--red)":"var(--gold)",
+              animation:"pulseDot 2s ease-in-out infinite"
+            }}),
+            React.createElement("span",{style:{fontSize:13,fontWeight:700,color:"var(--text)",letterSpacing:"-0.01em"}},"KLAX Weather Bets"),
+            wxStatus==="live"&&React.createElement("span",{style:{fontSize:10,color:"var(--green)",background:"rgba(34,197,94,0.08)",border:"1px solid var(--green-bd)",borderRadius:99,padding:"1px 7px"}},
+              wxData.source==="WU live"?"WU live ✓":"Open-Meteo live"
+            ),
+            wxStatus==="loading"&&React.createElement("span",{style:{fontSize:10,color:"var(--gold)"}},"fetching…"),
+            wxStatus==="error"&&React.createElement("span",{style:{fontSize:10,color:"var(--red)"}},"weather error")
+          ),
+          // Date + time + stats row
+          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}},
+            // Live date
+            React.createElement("span",{className:"mono",style:{fontSize:12,color:"var(--text)",fontWeight:600}},dateStr),
+            React.createElement("span",{style:{color:"var(--border2)"}},"·"),
+            // Live time
+            React.createElement("span",{className:"mono",style:{fontSize:12,color:"var(--green)",fontWeight:700}},timeStr),
+            React.createElement("span",{style:{color:"var(--border2)"}},"·"),
+            // All-time P&L
+            React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},"All-time: "),
+            React.createElement("span",{className:"mono",style:{fontSize:11,color:"var(--green)",fontWeight:600}},fmtN(allProfit)),
+            React.createElement("span",{style:{color:"var(--border2)"}},"·"),
+            // WU high
+            React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},"WU: "),
+            React.createElement("span",{className:"mono",style:{fontSize:11,color:"var(--text)",fontWeight:600}},`${WU_HIGH}°F`),
+            // Weather updated time
+            wxStatus==="live"&&React.createElement(React.Fragment,null,
+              React.createElement("span",{style:{color:"var(--border2)"}},"·"),
+              React.createElement("span",{style:{fontSize:10,color:"var(--muted)"}},"updated ",wxData.scrapedAt)
+            )
+          )
+        ),
+        React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10}},
+          React.createElement("div",{style:{display:"flex",background:"var(--bg2)",borderRadius:9,padding:3,gap:2}},
+            [{id:"calendar",label:"P&L"},{id:"tracker",label:"Tracker"}]
+            .map(({id,label})=>React.createElement("button",{key:id,onClick:()=>setPage(id),className:`nav-tab ${page===id?"active":"inactive"}`},label))
+          ),
+          React.createElement("div",{className:"countdown-wrap"},React.createElement(CountdownRing,{s:countdown,t:REFRESH_INTERVAL}))
+        )
+      )
+    ),
+    page==="calendar"
+      ?React.createElement(CalendarPage,null)
+      :React.createElement(TrackerPage,{wxData, nwsHigh})
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
