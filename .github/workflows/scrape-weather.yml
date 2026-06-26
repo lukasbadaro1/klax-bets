@@ -2,7 +2,7 @@ name: Scrape KLAX Weather
 
 on:
   schedule:
-    - cron: '5 * * * *'   # every hour at :05
+    - cron: '*/10 * * * *'  # every 10 minutes
   workflow_dispatch:        # allow manual trigger
 
 jobs:
