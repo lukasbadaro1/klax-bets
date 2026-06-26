@@ -286,25 +286,31 @@ function celsiusToF(c){ return Math.round(c*9/5+32); }
 
 async function fetchWeather(){
   // ── Priority 1: WU live data scraped by Chrome extension ──────────────────
-  // The Chrome extension scrapes wunderground.com/hourly/KLAX and saves to localStorage
   try {
     const raw = localStorage.getItem('klax_wu_live');
     if(raw){
       const wu = JSON.parse(raw);
       const ageMs = Date.now() - (wu.ts || 0);
-      // Use WU data if it's less than 15 minutes old
       if(ageMs < 15 * 60 * 1000 && wu.hourly && wu.hourly.length > 0){
-        return {
-          date:      wu.date,
-          scrapedAt: wu.scrapedAt,
-          hourly:    wu.hourly,
-          source:    'WU live',
-        };
+        return { date: wu.date, scrapedAt: wu.scrapedAt, hourly: wu.hourly, source: 'WU live' };
       }
     }
   } catch(e){ /* ignore */ }
 
-  // ── Priority 2: Open-Meteo API (good proxy for KLAX, free, no CORS) ───────
+  // ── Priority 2: GitHub-committed WU data (updated every 10 min via Actions) ─
+  try {
+    const ghUrl = "https://raw.githubusercontent.com/lukasbadaro1/klax-bets/main/weather.json?t=" + Date.now();
+    const ghRes = await fetch(ghUrl);
+    if(ghRes.ok){
+      const wu = await ghRes.json();
+      const ageMs = Date.now() - (wu.ts || 0);
+      if(ageMs < 20 * 60 * 1000 && wu.hourly && wu.hourly.length > 0){
+        return { date: wu.date, scrapedAt: wu.scrapedAt, hourly: wu.hourly, source: 'WU live' };
+      }
+    }
+  } catch(e){ /* ignore */ }
+
+  // ── Priority 3: Open-Meteo API (good proxy for KLAX, free, no CORS) ───────
   const url = "https://api.open-meteo.com/v1/forecast"
     +"?latitude=33.9425&longitude=-118.4081"
     +"&hourly=temperature_2m,relativehumidity_2m,cloudcover,windspeed_10m,winddirection_10m,weathercode"
@@ -337,34 +343,35 @@ async function fetchWeather(){
   };
 }
 
-// ── Static fallback WU DATA (Jun 25 2026 — scraped 10:40 PM) ─────────────────
+// ── Static fallback WU DATA (Jun 26 2026 — scraped 4:51 AM PDT via WU/KLAX) ──
+// Current: 63°F · 85% hum · 4 mph N · Cloudy | Forecast high: 70°F · SW 10-20 mph PM
 const WU_FALLBACK = {
-  date:"June 25, 2026", scrapedAt:"10:40 PM · WU", source:"WU fallback",
+  date:"June 26, 2026", scrapedAt:"4:51 AM · WU", source:"WU fallback",
   hourly:[
-    {time:"12:00 am",temp:62,cloud:73, hum:87,wind:5, dir:"WSW",cond:"Mostly Cloudy"},
-    {time:"1:00 am", temp:62,cloud:90, hum:87,wind:4, dir:"WSW",cond:"Cloudy"},
-    {time:"2:00 am", temp:62,cloud:80, hum:87,wind:3, dir:"WSW",cond:"Cloudy"},
-    {time:"3:00 am", temp:62,cloud:85, hum:86,wind:4, dir:"WSW",cond:"Cloudy"},
-    {time:"4:00 am", temp:62,cloud:78, hum:87,wind:4, dir:"WSW",cond:"Mostly Cloudy"},
-    {time:"5:00 am", temp:62,cloud:83, hum:85,wind:3, dir:"SW", cond:"Cloudy"},
-    {time:"6:00 am", temp:62,cloud:86, hum:85,wind:3, dir:"S",  cond:"Cloudy"},
-    {time:"7:00 am", temp:63,cloud:87, hum:84,wind:3, dir:"SSE",cond:"Cloudy"},
-    {time:"8:00 am", temp:64,cloud:80, hum:80,wind:3, dir:"SSW",cond:"Cloudy"},
-    {time:"9:00 am", temp:65,cloud:78, hum:77,wind:5, dir:"SW", cond:"Mostly Cloudy"},
-    {time:"10:00 am",temp:66,cloud:87, hum:72,wind:6, dir:"WSW",cond:"Cloudy"},
-    {time:"11:00 am",temp:68,cloud:52, hum:70,wind:8, dir:"WSW",cond:"Partly Cloudy"},
-    {time:"12:00 pm",temp:69,cloud:48, hum:68,wind:11,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"1:00 pm", temp:69,cloud:45, hum:66,wind:12,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"2:00 pm", temp:70,cloud:40, hum:65,wind:13,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"3:00 pm", temp:70,cloud:34, hum:64,wind:14,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"4:00 pm", temp:70,cloud:34, hum:65,wind:14,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"5:00 pm", temp:69,cloud:34, hum:68,wind:14,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"6:00 pm", temp:67,cloud:39, hum:73,wind:13,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"7:00 pm", temp:66,cloud:46, hum:76,wind:13,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"8:00 pm", temp:64,cloud:50, hum:82,wind:12,dir:"WSW",cond:"Partly Cloudy"},
-    {time:"9:00 pm", temp:63,cloud:60, hum:85,wind:10,dir:"WSW",cond:"Mostly Cloudy"},
-    {time:"10:00 pm",temp:63,cloud:70, hum:84,wind:9, dir:"WSW",cond:"Mostly Cloudy"},
-    {time:"11:00 pm",temp:62,cloud:76, hum:85,wind:8, dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"12:00 am",temp:62,cloud:80, hum:87,wind:5, dir:"N",  cond:"Mostly Cloudy"},
+    {time:"1:00 am", temp:62,cloud:82, hum:87,wind:4, dir:"N",  cond:"Cloudy"},
+    {time:"2:00 am", temp:62,cloud:80, hum:87,wind:3, dir:"NNW",cond:"Cloudy"},
+    {time:"3:00 am", temp:62,cloud:83, hum:86,wind:3, dir:"N",  cond:"Cloudy"},
+    {time:"4:00 am", temp:63,cloud:85, hum:85,wind:4, dir:"N",  cond:"Cloudy"},
+    {time:"5:00 am", temp:63,cloud:85, hum:85,wind:3, dir:"N",  cond:"Cloudy"},
+    {time:"6:00 am", temp:63,cloud:83, hum:84,wind:4, dir:"N",  cond:"Cloudy"},
+    {time:"7:00 am", temp:64,cloud:80, hum:82,wind:4, dir:"NNW",cond:"Cloudy"},
+    {time:"8:00 am", temp:65,cloud:72, hum:78,wind:5, dir:"NW", cond:"Cloudy"},
+    {time:"9:00 am", temp:66,cloud:60, hum:74,wind:7, dir:"SW", cond:"Mostly Cloudy"},
+    {time:"10:00 am",temp:67,cloud:52, hum:71,wind:9, dir:"WSW",cond:"Partly Cloudy"},
+    {time:"11:00 am",temp:68,cloud:45, hum:69,wind:11,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"12:00 pm",temp:69,cloud:40, hum:67,wind:13,dir:"SW", cond:"Partly Cloudy"},
+    {time:"1:00 pm", temp:70,cloud:35, hum:65,wind:15,dir:"SW", cond:"Partly Cloudy"},
+    {time:"2:00 pm", temp:70,cloud:33, hum:64,wind:17,dir:"SW", cond:"Partly Cloudy"},
+    {time:"3:00 pm", temp:70,cloud:33, hum:64,wind:18,dir:"SW", cond:"Partly Cloudy"},
+    {time:"4:00 pm", temp:70,cloud:36, hum:65,wind:17,dir:"SW", cond:"Partly Cloudy"},
+    {time:"5:00 pm", temp:69,cloud:40, hum:67,wind:15,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"6:00 pm", temp:67,cloud:45, hum:72,wind:13,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"7:00 pm", temp:66,cloud:52, hum:76,wind:11,dir:"WSW",cond:"Partly Cloudy"},
+    {time:"8:00 pm", temp:65,cloud:62, hum:80,wind:9, dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"9:00 pm", temp:64,cloud:70, hum:83,wind:7, dir:"W",  cond:"Mostly Cloudy"},
+    {time:"10:00 pm",temp:63,cloud:76, hum:85,wind:6, dir:"WSW",cond:"Mostly Cloudy"},
+    {time:"11:00 pm",temp:62,cloud:80, hum:86,wind:5, dir:"WSW",cond:"Mostly Cloudy"},
   ]
 };
 
