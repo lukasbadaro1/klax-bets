@@ -758,6 +758,66 @@ function HourlyChart({hourly,adj}){
   );
 }
 
+function WindChart({hourly}){
+  if(!hourly||!hourly.length) return null;
+  const W=580,H=80,PL=26,PR=40,PT=8,PB=20,iW=W-PL-PR,iH=H-PT-PB;
+  const maxW=Math.max(...hourly.map(h=>h.wind),10);
+  const px=i=>PL+(i/(hourly.length-1))*iW;
+  const py=v=>PT+iH-(v/maxW)*iH;
+  const path=hourly.map((h,i)=>`${i===0?"M":"L"}${px(i).toFixed(1)},${py(h.wind).toFixed(1)}`).join(" ");
+  const area=`${path} L${px(hourly.length-1)},${H-PB} L${px(0)},${H-PB} Z`;
+  const ticks=[0,Math.round(maxW/2),maxW];
+  return React.createElement("svg",{viewBox:`0 0 ${W} ${H}`,style:{width:"100%",height:"auto",display:"block"}},
+    React.createElement("defs",null,
+      React.createElement("linearGradient",{id:"wg",x1:0,y1:0,x2:0,y2:1},
+        React.createElement("stop",{offset:"0%",stopColor:"#38bdf8",stopOpacity:.15}),
+        React.createElement("stop",{offset:"100%",stopColor:"#38bdf8",stopOpacity:0})
+      )
+    ),
+    ticks.map(t=>React.createElement("g",{key:t},
+      React.createElement("line",{x1:PL,x2:W-PR,y1:py(t),y2:py(t),stroke:"var(--border)",strokeWidth:1}),
+      React.createElement("text",{x:PL-4,y:py(t)+3,textAnchor:"end",fill:"var(--muted)",fontSize:8,fontFamily:"JetBrains Mono"},`${t}`)
+    )),
+    React.createElement("path",{d:area,fill:"url(#wg)"}),
+    React.createElement("path",{d:path,fill:"none",stroke:"#38bdf8",strokeWidth:1.5,strokeLinejoin:"round"}),
+    hourly.filter((_,i)=>i%3===0).map((h,i)=>{
+      const idx=hourly.indexOf(h);
+      return React.createElement("g",{key:i},
+        React.createElement("text",{x:px(idx),y:py(h.wind)-5,textAnchor:"middle",fill:"var(--muted)",fontSize:7,fontFamily:"JetBrains Mono"},h.dir)
+      );
+    }),
+    hourly.filter((_,i)=>i%6===0).map((h,i)=>{
+      const idx=hourly.indexOf(h);
+      return React.createElement("text",{key:i,x:px(idx),y:H-PB+12,textAnchor:"middle",fill:"var(--muted)",fontSize:8,fontFamily:"JetBrains Mono"},
+        h.time.replace(":00 ","").replace(" ","").toLowerCase());
+    })
+  );
+}
+
+function CloudHumChart({hourly}){
+  if(!hourly||!hourly.length) return null;
+  const W=580,H=80,PL=26,PR=40,PT=8,PB=20,iW=W-PL-PR,iH=H-PT-PB;
+  const px=i=>PL+(i/(hourly.length-1))*iW;
+  const py=v=>PT+iH-(Math.min(100,Math.max(0,v))/100)*iH;
+  const mkPath=key=>hourly.map((h,i)=>`${i===0?"M":"L"}${px(i).toFixed(1)},${py(h[key]).toFixed(1)}`).join(" ");
+  const cloudPath=mkPath("cloud"), humPath=mkPath("hum");
+  return React.createElement("svg",{viewBox:`0 0 ${W} ${H}`,style:{width:"100%",height:"auto",display:"block"}},
+    [0,50,100].map(t=>React.createElement("g",{key:t},
+      React.createElement("line",{x1:PL,x2:W-PR,y1:py(t),y2:py(t),stroke:"var(--border)",strokeWidth:1}),
+      React.createElement("text",{x:PL-4,y:py(t)+3,textAnchor:"end",fill:"var(--muted)",fontSize:8,fontFamily:"JetBrains Mono"},`${t}`)
+    )),
+    React.createElement("path",{d:cloudPath,fill:"none",stroke:"#94a3b8",strokeWidth:1.5,strokeLinejoin:"round",strokeDasharray:"4,3"}),
+    React.createElement("path",{d:humPath,fill:"none",stroke:"#818cf8",strokeWidth:1.5,strokeLinejoin:"round"}),
+    hourly.filter((_,i)=>i%6===0).map((h,i)=>{
+      const idx=hourly.indexOf(h);
+      return React.createElement("text",{key:i,x:px(idx),y:H-PB+12,textAnchor:"middle",fill:"var(--muted)",fontSize:8,fontFamily:"JetBrains Mono"},
+        h.time.replace(":00 ","").replace(" ","").toLowerCase());
+    }),
+    React.createElement("text",{x:W-PR+4,y:py(hourly[hourly.length-1].cloud)+3,fill:"#94a3b8",fontSize:8,fontFamily:"JetBrains Mono"},"cld"),
+    React.createElement("text",{x:W-PR+4,y:py(hourly[hourly.length-1].hum)+3,fill:"#818cf8",fontSize:8,fontFamily:"JetBrains Mono"},"hum")
+  );
+}
+
 // ── Trade helpers ─────────────────────────────────────────────────────────────
 function tradeIcon(t){if(t.type==="payout")return t.action>0?"✅":"❌";if(t.type==="sell")return "💰";return "🛒";}
 function tradeLabel(t){
@@ -1611,8 +1671,8 @@ function TrackerPage({wxData, nwsHigh}){
       )
     ),
 
-    // ── Robinhood Live Market ────────────────────────────────────────────────
-    React.createElement("div",{className:"card",style:{marginBottom:14}},
+    // ── Robinhood Live Market (moved to bottom) ──────────────────────────────
+    false&&React.createElement("div",{className:"card",style:{marginBottom:14}},
       React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}},
         React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)"}},"Robinhood Live Market"),
         React.createElement("div",{style:{fontSize:11,color:"var(--muted)"}},"Enter current No prices from the app — updates analysis live")
@@ -1918,10 +1978,22 @@ function TrackerPage({wxData, nwsHigh}){
       )
     ),
 
-    // ── Hourly chart ──────────────────────────────────────────────────────────
+    // ── Hourly charts ─────────────────────────────────────────────────────────
     React.createElement("div",{className:"card",style:{marginBottom:14}},
       React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)",marginBottom:14}},"Hourly Forecast · KLAX"),
+
+      React.createElement("div",{style:{fontSize:11,fontWeight:600,color:"var(--muted)",marginBottom:6,textTransform:"uppercase",letterSpacing:"0.06em"}},"Temperature (°F)"),
       React.createElement(HourlyChart,{hourly:WU_DATA.hourly,adj:ADJ}),
+
+      React.createElement("div",{style:{fontSize:11,fontWeight:600,color:"#38bdf8",marginBottom:6,marginTop:18,textTransform:"uppercase",letterSpacing:"0.06em"}},"Wind Speed (mph) · direction labels"),
+      React.createElement(WindChart,{hourly:WU_DATA.hourly}),
+
+      React.createElement("div",{style:{fontSize:11,fontWeight:600,color:"var(--muted)",marginBottom:6,marginTop:18,textTransform:"uppercase",letterSpacing:"0.06em"}},
+        React.createElement("span",{style:{color:"#94a3b8"}},"— Cloud Cover  "),
+        React.createElement("span",{style:{color:"#818cf8"}},"— Humidity  "),
+        React.createElement("span",{style:{color:"var(--muted)"}},"(%)")
+      ),
+      React.createElement(CloudHumChart,{hourly:WU_DATA.hourly}),
       React.createElement("div",{style:{display:"flex",gap:16,alignItems:"center",flexWrap:"wrap",marginTop:12,paddingTop:12,borderTop:"1px solid var(--border)"}},
         React.createElement("span",{style:{fontSize:11,color:"var(--muted)"}},"Peak:"),
         React.createElement("span",{className:"mono",style:{fontSize:13,fontWeight:600,color:"var(--gold)"}},
@@ -1984,6 +2056,80 @@ function TrackerPage({wxData, nwsHigh}){
         React.createElement("span",{className:"mono",style:{color:"var(--blue)"}},`${ADJ.toFixed(1)}°F`),
         ` · Marine ${ML_SCORE}/8 · Spike risk: ${SPIKE_SCORE>=4?"High":SPIKE_SCORE>=2?"Moderate":"Low"}`
       )
+    ),
+
+    // ── Robinhood Live Market ────────────────────────────────────────────────
+    React.createElement("div",{className:"card",style:{marginTop:14}},
+      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}},
+        React.createElement("div",{style:{fontSize:14,fontWeight:600,color:"var(--text)"}},"Robinhood Live Market"),
+        React.createElement("div",{style:{fontSize:11,color:"var(--muted)"}},"Enter current No prices from the app — updates analysis live")
+      ),
+      React.createElement("div",{style:{fontSize:11,color:"var(--muted)",marginBottom:16}},"Type the No price (¢) for each contract. Color = model vs market agreement."),
+      React.createElement("div",{className:"market-grid",style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",gap:8}},
+        CONTRACT_LINES.map(l => {
+          const mkt    = parseFloat(mktPrices[l]) || 0;
+          const pNo    = 1 - pOverWU(l);
+          const fairNo = Math.round(pNo * 100);
+          const edge   = mkt > 0 ? fairNo - mkt : null;
+          const isSel  = l === lineN;
+          const borderCol = mkt === 0
+            ? (isSel ? "rgba(255,255,255,0.3)" : "var(--border)")
+            : edge > 10 ? "var(--green-bd)" : edge < -10 ? "var(--red-bd)" : "var(--border2)";
+          return React.createElement("div",{key:l,style:{
+            background: isSel ? "rgba(255,255,255,0.04)" : "var(--bg2)",
+            border:`1px solid ${borderCol}`, borderRadius:8, padding:"10px", position:"relative"
+          }},
+            React.createElement("div",{onClick:()=>setLine(l),style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8,cursor:"pointer"}},
+              React.createElement("span",{style:{fontSize:12,fontWeight:600,color:isSel?"var(--text)":"var(--text2)"}},`No >${l}`),
+              React.createElement("span",{className:"mono",style:{fontSize:11,color:"var(--muted)"}},`${fairNo}¢ fair`)
+            ),
+            React.createElement("input",{type:"number",min:1,max:99,placeholder:"—  ¢",value:mktPrices[l]||"",
+              onChange:e=>{setMkt(l,e.target.value);setLine(l);setNoPrice(e.target.value);},
+              style:{width:"100%",background:"#000",border:`1px solid ${mkt>0?"var(--border2)":"var(--border)"}`,
+                borderRadius:6,color:"var(--text)",fontSize:18,fontWeight:700,padding:"6px 8px",
+                fontFamily:"JetBrains Mono",textAlign:"center",outline:"none"}
+            }),
+            mkt>0&&React.createElement("div",{style:{marginTop:6,fontSize:10,fontWeight:600,textAlign:"center",
+              color:edge>10?"var(--green)":edge<-10?"var(--red)":"var(--muted)"}},
+              edge>10?`+${edge}¢ edge ✓`:edge<-10?`${edge}¢ overpriced`:`≈ fair (${edge>0?"+":""}${edge}¢)`
+            )
+          );
+        })
+      ),
+      (()=>{
+        const withValue = CONTRACT_LINES.map(l=>({l,mkt:parseFloat(mktPrices[l])||0,pNo:1-pOverWU(l)})).filter(x=>x.mkt>0);
+        const bestBets = withValue.map(x=>({...x,edge:Math.round(x.pNo*100)-x.mkt})).filter(x=>x.edge>=8&&x.pNo>=0.65).sort((a,b)=>b.edge-a.edge);
+        const avoid    = withValue.map(x=>({...x,edge:Math.round(x.pNo*100)-x.mkt})).filter(x=>x.edge<-8);
+        if(!withValue.length) return null;
+        return React.createElement("div",{style:{marginTop:14,paddingTop:14,borderTop:"1px solid var(--border)"}},
+          React.createElement("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},
+            bestBets.length>0&&React.createElement("div",{style:{flex:1}},
+              React.createElement("div",{className:"label",style:{marginBottom:6,color:"var(--green)"}},"Value Bets"),
+              React.createElement("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
+                bestBets.map(x=>React.createElement("div",{key:x.l,onClick:()=>{setLine(x.l);setNoPrice(String(x.mkt));},style:{
+                  background:"rgba(34,197,94,0.06)",border:"1px solid var(--green-bd)",borderRadius:6,padding:"6px 10px",cursor:"pointer",
+                  display:"flex",flexDirection:"column",alignItems:"center",gap:2}},
+                  React.createElement("span",{style:{fontSize:11,fontWeight:600,color:"var(--green)"}},`No >${x.l}`),
+                  React.createElement("span",{className:"mono",style:{fontSize:10,color:"var(--text2)"}},`${x.mkt}¢ mkt · ${Math.round(x.pNo*100)}% model`),
+                  React.createElement("span",{style:{fontSize:10,color:"var(--green)",fontWeight:700}},`+${Math.round(x.pNo*100)-x.mkt}¢ edge`)
+                ))
+              )
+            ),
+            avoid.length>0&&React.createElement("div",{style:{flex:1}},
+              React.createElement("div",{className:"label",style:{marginBottom:6,color:"var(--red)"}},"Avoid"),
+              React.createElement("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
+                avoid.map(x=>React.createElement("div",{key:x.l,style:{
+                  background:"rgba(239,68,68,0.06)",border:"1px solid var(--red-bd)",borderRadius:6,padding:"6px 10px",
+                  display:"flex",flexDirection:"column",alignItems:"center",gap:2}},
+                  React.createElement("span",{style:{fontSize:11,fontWeight:600,color:"var(--red)"}},`No >${x.l}`),
+                  React.createElement("span",{className:"mono",style:{fontSize:10,color:"var(--text2)"}},`${x.mkt}¢ mkt · ${Math.round(x.pNo*100)}% model`),
+                  React.createElement("span",{style:{fontSize:10,color:"var(--red)",fontWeight:700}},`${Math.round(x.pNo*100)-x.mkt}¢ overpriced`)
+                ))
+              )
+            )
+          )
+        );
+      })()
     )
   );
 }
