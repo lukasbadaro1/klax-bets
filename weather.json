@@ -1,59 +1,32 @@
 {
   "station": "KLAX",
   "date": "July 11, 2026",
-  "scrapedAt": "8:28 PM \u00b7 WU",
-  "ts": 1783801692703,
+  "scrapedAt": "11:36 PM \u00b7 WU",
+  "ts": 1783813005163,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 73,
-      "cloud": 41,
+      "time": "5:00 pm",
+      "temp": 72,
+      "cloud": 56,
       "hum": 65,
-      "wind": 11,
+      "wind": 10,
       "dir": "SW",
       "cond": "Partly Cloudy"
     },
     {
-      "time": "3:00 pm",
-      "temp": 74,
-      "cloud": 64,
-      "hum": 63,
-      "wind": 11,
-      "dir": "SW",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "4:00 pm",
-      "temp": 72,
-      "cloud": 83,
-      "hum": 66,
-      "wind": 11,
-      "dir": "SW",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "5:00 pm",
-      "temp": 73,
-      "cloud": 73,
-      "hum": 66,
-      "wind": 10,
-      "dir": "SW",
-      "cond": "Mostly Cloudy"
-    },
-    {
       "time": "6:00 pm",
-      "temp": 72,
-      "cloud": 80,
+      "temp": 71,
+      "cloud": 69,
       "hum": 69,
       "wind": 8,
       "dir": "WSW",
-      "cond": "Cloudy"
+      "cond": "Mostly Cloudy"
     },
     {
       "time": "7:00 pm",
-      "temp": 71,
-      "cloud": 85,
+      "temp": 70,
+      "cloud": 80,
       "hum": 72,
       "wind": 8,
       "dir": "WSW",
@@ -61,8 +34,8 @@
     },
     {
       "time": "8:00 pm",
-      "temp": 70,
-      "cloud": 86,
+      "temp": 69,
+      "cloud": 80,
       "hum": 76,
       "wind": 7,
       "dir": "W",
@@ -71,18 +44,18 @@
     {
       "time": "9:00 pm",
       "temp": 68,
-      "cloud": 83,
+      "cloud": 79,
       "hum": 78,
-      "wind": 7,
+      "wind": 5,
       "dir": "WSW",
-      "cond": "Cloudy"
+      "cond": "Mostly Cloudy"
     },
     {
       "time": "10:00 pm",
       "temp": 68,
-      "cloud": 75,
-      "hum": 81,
-      "wind": 8,
+      "cloud": 79,
+      "hum": 80,
+      "wind": 6,
       "dir": "WSW",
       "cond": "Mostly Cloudy"
     },
@@ -91,7 +64,7 @@
       "temp": 68,
       "cloud": 77,
       "hum": 81,
-      "wind": 7,
+      "wind": 5,
       "dir": "WSW",
       "cond": "Mostly Cloudy"
     }
