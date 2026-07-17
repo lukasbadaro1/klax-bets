@@ -1,45 +1,36 @@
 {
   "station": "KLAX",
   "date": "July 17, 2026",
-  "scrapedAt": "6:43 PM \u00b7 WU",
-  "ts": 1784313825112,
+  "scrapedAt": "7:47 PM \u00b7 WU",
+  "ts": 1784317672420,
   "source": "WU live",
   "hourly": [
     {
-      "time": "12:00 pm",
-      "temp": 81,
-      "cloud": 20,
-      "hum": 57,
-      "wind": 9,
-      "dir": "SSW",
-      "cond": "Mostly Sunny"
-    },
-    {
       "time": "1:00 pm",
-      "temp": 81,
+      "temp": 82,
       "cloud": 20,
-      "hum": 57,
+      "hum": 54,
       "wind": 9,
       "dir": "SSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "2:00 pm",
-      "temp": 81,
-      "cloud": 38,
-      "hum": 56,
-      "wind": 9,
-      "dir": "SW",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "3:00 pm",
-      "temp": 80,
+      "temp": 83,
       "cloud": 26,
-      "hum": 57,
+      "hum": 54,
       "wind": 9,
       "dir": "SW",
       "cond": "Mostly Sunny"
+    },
+    {
+      "time": "3:00 pm",
+      "temp": 81,
+      "cloud": 34,
+      "hum": 55,
+      "wind": 10,
+      "dir": "SW",
+      "cond": "Partly Cloudy"
     },
     {
       "time": "4:00 pm",
@@ -71,9 +62,9 @@
     {
       "time": "7:00 pm",
       "temp": 74,
-      "cloud": 39,
-      "hum": 70,
-      "wind": 11,
+      "cloud": 38,
+      "hum": 69,
+      "wind": 9,
       "dir": "SW",
       "cond": "Partly Cloudy"
     },
