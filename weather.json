@@ -1,88 +1,70 @@
 {
   "station": "KLAX",
   "date": "July 23, 2026",
-  "scrapedAt": "9:58 AM \u00b7 WU",
-  "ts": 1784800738330,
+  "scrapedAt": "11:49 AM \u00b7 WU",
+  "ts": 1784807383782,
   "source": "WU live",
   "hourly": [
     {
-      "time": "3:00 am",
-      "temp": 68,
-      "cloud": 3,
-      "hum": 87,
-      "wind": 1,
-      "dir": "SE",
-      "cond": "Clear"
-    },
-    {
-      "time": "4:00 am",
-      "temp": 68,
-      "cloud": 3,
-      "hum": 86,
-      "wind": 2,
-      "dir": "E",
-      "cond": "Clear"
-    },
-    {
       "time": "5:00 am",
-      "temp": 68,
-      "cloud": 4,
-      "hum": 86,
-      "wind": 2,
+      "temp": 67,
+      "cloud": 1,
+      "hum": 89,
+      "wind": 1,
       "dir": "ESE",
       "cond": "Clear"
     },
     {
       "time": "6:00 am",
-      "temp": 70,
-      "cloud": 6,
-      "hum": 82,
-      "wind": 3,
-      "dir": "ESE",
+      "temp": 68,
+      "cloud": 4,
+      "hum": 89,
+      "wind": 2,
+      "dir": "SE",
       "cond": "Sunny"
     },
     {
       "time": "7:00 am",
-      "temp": 71,
-      "cloud": 6,
-      "hum": 79,
-      "wind": 3,
-      "dir": "SE",
+      "temp": 69,
+      "cloud": 4,
+      "hum": 85,
+      "wind": 1,
+      "dir": "ESE",
       "cond": "Sunny"
     },
     {
       "time": "8:00 am",
       "temp": 73,
       "cloud": 7,
-      "hum": 75,
+      "hum": 74,
       "wind": 3,
-      "dir": "SSE",
+      "dir": "SE",
       "cond": "Sunny"
     },
     {
       "time": "9:00 am",
       "temp": 75,
       "cloud": 6,
-      "hum": 68,
+      "hum": 67,
       "wind": 3,
       "dir": "SSW",
       "cond": "Sunny"
     },
     {
       "time": "10:00 am",
-      "temp": 77,
-      "cloud": 7,
-      "hum": 68,
-      "wind": 7,
+      "temp": 78,
+      "cloud": 6,
+      "hum": 64,
+      "wind": 6,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "11:00 am",
-      "temp": 78,
-      "cloud": 9,
-      "hum": 65,
-      "wind": 9,
+      "temp": 79,
+      "cloud": 8,
+      "hum": 63,
+      "wind": 8,
       "dir": "WSW",
       "cond": "Sunny"
     },
@@ -117,7 +99,7 @@
       "time": "3:00 pm",
       "temp": 80,
       "cloud": 6,
-      "hum": 58,
+      "hum": 59,
       "wind": 14,
       "dir": "W",
       "cond": "Sunny"
@@ -126,7 +108,7 @@
       "time": "4:00 pm",
       "temp": 79,
       "cloud": 4,
-      "hum": 58,
+      "hum": 59,
       "wind": 15,
       "dir": "WSW",
       "cond": "Sunny"
@@ -135,7 +117,7 @@
       "time": "5:00 pm",
       "temp": 79,
       "cloud": 3,
-      "hum": 59,
+      "hum": 60,
       "wind": 15,
       "dir": "WSW",
       "cond": "Sunny"
@@ -144,8 +126,8 @@
       "time": "6:00 pm",
       "temp": 78,
       "cloud": 3,
-      "hum": 63,
-      "wind": 14,
+      "hum": 64,
+      "wind": 15,
       "dir": "WSW",
       "cond": "Sunny"
     },
@@ -153,7 +135,7 @@
       "time": "7:00 pm",
       "temp": 76,
       "cloud": 3,
-      "hum": 70,
+      "hum": 69,
       "wind": 13,
       "dir": "WSW",
       "cond": "Sunny"
@@ -170,7 +152,7 @@
     {
       "time": "9:00 pm",
       "temp": 73,
-      "cloud": 24,
+      "cloud": 28,
       "hum": 77,
       "wind": 9,
       "dir": "WSW",
@@ -179,7 +161,7 @@
     {
       "time": "10:00 pm",
       "temp": 73,
-      "cloud": 24,
+      "cloud": 27,
       "hum": 77,
       "wind": 8,
       "dir": "SW",
@@ -188,11 +170,11 @@
     {
       "time": "11:00 pm",
       "temp": 72,
-      "cloud": 9,
+      "cloud": 24,
       "hum": 79,
       "wind": 7,
       "dir": "SW",
-      "cond": "Clear"
+      "cond": "Mostly Clear"
     }
   ]
 }
