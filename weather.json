@@ -1,24 +1,15 @@
 {
   "station": "KLAX",
   "date": "July 23, 2026",
-  "scrapedAt": "8:40 PM \u00b7 WU",
-  "ts": 1784839205414,
+  "scrapedAt": "9:39 PM \u00b7 WU",
+  "ts": 1784842796204,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 77,
-      "cloud": 9,
-      "hum": 65,
-      "wind": 13,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
       "time": "3:00 pm",
       "temp": 78,
-      "cloud": 9,
-      "hum": 63,
+      "cloud": 11,
+      "hum": 60,
       "wind": 13,
       "dir": "WSW",
       "cond": "Sunny"
@@ -26,16 +17,16 @@
     {
       "time": "4:00 pm",
       "temp": 78,
-      "cloud": 7,
-      "hum": 61,
+      "cloud": 8,
+      "hum": 59,
       "wind": 13,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "5:00 pm",
-      "temp": 79,
-      "cloud": 3,
+      "temp": 78,
+      "cloud": 7,
       "hum": 60,
       "wind": 13,
       "dir": "WSW",
@@ -45,7 +36,7 @@
       "time": "6:00 pm",
       "temp": 77,
       "cloud": 21,
-      "hum": 65,
+      "hum": 64,
       "wind": 12,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -53,29 +44,29 @@
     {
       "time": "7:00 pm",
       "temp": 76,
-      "cloud": 26,
+      "cloud": 30,
       "hum": 69,
       "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "8:00 pm",
       "temp": 74,
-      "cloud": 29,
+      "cloud": 38,
       "hum": 74,
       "wind": 8,
       "dir": "SW",
-      "cond": "Mostly Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "9:00 pm",
       "temp": 73,
-      "cloud": 22,
+      "cloud": 39,
       "hum": 76,
-      "wind": 9,
+      "wind": 7,
       "dir": "SW",
-      "cond": "Mostly Clear"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "10:00 pm",
@@ -88,8 +79,8 @@
     },
     {
       "time": "11:00 pm",
-      "temp": 71,
-      "cloud": 8,
+      "temp": 72,
+      "cloud": 7,
       "hum": 79,
       "wind": 7,
       "dir": "SW",
