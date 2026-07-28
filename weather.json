@@ -1,43 +1,25 @@
 {
   "station": "KLAX",
   "date": "July 28, 2026",
-  "scrapedAt": "7:57 PM \u00b7 WU",
-  "ts": 1785268663628,
+  "scrapedAt": "9:03 PM \u00b7 WU",
+  "ts": 1785272606543,
   "source": "WU live",
   "hourly": [
     {
-      "time": "1:00 pm",
-      "temp": 77,
-      "cloud": 24,
-      "hum": 68,
-      "wind": 10,
-      "dir": "WSW",
-      "cond": "Mostly Sunny"
-    },
-    {
-      "time": "2:00 pm",
-      "temp": 77,
-      "cloud": 22,
-      "hum": 67,
-      "wind": 10,
-      "dir": "WSW",
-      "cond": "Mostly Sunny"
-    },
-    {
       "time": "3:00 pm",
       "temp": 77,
-      "cloud": 33,
-      "hum": 66,
+      "cloud": 13,
+      "hum": 67,
       "wind": 11,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Sunny"
     },
     {
       "time": "4:00 pm",
-      "temp": 77,
-      "cloud": 24,
-      "hum": 65,
-      "wind": 11,
+      "temp": 76,
+      "cloud": 25,
+      "hum": 69,
+      "wind": 12,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
@@ -45,7 +27,7 @@
       "time": "5:00 pm",
       "temp": 76,
       "cloud": 24,
-      "hum": 69,
+      "hum": 68,
       "wind": 11,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -54,7 +36,7 @@
       "time": "6:00 pm",
       "temp": 75,
       "cloud": 22,
-      "hum": 72,
+      "hum": 71,
       "wind": 11,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -71,9 +53,9 @@
     {
       "time": "8:00 pm",
       "temp": 71,
-      "cloud": 28,
-      "hum": 81,
-      "wind": 9,
+      "cloud": 24,
+      "hum": 80,
+      "wind": 8,
       "dir": "WSW",
       "cond": "Mostly Clear"
     },
