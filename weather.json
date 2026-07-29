@@ -1,79 +1,70 @@
 {
   "station": "KLAX",
   "date": "July 29, 2026",
-  "scrapedAt": "10:13 PM \u00b7 WU",
-  "ts": 1785363191286,
+  "scrapedAt": "11:14 PM \u00b7 WU",
+  "ts": 1785366853393,
   "source": "WU live",
   "hourly": [
     {
-      "time": "4:00 pm",
-      "temp": 75,
-      "cloud": 27,
-      "hum": 71,
-      "wind": 15,
-      "dir": "WSW",
-      "cond": "Mostly Sunny"
-    },
-    {
       "time": "5:00 pm",
-      "temp": 75,
+      "temp": 74,
       "cloud": 21,
-      "hum": 72,
-      "wind": 15,
+      "hum": 74,
+      "wind": 16,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "6:00 pm",
       "temp": 73,
-      "cloud": 34,
-      "hum": 77,
-      "wind": 14,
+      "cloud": 30,
+      "hum": 78,
+      "wind": 15,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "7:00 pm",
       "temp": 72,
-      "cloud": 24,
-      "hum": 79,
-      "wind": 11,
+      "cloud": 33,
+      "hum": 82,
+      "wind": 13,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "8:00 pm",
       "temp": 71,
-      "cloud": 46,
-      "hum": 83,
+      "cloud": 26,
+      "hum": 81,
       "wind": 8,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Mostly Clear"
     },
     {
       "time": "9:00 pm",
-      "temp": 70,
-      "cloud": 52,
-      "hum": 84,
+      "temp": 71,
+      "cloud": 31,
+      "hum": 81,
       "wind": 7,
-      "dir": "WSW",
+      "dir": "SW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "10:00 pm",
-      "temp": 69,
-      "cloud": 43,
-      "hum": 85,
-      "wind": 5,
+      "temp": 70,
+      "cloud": 34,
+      "hum": 83,
+      "wind": 6,
       "dir": "SW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "11:00 pm",
-      "temp": 69,
-      "cloud": 58,
-      "hum": 85,
-      "wind": 5,
+      "temp": 70,
+      "cloud": 48,
+      "hum": 84,
+      "wind": 4,
       "dir": "SW",
       "cond": "Partly Cloudy"
     }
