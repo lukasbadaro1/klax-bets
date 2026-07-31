@@ -1,50 +1,41 @@
 {
   "station": "KLAX",
   "date": "July 31, 2026",
-  "scrapedAt": "8:34 PM \u00b7 WU",
-  "ts": 1785530089650,
+  "scrapedAt": "9:42 PM \u00b7 WU",
+  "ts": 1785534139237,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 77,
-      "cloud": 11,
-      "hum": 69,
-      "wind": 12,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
       "time": "3:00 pm",
-      "temp": 77,
-      "cloud": 11,
-      "hum": 70,
-      "wind": 13,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
-      "time": "4:00 pm",
-      "temp": 77,
-      "cloud": 9,
+      "temp": 76,
+      "cloud": 14,
       "hum": 71,
       "wind": 13,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
-      "time": "5:00 pm",
-      "temp": 77,
-      "cloud": 20,
-      "hum": 69,
-      "wind": 12,
+      "time": "4:00 pm",
+      "temp": 76,
+      "cloud": 8,
+      "hum": 72,
+      "wind": 13,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Sunny"
+    },
+    {
+      "time": "5:00 pm",
+      "temp": 76,
+      "cloud": 9,
+      "hum": 74,
+      "wind": 13,
+      "dir": "WSW",
+      "cond": "Sunny"
     },
     {
       "time": "6:00 pm",
-      "temp": 76,
-      "cloud": 26,
+      "temp": 75,
+      "cloud": 20,
       "hum": 74,
       "wind": 12,
       "dir": "WSW",
@@ -53,7 +44,7 @@
     {
       "time": "7:00 pm",
       "temp": 74,
-      "cloud": 22,
+      "cloud": 21,
       "hum": 78,
       "wind": 10,
       "dir": "WSW",
@@ -62,7 +53,7 @@
     {
       "time": "8:00 pm",
       "temp": 72,
-      "cloud": 20,
+      "cloud": 21,
       "hum": 81,
       "wind": 8,
       "dir": "WSW",
@@ -71,29 +62,29 @@
     {
       "time": "9:00 pm",
       "temp": 71,
-      "cloud": 21,
+      "cloud": 27,
       "hum": 83,
-      "wind": 8,
-      "dir": "WSW",
+      "wind": 6,
+      "dir": "SW",
       "cond": "Mostly Clear"
     },
     {
       "time": "10:00 pm",
       "temp": 71,
-      "cloud": 24,
-      "hum": 84,
+      "cloud": 34,
+      "hum": 85,
       "wind": 7,
-      "dir": "WSW",
-      "cond": "Mostly Clear"
+      "dir": "SW",
+      "cond": "Partly Cloudy"
     },
     {
       "time": "11:00 pm",
       "temp": 70,
-      "cloud": 34,
+      "cloud": 29,
       "hum": 86,
       "wind": 5,
       "dir": "SW",
-      "cond": "Partly Cloudy"
+      "cond": "Mostly Clear"
     }
   ]
 }
