@@ -1,15 +1,15 @@
 {
   "station": "KLAX",
   "date": "August 8, 2026",
-  "scrapedAt": "5:19 PM \u00b7 WU",
-  "ts": 1786209561363,
+  "scrapedAt": "5:49 PM \u00b7 WU",
+  "ts": 1786211376567,
   "source": "WU live",
   "hourly": [
     {
       "time": "11:00 am",
       "temp": 77,
-      "cloud": 8,
-      "hum": 64,
+      "cloud": 9,
+      "hum": 65,
       "wind": 9,
       "dir": "WSW",
       "cond": "Sunny"
@@ -17,17 +17,17 @@
     {
       "time": "12:00 pm",
       "temp": 78,
-      "cloud": 27,
+      "cloud": 18,
       "hum": 63,
       "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Sunny"
     },
     {
       "time": "1:00 pm",
       "temp": 78,
-      "cloud": 28,
-      "hum": 62,
+      "cloud": 29,
+      "hum": 63,
       "wind": 11,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -45,17 +45,17 @@
       "time": "3:00 pm",
       "temp": 79,
       "cloud": 29,
-      "hum": 60,
+      "hum": 61,
       "wind": 12,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "4:00 pm",
-      "temp": 79,
+      "temp": 78,
       "cloud": 26,
-      "hum": 60,
-      "wind": 12,
+      "hum": 62,
+      "wind": 13,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
@@ -63,7 +63,7 @@
       "time": "5:00 pm",
       "temp": 78,
       "cloud": 4,
-      "hum": 62,
+      "hum": 65,
       "wind": 13,
       "dir": "WSW",
       "cond": "Sunny"
