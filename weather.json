@@ -1,45 +1,36 @@
 {
   "station": "KLAX",
   "date": "August 9, 2026",
-  "scrapedAt": "7:53 PM \u00b7 WU",
-  "ts": 1786305193131,
+  "scrapedAt": "8:18 PM \u00b7 WU",
+  "ts": 1786306693091,
   "source": "WU live",
   "hourly": [
     {
-      "time": "1:00 pm",
-      "temp": 76,
-      "cloud": 30,
-      "hum": 70,
-      "wind": 10,
+      "time": "2:00 pm",
+      "temp": 77,
+      "cloud": 51,
+      "hum": 68,
+      "wind": 12,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
-      "time": "2:00 pm",
-      "temp": 77,
-      "cloud": 29,
-      "hum": 67,
-      "wind": 11,
-      "dir": "WSW",
-      "cond": "Mostly Sunny"
-    },
-    {
       "time": "3:00 pm",
       "temp": 77,
-      "cloud": 32,
+      "cloud": 49,
       "hum": 66,
-      "wind": 11,
+      "wind": 12,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "4:00 pm",
-      "temp": 78,
-      "cloud": 26,
-      "hum": 62,
+      "temp": 76,
+      "cloud": 47,
+      "hum": 68,
       "wind": 12,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "5:00 pm",
@@ -71,9 +62,9 @@
     {
       "time": "8:00 pm",
       "temp": 72,
-      "cloud": 52,
+      "cloud": 51,
       "hum": 81,
-      "wind": 10,
+      "wind": 9,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
