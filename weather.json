@@ -1,33 +1,33 @@
 {
   "station": "KLAX",
   "date": "August 15, 2026",
-  "scrapedAt": "7:13 PM \u00b7 WU",
-  "ts": 1786821187829,
+  "scrapedAt": "7:34 PM \u00b7 WU",
+  "ts": 1786822468310,
   "source": "WU live",
   "hourly": [
     {
       "time": "1:00 pm",
       "temp": 75,
-      "cloud": 40,
+      "cloud": 17,
       "hum": 63,
-      "wind": 11,
+      "wind": 12,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Sunny"
     },
     {
       "time": "2:00 pm",
       "temp": 75,
-      "cloud": 49,
-      "hum": 64,
+      "cloud": 18,
+      "hum": 63,
       "wind": 13,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Sunny"
     },
     {
       "time": "3:00 pm",
       "temp": 75,
-      "cloud": 49,
-      "hum": 66,
+      "cloud": 33,
+      "hum": 65,
       "wind": 13,
       "dir": "WSW",
       "cond": "Partly Cloudy"
@@ -35,8 +35,8 @@
     {
       "time": "4:00 pm",
       "temp": 75,
-      "cloud": 22,
-      "hum": 66,
+      "cloud": 24,
+      "hum": 67,
       "wind": 13,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -44,8 +44,8 @@
     {
       "time": "5:00 pm",
       "temp": 74,
-      "cloud": 24,
-      "hum": 67,
+      "cloud": 26,
+      "hum": 68,
       "wind": 13,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -62,7 +62,7 @@
     {
       "time": "7:00 pm",
       "temp": 72,
-      "cloud": 31,
+      "cloud": 30,
       "hum": 75,
       "wind": 12,
       "dir": "WSW",
@@ -71,9 +71,9 @@
     {
       "time": "8:00 pm",
       "temp": 70,
-      "cloud": 33,
-      "hum": 81,
-      "wind": 13,
+      "cloud": 39,
+      "hum": 80,
+      "wind": 12,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
@@ -81,7 +81,7 @@
       "time": "9:00 pm",
       "temp": 69,
       "cloud": 47,
-      "hum": 82,
+      "hum": 81,
       "wind": 10,
       "dir": "WSW",
       "cond": "Partly Cloudy"
@@ -90,7 +90,7 @@
       "time": "10:00 pm",
       "temp": 69,
       "cloud": 50,
-      "hum": 83,
+      "hum": 82,
       "wind": 9,
       "dir": "WSW",
       "cond": "Partly Cloudy"
