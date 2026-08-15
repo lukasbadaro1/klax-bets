@@ -1,72 +1,72 @@
 {
   "station": "KLAX",
   "date": "August 15, 2026",
-  "scrapedAt": "11:10 AM \u00b7 WU",
-  "ts": 1786792226473,
+  "scrapedAt": "11:33 AM \u00b7 WU",
+  "ts": 1786793634890,
   "source": "WU live",
   "hourly": [
     {
       "time": "5:00 am",
       "temp": 67,
-      "cloud": 91,
+      "cloud": 82,
       "hum": 84,
-      "wind": 6,
+      "wind": 5,
       "dir": "WSW",
       "cond": "Cloudy"
     },
     {
       "time": "6:00 am",
       "temp": 67,
-      "cloud": 86,
+      "cloud": 77,
       "hum": 84,
-      "wind": 6,
-      "dir": "WSW",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "7:00 am",
-      "temp": 68,
-      "cloud": 92,
-      "hum": 83,
-      "wind": 6,
-      "dir": "W",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "8:00 am",
-      "temp": 69,
-      "cloud": 80,
-      "hum": 80,
-      "wind": 4,
-      "dir": "W",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "9:00 am",
-      "temp": 71,
-      "cloud": 73,
-      "hum": 77,
       "wind": 5,
       "dir": "WSW",
       "cond": "Mostly Cloudy"
     },
     {
+      "time": "7:00 am",
+      "temp": 68,
+      "cloud": 71,
+      "hum": 82,
+      "wind": 5,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "8:00 am",
+      "temp": 70,
+      "cloud": 59,
+      "hum": 78,
+      "wind": 4,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "9:00 am",
+      "temp": 71,
+      "cloud": 56,
+      "hum": 76,
+      "wind": 5,
+      "dir": "WSW",
+      "cond": "Partly Cloudy"
+    },
+    {
       "time": "10:00 am",
       "temp": 72,
-      "cloud": 50,
-      "hum": 74,
+      "cloud": 45,
+      "hum": 72,
       "wind": 7,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "11:00 am",
-      "temp": 73,
-      "cloud": 33,
-      "hum": 71,
-      "wind": 8,
+      "temp": 74,
+      "cloud": 29,
+      "hum": 69,
+      "wind": 9,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Mostly Sunny"
     },
     {
       "time": "12:00 pm",
