@@ -1,34 +1,34 @@
 {
   "station": "KLAX",
   "date": "August 15, 2026",
-  "scrapedAt": "11:50 AM \u00b7 WU",
-  "ts": 1786794603366,
+  "scrapedAt": "11:59 AM \u00b7 WU",
+  "ts": 1786795191645,
   "source": "WU live",
   "hourly": [
     {
       "time": "5:00 am",
       "temp": 67,
-      "cloud": 81,
-      "hum": 84,
-      "wind": 5,
+      "cloud": 90,
+      "hum": 83,
+      "wind": 1,
       "dir": "WSW",
       "cond": "Cloudy"
     },
     {
       "time": "6:00 am",
       "temp": 67,
-      "cloud": 76,
+      "cloud": 84,
       "hum": 83,
-      "wind": 5,
+      "wind": 1,
       "dir": "WSW",
-      "cond": "Mostly Cloudy"
+      "cond": "Cloudy"
     },
     {
       "time": "7:00 am",
       "temp": 68,
-      "cloud": 71,
-      "hum": 82,
-      "wind": 5,
+      "cloud": 77,
+      "hum": 81,
+      "wind": 2,
       "dir": "W",
       "cond": "Mostly Cloudy"
     },
