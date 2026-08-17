@@ -1,45 +1,36 @@
 {
   "station": "KLAX",
   "date": "August 17, 2026",
-  "scrapedAt": "10:44 AM \u00b7 WU",
-  "ts": 1786963463827,
+  "scrapedAt": "11:03 AM \u00b7 WU",
+  "ts": 1786964603837,
   "source": "WU live",
   "hourly": [
     {
-      "time": "4:00 am",
-      "temp": 67,
-      "cloud": 50,
-      "hum": 90,
-      "wind": 3,
-      "dir": "W",
-      "cond": "Partly Cloudy"
-    },
-    {
       "time": "5:00 am",
       "temp": 67,
-      "cloud": 52,
+      "cloud": 78,
       "hum": 90,
       "wind": 3,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Mostly Cloudy"
     },
     {
       "time": "6:00 am",
       "temp": 67,
-      "cloud": 73,
+      "cloud": 80,
       "hum": 89,
       "wind": 3,
       "dir": "S",
-      "cond": "Mostly Cloudy"
+      "cond": "Cloudy"
     },
     {
       "time": "7:00 am",
-      "temp": 68,
-      "cloud": 62,
-      "hum": 87,
+      "temp": 67,
+      "cloud": 90,
+      "hum": 88,
       "wind": 3,
       "dir": "W",
-      "cond": "Mostly Cloudy"
+      "cond": "Cloudy"
     },
     {
       "time": "8:00 am",
@@ -71,117 +62,117 @@
     {
       "time": "11:00 am",
       "temp": 75,
-      "cloud": 27,
-      "hum": 69,
-      "wind": 8,
+      "cloud": 24,
+      "hum": 67,
+      "wind": 7,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "12:00 pm",
-      "temp": 76,
-      "cloud": 33,
-      "hum": 66,
-      "wind": 11,
+      "temp": 78,
+      "cloud": 31,
+      "hum": 63,
+      "wind": 8,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "1:00 pm",
-      "temp": 76,
-      "cloud": 36,
-      "hum": 65,
-      "wind": 11,
+      "temp": 79,
+      "cloud": 31,
+      "hum": 60,
+      "wind": 8,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "2:00 pm",
-      "temp": 77,
-      "cloud": 45,
-      "hum": 63,
-      "wind": 13,
+      "temp": 79,
+      "cloud": 40,
+      "hum": 59,
+      "wind": 10,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "3:00 pm",
-      "temp": 77,
-      "cloud": 48,
-      "hum": 65,
-      "wind": 14,
-      "dir": "W",
+      "temp": 78,
+      "cloud": 35,
+      "hum": 60,
+      "wind": 11,
+      "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "4:00 pm",
-      "temp": 76,
-      "cloud": 57,
-      "hum": 66,
-      "wind": 16,
-      "dir": "W",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "5:00 pm",
-      "temp": 76,
-      "cloud": 45,
-      "hum": 67,
-      "wind": 15,
-      "dir": "W",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "6:00 pm",
-      "temp": 75,
-      "cloud": 53,
-      "hum": 68,
-      "wind": 15,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "7:00 pm",
-      "temp": 73,
-      "cloud": 47,
-      "hum": 74,
-      "wind": 14,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "8:00 pm",
-      "temp": 72,
-      "cloud": 55,
-      "hum": 77,
+      "temp": 78,
+      "cloud": 52,
+      "hum": 61,
       "wind": 12,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
-      "time": "9:00 pm",
-      "temp": 71,
-      "cloud": 50,
-      "hum": 77,
+      "time": "5:00 pm",
+      "temp": 77,
+      "cloud": 41,
+      "hum": 62,
+      "wind": 12,
+      "dir": "WSW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "6:00 pm",
+      "temp": 76,
+      "cloud": 45,
+      "hum": 64,
+      "wind": 11,
+      "dir": "WSW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "7:00 pm",
+      "temp": 74,
+      "cloud": 40,
+      "hum": 70,
       "wind": 10,
+      "dir": "WSW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "8:00 pm",
+      "temp": 73,
+      "cloud": 49,
+      "hum": 74,
+      "wind": 8,
+      "dir": "WSW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "9:00 pm",
+      "temp": 72,
+      "cloud": 49,
+      "hum": 76,
+      "wind": 7,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "10:00 pm",
       "temp": 71,
-      "cloud": 43,
-      "hum": 81,
-      "wind": 9,
+      "cloud": 39,
+      "hum": 79,
+      "wind": 5,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "11:00 pm",
       "temp": 70,
-      "cloud": 48,
+      "cloud": 49,
       "hum": 83,
-      "wind": 8,
+      "wind": 5,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     }
