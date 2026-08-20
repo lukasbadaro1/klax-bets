@@ -1,45 +1,36 @@
 {
   "station": "KLAX",
   "date": "August 20, 2026",
-  "scrapedAt": "4:46 PM \u00b7 WU",
-  "ts": 1787244364513,
+  "scrapedAt": "5:12 PM \u00b7 WU",
+  "ts": 1787245927548,
   "source": "WU live",
   "hourly": [
     {
-      "time": "10:00 am",
-      "temp": 76,
-      "cloud": 30,
-      "hum": 67,
-      "wind": 3,
-      "dir": "SW",
-      "cond": "Partly Cloudy"
-    },
-    {
       "time": "11:00 am",
-      "temp": 78,
-      "cloud": 45,
-      "hum": 64,
-      "wind": 5,
+      "temp": 77,
+      "cloud": 86,
+      "hum": 69,
+      "wind": 9,
       "dir": "SW",
-      "cond": "Partly Cloudy"
+      "cond": "Cloudy"
     },
     {
       "time": "12:00 pm",
-      "temp": 78,
-      "cloud": 63,
-      "hum": 66,
-      "wind": 7,
+      "temp": 77,
+      "cloud": 82,
+      "hum": 70,
+      "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Cloudy"
+      "cond": "Cloudy"
     },
     {
       "time": "1:00 pm",
-      "temp": 79,
-      "cloud": 71,
-      "hum": 63,
-      "wind": 8,
+      "temp": 78,
+      "cloud": 89,
+      "hum": 67,
+      "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Cloudy"
+      "cond": "Cloudy"
     },
     {
       "time": "2:00 pm",
@@ -71,11 +62,11 @@
     {
       "time": "5:00 pm",
       "temp": 77,
-      "cloud": 70,
-      "hum": 68,
-      "wind": 12,
+      "cloud": 59,
+      "hum": 66,
+      "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Cloudy"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "6:00 pm",
