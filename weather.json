@@ -1,14 +1,14 @@
 {
   "station": "KLAX",
   "date": "August 22, 2026",
-  "scrapedAt": "7:21 AM \u00b7 WU",
-  "ts": 1787383307964,
+  "scrapedAt": "7:51 AM \u00b7 WU",
+  "ts": 1787385087740,
   "source": "WU live",
   "hourly": [
     {
       "time": "1:00 am",
       "temp": 70,
-      "cloud": 31,
+      "cloud": 36,
       "hum": 87,
       "wind": 2,
       "dir": "WSW",
@@ -17,16 +17,16 @@
     {
       "time": "2:00 am",
       "temp": 69,
-      "cloud": 29,
+      "cloud": 36,
       "hum": 87,
       "wind": 1,
       "dir": "W",
-      "cond": "Mostly Clear"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "3:00 am",
       "temp": 70,
-      "cloud": 26,
+      "cloud": 29,
       "hum": 87,
       "wind": 1,
       "dir": "WNW",
@@ -88,9 +88,9 @@
     },
     {
       "time": "10:00 am",
-      "temp": 77,
+      "temp": 78,
       "cloud": 27,
-      "hum": 68,
+      "hum": 66,
       "wind": 6,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -98,8 +98,8 @@
     {
       "time": "11:00 am",
       "temp": 79,
-      "cloud": 22,
-      "hum": 64,
+      "cloud": 28,
+      "hum": 63,
       "wind": 7,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -108,7 +108,7 @@
       "time": "12:00 pm",
       "temp": 80,
       "cloud": 34,
-      "hum": 64,
+      "hum": 63,
       "wind": 9,
       "dir": "WSW",
       "cond": "Partly Cloudy"
@@ -117,22 +117,13 @@
       "time": "1:00 pm",
       "temp": 80,
       "cloud": 29,
-      "hum": 64,
+      "hum": 63,
       "wind": 11,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "2:00 pm",
-      "temp": 79,
-      "cloud": 27,
-      "hum": 63,
-      "wind": 12,
-      "dir": "W",
-      "cond": "Mostly Sunny"
-    },
-    {
-      "time": "3:00 pm",
       "temp": 80,
       "cloud": 27,
       "hum": 61,
@@ -141,9 +132,18 @@
       "cond": "Mostly Sunny"
     },
     {
-      "time": "4:00 pm",
-      "temp": 79,
+      "time": "3:00 pm",
+      "temp": 80,
       "cloud": 26,
+      "hum": 60,
+      "wind": 12,
+      "dir": "W",
+      "cond": "Mostly Sunny"
+    },
+    {
+      "time": "4:00 pm",
+      "temp": 80,
+      "cloud": 25,
       "hum": 62,
       "wind": 14,
       "dir": "W",
@@ -160,18 +160,18 @@
     },
     {
       "time": "6:00 pm",
-      "temp": 77,
+      "temp": 78,
       "cloud": 20,
-      "hum": 65,
+      "hum": 64,
       "wind": 13,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "7:00 pm",
-      "temp": 75,
+      "temp": 76,
       "cloud": 8,
-      "hum": 70,
+      "hum": 69,
       "wind": 12,
       "dir": "WSW",
       "cond": "Sunny"
@@ -189,16 +189,16 @@
       "time": "9:00 pm",
       "temp": 73,
       "cloud": 8,
-      "hum": 78,
+      "hum": 77,
       "wind": 8,
       "dir": "WSW",
       "cond": "Clear"
     },
     {
       "time": "10:00 pm",
-      "temp": 72,
+      "temp": 73,
       "cloud": 8,
-      "hum": 79,
+      "hum": 78,
       "wind": 6,
       "dir": "WSW",
       "cond": "Clear"
