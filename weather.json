@@ -1,8 +1,8 @@
 {
   "station": "KLAX",
   "date": "August 22, 2026",
-  "scrapedAt": "11:32 PM \u00b7 WU",
-  "ts": 1787441538205,
+  "scrapedAt": "11:51 PM \u00b7 WU",
+  "ts": 1787442660467,
   "source": "WU live",
   "hourly": [
     {
@@ -18,7 +18,7 @@
       "time": "6:00 pm",
       "temp": 77,
       "cloud": 7,
-      "hum": 68,
+      "hum": 67,
       "wind": 11,
       "dir": "WSW",
       "cond": "Sunny"
@@ -27,7 +27,7 @@
       "time": "7:00 pm",
       "temp": 75,
       "cloud": 8,
-      "hum": 72,
+      "hum": 71,
       "wind": 10,
       "dir": "WSW",
       "cond": "Sunny"
