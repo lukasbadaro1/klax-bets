@@ -1,41 +1,41 @@
 {
   "station": "KLAX",
   "date": "August 22, 2026",
-  "scrapedAt": "9:10 PM \u00b7 WU",
-  "ts": 1787433042375,
+  "scrapedAt": "9:35 PM \u00b7 WU",
+  "ts": 1787434540346,
   "source": "WU live",
   "hourly": [
     {
       "time": "3:00 pm",
       "temp": 79,
-      "cloud": 27,
+      "cloud": 13,
       "hum": 63,
-      "wind": 13,
+      "wind": 11,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Sunny"
     },
     {
       "time": "4:00 pm",
       "temp": 79,
-      "cloud": 36,
+      "cloud": 22,
       "hum": 65,
-      "wind": 13,
+      "wind": 12,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Mostly Sunny"
     },
     {
       "time": "5:00 pm",
       "temp": 78,
-      "cloud": 29,
-      "hum": 66,
-      "wind": 12,
+      "cloud": 22,
+      "hum": 64,
+      "wind": 11,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "6:00 pm",
       "temp": 78,
-      "cloud": 9,
+      "cloud": 8,
       "hum": 63,
       "wind": 11,
       "dir": "WSW",
@@ -44,17 +44,17 @@
     {
       "time": "7:00 pm",
       "temp": 76,
-      "cloud": 8,
-      "hum": 68,
-      "wind": 10,
+      "cloud": 7,
+      "hum": 66,
+      "wind": 9,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "8:00 pm",
       "temp": 74,
-      "cloud": 6,
-      "hum": 74,
+      "cloud": 7,
+      "hum": 72,
       "wind": 8,
       "dir": "WSW",
       "cond": "Clear"
@@ -63,7 +63,7 @@
       "time": "9:00 pm",
       "temp": 73,
       "cloud": 6,
-      "hum": 78,
+      "hum": 77,
       "wind": 7,
       "dir": "WSW",
       "cond": "Clear"
@@ -71,19 +71,19 @@
     {
       "time": "10:00 pm",
       "temp": 72,
-      "cloud": 4,
-      "hum": 80,
+      "cloud": 20,
+      "hum": 79,
       "wind": 7,
       "dir": "WSW",
-      "cond": "Clear"
+      "cond": "Mostly Clear"
     },
     {
       "time": "11:00 pm",
       "temp": 72,
-      "cloud": 9,
-      "hum": 80,
+      "cloud": 5,
+      "hum": 81,
       "wind": 6,
-      "dir": "SW",
+      "dir": "WSW",
       "cond": "Clear"
     }
   ]
