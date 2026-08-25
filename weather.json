@@ -1,24 +1,15 @@
 {
   "station": "KLAX",
   "date": "August 25, 2026",
-  "scrapedAt": "1:57 PM \u00b7 WU",
-  "ts": 1787666256450,
+  "scrapedAt": "2:39 PM \u00b7 WU",
+  "ts": 1787668758218,
   "source": "WU live",
   "hourly": [
     {
-      "time": "7:00 am",
-      "temp": 70,
-      "cloud": 52,
-      "hum": 92,
-      "wind": 2,
-      "dir": "SSE",
-      "cond": "Partly Cloudy"
-    },
-    {
       "time": "8:00 am",
       "temp": 72,
-      "cloud": 55,
-      "hum": 86,
+      "cloud": 43,
+      "hum": 87,
       "wind": 3,
       "dir": "SE",
       "cond": "Partly Cloudy"
@@ -26,17 +17,17 @@
     {
       "time": "9:00 am",
       "temp": 76,
-      "cloud": 59,
-      "hum": 75,
+      "cloud": 50,
+      "hum": 76,
       "wind": 3,
       "dir": "S",
       "cond": "Partly Cloudy"
     },
     {
       "time": "10:00 am",
-      "temp": 81,
-      "cloud": 34,
-      "hum": 62,
+      "temp": 79,
+      "cloud": 30,
+      "hum": 67,
       "wind": 3,
       "dir": "SW",
       "cond": "Partly Cloudy"
@@ -70,10 +61,10 @@
     },
     {
       "time": "2:00 pm",
-      "temp": 82,
-      "cloud": 43,
-      "hum": 59,
-      "wind": 12,
+      "temp": 84,
+      "cloud": 40,
+      "hum": 56,
+      "wind": 10,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
@@ -81,7 +72,7 @@
       "time": "3:00 pm",
       "temp": 83,
       "cloud": 33,
-      "hum": 57,
+      "hum": 58,
       "wind": 12,
       "dir": "WSW",
       "cond": "Partly Cloudy"
@@ -97,7 +88,7 @@
     },
     {
       "time": "5:00 pm",
-      "temp": 81,
+      "temp": 80,
       "cloud": 25,
       "hum": 61,
       "wind": 13,
@@ -108,7 +99,7 @@
       "time": "6:00 pm",
       "temp": 79,
       "cloud": 24,
-      "hum": 64,
+      "hum": 65,
       "wind": 12,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -144,7 +135,7 @@
       "time": "10:00 pm",
       "temp": 74,
       "cloud": 21,
-      "hum": 76,
+      "hum": 77,
       "wind": 6,
       "dir": "SW",
       "cond": "Mostly Clear"
@@ -153,7 +144,7 @@
       "time": "11:00 pm",
       "temp": 74,
       "cloud": 7,
-      "hum": 77,
+      "hum": 78,
       "wind": 5,
       "dir": "SW",
       "cond": "Clear"
