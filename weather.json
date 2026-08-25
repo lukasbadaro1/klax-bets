@@ -1,45 +1,36 @@
 {
   "station": "KLAX",
   "date": "August 25, 2026",
-  "scrapedAt": "10:47 PM \u00b7 WU",
-  "ts": 1787698050672,
+  "scrapedAt": "11:05 PM \u00b7 WU",
+  "ts": 1787699113092,
   "source": "WU live",
   "hourly": [
     {
-      "time": "4:00 pm",
-      "temp": 82,
-      "cloud": 17,
-      "hum": 60,
-      "wind": 11,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
       "time": "5:00 pm",
       "temp": 80,
-      "cloud": 11,
-      "hum": 64,
-      "wind": 11,
+      "cloud": 39,
+      "hum": 66,
+      "wind": 12,
       "dir": "WSW",
-      "cond": "Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "6:00 pm",
-      "temp": 78,
-      "cloud": 9,
-      "hum": 67,
-      "wind": 10,
+      "temp": 79,
+      "cloud": 47,
+      "hum": 69,
+      "wind": 12,
       "dir": "WSW",
-      "cond": "Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "7:00 pm",
       "temp": 77,
-      "cloud": 8,
-      "hum": 71,
-      "wind": 9,
+      "cloud": 39,
+      "hum": 74,
+      "wind": 10,
       "dir": "WSW",
-      "cond": "Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "8:00 pm",
@@ -71,11 +62,11 @@
     {
       "time": "11:00 pm",
       "temp": 74,
-      "cloud": 20,
+      "cloud": 9,
       "hum": 79,
       "wind": 4,
       "dir": "SW",
-      "cond": "Mostly Clear"
+      "cond": "Clear"
     }
   ]
 }
