@@ -1,51 +1,33 @@
 {
   "station": "KLAX",
   "date": "August 30, 2026",
-  "scrapedAt": "8:04 PM \u00b7 WU",
-  "ts": 1788120285508,
+  "scrapedAt": "10:40 PM \u00b7 WU",
+  "ts": 1788129625573,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 80,
-      "cloud": 41,
-      "hum": 65,
-      "wind": 14,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "3:00 pm",
-      "temp": 80,
-      "cloud": 52,
-      "hum": 65,
-      "wind": 14,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
-    },
-    {
       "time": "4:00 pm",
-      "temp": 79,
-      "cloud": 39,
-      "hum": 66,
-      "wind": 14,
+      "temp": 78,
+      "cloud": 0,
+      "hum": 70,
+      "wind": 13,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Sunny"
     },
     {
       "time": "5:00 pm",
-      "temp": 79,
-      "cloud": 7,
-      "hum": 63,
-      "wind": 12,
+      "temp": 77,
+      "cloud": 0,
+      "hum": 70,
+      "wind": 13,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "6:00 pm",
-      "temp": 78,
-      "cloud": 9,
-      "hum": 65,
+      "temp": 76,
+      "cloud": 0,
+      "hum": 71,
       "wind": 12,
       "dir": "WSW",
       "cond": "Sunny"
@@ -54,7 +36,7 @@
       "time": "7:00 pm",
       "temp": 75,
       "cloud": 6,
-      "hum": 71,
+      "hum": 73,
       "wind": 11,
       "dir": "WSW",
       "cond": "Sunny"
@@ -63,7 +45,7 @@
       "time": "8:00 pm",
       "temp": 74,
       "cloud": 5,
-      "hum": 75,
+      "hum": 76,
       "wind": 9,
       "dir": "WSW",
       "cond": "Clear"
@@ -71,9 +53,9 @@
     {
       "time": "9:00 pm",
       "temp": 73,
-      "cloud": 3,
-      "hum": 76,
-      "wind": 10,
+      "cloud": 5,
+      "hum": 78,
+      "wind": 8,
       "dir": "WSW",
       "cond": "Clear"
     },
@@ -82,15 +64,15 @@
       "temp": 72,
       "cloud": 4,
       "hum": 77,
-      "wind": 9,
-      "dir": "WSW",
+      "wind": 7,
+      "dir": "SW",
       "cond": "Clear"
     },
     {
       "time": "11:00 pm",
       "temp": 72,
-      "cloud": 9,
-      "hum": 78,
+      "cloud": 5,
+      "hum": 77,
       "wind": 7,
       "dir": "SW",
       "cond": "Clear"
