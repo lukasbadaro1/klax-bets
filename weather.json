@@ -1,50 +1,41 @@
 {
   "station": "KLAX",
   "date": "September 6, 2026",
-  "scrapedAt": "10:10 PM \u00b7 WU",
-  "ts": 1788732655215,
+  "scrapedAt": "11:55 PM \u00b7 WU",
+  "ts": 1788738908342,
   "source": "WU live",
   "hourly": [
     {
-      "time": "4:00 pm",
-      "temp": 74,
-      "cloud": 90,
-      "hum": 89,
-      "wind": 7,
-      "dir": "N",
-      "cond": "Showers"
-    },
-    {
       "time": "5:00 pm",
       "temp": 73,
-      "cloud": 90,
+      "cloud": 99,
       "hum": 90,
-      "wind": 9,
-      "dir": "NW",
-      "cond": "Showers"
+      "wind": 11,
+      "dir": "NNW",
+      "cond": "Light Rain"
     },
     {
       "time": "6:00 pm",
-      "temp": 74,
-      "cloud": 98,
-      "hum": 87,
-      "wind": 7,
+      "temp": 73,
+      "cloud": 100,
+      "hum": 88,
+      "wind": 9,
       "dir": "NW",
       "cond": "Cloudy"
     },
     {
       "time": "7:00 pm",
-      "temp": 76,
-      "cloud": 97,
-      "hum": 78,
-      "wind": 6,
+      "temp": 73,
+      "cloud": 100,
+      "hum": 87,
+      "wind": 8,
       "dir": "NW",
       "cond": "Cloudy"
     },
     {
       "time": "8:00 pm",
       "temp": 74,
-      "cloud": 93,
+      "cloud": 92,
       "hum": 81,
       "wind": 7,
       "dir": "NW",
@@ -52,28 +43,28 @@
     },
     {
       "time": "9:00 pm",
-      "temp": 74,
-      "cloud": 80,
-      "hum": 85,
-      "wind": 6,
-      "dir": "WNW",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "10:00 pm",
       "temp": 73,
-      "cloud": 71,
-      "hum": 85,
-      "wind": 5,
+      "cloud": 75,
+      "hum": 86,
+      "wind": 6,
       "dir": "WNW",
       "cond": "Mostly Cloudy"
     },
     {
-      "time": "11:00 pm",
+      "time": "10:00 pm",
       "temp": 73,
-      "cloud": 46,
+      "cloud": 59,
       "hum": 85,
       "wind": 5,
+      "dir": "WNW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "11:00 pm",
+      "temp": 73,
+      "cloud": 45,
+      "hum": 86,
+      "wind": 4,
       "dir": "W",
       "cond": "Partly Cloudy"
     }
