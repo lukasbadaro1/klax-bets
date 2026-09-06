@@ -1,71 +1,224 @@
 {
   "station": "KLAX",
-  "date": "September 5, 2026",
-  "scrapedAt": "11:14 PM \u00b7 WU",
-  "ts": 1788650063933,
+  "date": "September 6, 2026",
+  "scrapedAt": "12:58 AM \u00b7 WU",
+  "ts": 1788656331886,
   "source": "WU live",
   "hourly": [
     {
-      "time": "5:00 pm",
-      "temp": 77,
-      "cloud": 42,
-      "hum": 59,
-      "wind": 12,
+      "time": "12:00 am",
+      "temp": 72,
+      "cloud": 43,
+      "hum": 68,
+      "wind": 3,
       "dir": "WSW",
       "cond": "Partly Cloudy"
+    },
+    {
+      "time": "1:00 am",
+      "temp": 72,
+      "cloud": 57,
+      "hum": 71,
+      "wind": 4,
+      "dir": "WSW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "2:00 am",
+      "temp": 72,
+      "cloud": 85,
+      "hum": 71,
+      "wind": 4,
+      "dir": "WSW",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "3:00 am",
+      "temp": 72,
+      "cloud": 81,
+      "hum": 72,
+      "wind": 4,
+      "dir": "W",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "4:00 am",
+      "temp": 72,
+      "cloud": 83,
+      "hum": 73,
+      "wind": 3,
+      "dir": "W",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "5:00 am",
+      "temp": 72,
+      "cloud": 91,
+      "hum": 74,
+      "wind": 3,
+      "dir": "W",
+      "cond": "Showers"
+    },
+    {
+      "time": "6:00 am",
+      "temp": 72,
+      "cloud": 84,
+      "hum": 73,
+      "wind": 4,
+      "dir": "NNW",
+      "cond": "Few Showers"
+    },
+    {
+      "time": "7:00 am",
+      "temp": 72,
+      "cloud": 84,
+      "hum": 74,
+      "wind": 4,
+      "dir": "NE",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "8:00 am",
+      "temp": 73,
+      "cloud": 88,
+      "hum": 70,
+      "wind": 4,
+      "dir": "ENE",
+      "cond": "Light Rain"
+    },
+    {
+      "time": "9:00 am",
+      "temp": 72,
+      "cloud": 95,
+      "hum": 68,
+      "wind": 5,
+      "dir": "E",
+      "cond": "Light Rain"
+    },
+    {
+      "time": "10:00 am",
+      "temp": 73,
+      "cloud": 93,
+      "hum": 66,
+      "wind": 5,
+      "dir": "NNW",
+      "cond": "Light Rain"
+    },
+    {
+      "time": "11:00 am",
+      "temp": 74,
+      "cloud": 100,
+      "hum": 68,
+      "wind": 6,
+      "dir": "NNW",
+      "cond": "Rain"
+    },
+    {
+      "time": "12:00 pm",
+      "temp": 73,
+      "cloud": 99,
+      "hum": 73,
+      "wind": 6,
+      "dir": "NW",
+      "cond": "Showers"
+    },
+    {
+      "time": "1:00 pm",
+      "temp": 75,
+      "cloud": 95,
+      "hum": 73,
+      "wind": 8,
+      "dir": "NNW",
+      "cond": "Showers"
+    },
+    {
+      "time": "2:00 pm",
+      "temp": 78,
+      "cloud": 91,
+      "hum": 68,
+      "wind": 8,
+      "dir": "NW",
+      "cond": "Showers"
+    },
+    {
+      "time": "3:00 pm",
+      "temp": 79,
+      "cloud": 94,
+      "hum": 68,
+      "wind": 8,
+      "dir": "WNW",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "4:00 pm",
+      "temp": 79,
+      "cloud": 93,
+      "hum": 69,
+      "wind": 9,
+      "dir": "WNW",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "5:00 pm",
+      "temp": 78,
+      "cloud": 83,
+      "hum": 72,
+      "wind": 9,
+      "dir": "W",
+      "cond": "Few Showers"
     },
     {
       "time": "6:00 pm",
       "temp": 76,
-      "cloud": 60,
-      "hum": 64,
-      "wind": 11,
-      "dir": "WSW",
-      "cond": "Mostly Cloudy"
+      "cloud": 82,
+      "hum": 76,
+      "wind": 9,
+      "dir": "W",
+      "cond": "Few Showers"
     },
     {
       "time": "7:00 pm",
-      "temp": 74,
-      "cloud": 59,
-      "hum": 70,
+      "temp": 75,
+      "cloud": 82,
+      "hum": 80,
       "wind": 10,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "dir": "W",
+      "cond": "Few Showers"
     },
     {
       "time": "8:00 pm",
-      "temp": 73,
-      "cloud": 35,
-      "hum": 69,
-      "wind": 7,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "temp": 74,
+      "cloud": 76,
+      "hum": 80,
+      "wind": 9,
+      "dir": "W",
+      "cond": "Few Showers"
     },
     {
       "time": "9:00 pm",
-      "temp": 72,
-      "cloud": 28,
-      "hum": 70,
-      "wind": 6,
-      "dir": "WSW",
-      "cond": "Mostly Clear"
+      "temp": 74,
+      "cloud": 82,
+      "hum": 79,
+      "wind": 9,
+      "dir": "W",
+      "cond": "Few Showers"
     },
     {
       "time": "10:00 pm",
-      "temp": 72,
-      "cloud": 32,
-      "hum": 70,
-      "wind": 5,
+      "temp": 74,
+      "cloud": 70,
+      "hum": 77,
+      "wind": 7,
       "dir": "W",
-      "cond": "Partly Cloudy"
+      "cond": "Mostly Cloudy"
     },
     {
       "time": "11:00 pm",
-      "temp": 72,
-      "cloud": 30,
-      "hum": 70,
-      "wind": 3,
-      "dir": "WSW",
+      "temp": 74,
+      "cloud": 52,
+      "hum": 79,
+      "wind": 6,
+      "dir": "W",
       "cond": "Partly Cloudy"
     }
   ]
