@@ -1,70 +1,223 @@
 {
   "station": "KLAX",
-  "date": "September 6, 2026",
-  "scrapedAt": "11:55 PM \u00b7 WU",
-  "ts": 1788738908342,
+  "date": "September 7, 2026",
+  "scrapedAt": "1:38 AM \u00b7 WU",
+  "ts": 1788745107240,
   "source": "WU live",
   "hourly": [
     {
-      "time": "5:00 pm",
+      "time": "12:00 am",
       "temp": 73,
-      "cloud": 99,
-      "hum": 90,
-      "wind": 11,
-      "dir": "NNW",
-      "cond": "Light Rain"
-    },
-    {
-      "time": "6:00 pm",
-      "temp": 73,
-      "cloud": 100,
-      "hum": 88,
-      "wind": 9,
-      "dir": "NW",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "7:00 pm",
-      "temp": 73,
-      "cloud": 100,
-      "hum": 87,
-      "wind": 8,
-      "dir": "NW",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "8:00 pm",
-      "temp": 74,
-      "cloud": 92,
-      "hum": 81,
-      "wind": 7,
-      "dir": "NW",
-      "cond": "Cloudy"
-    },
-    {
-      "time": "9:00 pm",
-      "temp": 73,
-      "cloud": 75,
+      "cloud": 49,
       "hum": 86,
-      "wind": 6,
-      "dir": "WNW",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "10:00 pm",
-      "temp": 73,
-      "cloud": 59,
-      "hum": 85,
-      "wind": 5,
+      "wind": 4,
       "dir": "WNW",
       "cond": "Partly Cloudy"
     },
     {
-      "time": "11:00 pm",
+      "time": "1:00 am",
       "temp": 73,
-      "cloud": 45,
-      "hum": 86,
+      "cloud": 50,
+      "hum": 83,
+      "wind": 3,
+      "dir": "WNW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "2:00 am",
+      "temp": 73,
+      "cloud": 59,
+      "hum": 84,
       "wind": 4,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "3:00 am",
+      "temp": 73,
+      "cloud": 63,
+      "hum": 85,
+      "wind": 4,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "4:00 am",
+      "temp": 73,
+      "cloud": 82,
+      "hum": 85,
+      "wind": 3,
+      "dir": "WNW",
+      "cond": "Cloudy"
+    },
+    {
+      "time": "5:00 am",
+      "temp": 73,
+      "cloud": 68,
+      "hum": 84,
+      "wind": 4,
+      "dir": "WNW",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "6:00 am",
+      "temp": 72,
+      "cloud": 54,
+      "hum": 84,
+      "wind": 4,
+      "dir": "NW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "7:00 am",
+      "temp": 72,
+      "cloud": 59,
+      "hum": 83,
+      "wind": 4,
+      "dir": "NW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "8:00 am",
+      "temp": 75,
+      "cloud": 76,
+      "hum": 79,
+      "wind": 3,
+      "dir": "NW",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "9:00 am",
+      "temp": 78,
+      "cloud": 57,
+      "hum": 70,
+      "wind": 4,
+      "dir": "WNW",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "10:00 am",
+      "temp": 80,
+      "cloud": 74,
+      "hum": 67,
+      "wind": 4,
+      "dir": "WNW",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "11:00 am",
+      "temp": 81,
+      "cloud": 61,
+      "hum": 64,
+      "wind": 5,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "12:00 pm",
+      "temp": 83,
+      "cloud": 61,
+      "hum": 60,
+      "wind": 8,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "1:00 pm",
+      "temp": 83,
+      "cloud": 60,
+      "hum": 60,
+      "wind": 9,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "2:00 pm",
+      "temp": 82,
+      "cloud": 56,
+      "hum": 60,
+      "wind": 10,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "3:00 pm",
+      "temp": 82,
+      "cloud": 64,
+      "hum": 59,
+      "wind": 11,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "4:00 pm",
+      "temp": 81,
+      "cloud": 46,
+      "hum": 59,
+      "wind": 12,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "5:00 pm",
+      "temp": 80,
+      "cloud": 56,
+      "hum": 61,
+      "wind": 12,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "6:00 pm",
+      "temp": 79,
+      "cloud": 63,
+      "hum": 62,
+      "wind": 12,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "7:00 pm",
+      "temp": 78,
+      "cloud": 59,
+      "hum": 60,
+      "wind": 12,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "8:00 pm",
+      "temp": 77,
+      "cloud": 53,
+      "hum": 64,
+      "wind": 10,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "9:00 pm",
+      "temp": 77,
+      "cloud": 70,
+      "hum": 66,
+      "wind": 8,
+      "dir": "W",
+      "cond": "Mostly Cloudy"
+    },
+    {
+      "time": "10:00 pm",
+      "temp": 77,
+      "cloud": 50,
+      "hum": 66,
+      "wind": 6,
+      "dir": "W",
+      "cond": "Partly Cloudy"
+    },
+    {
+      "time": "11:00 pm",
+      "temp": 77,
+      "cloud": 36,
+      "hum": 66,
+      "wind": 5,
       "dir": "W",
       "cond": "Partly Cloudy"
     }
