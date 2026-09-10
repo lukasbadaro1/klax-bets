@@ -1,68 +1,50 @@
 {
   "station": "KLAX",
   "date": "September 10, 2026",
-  "scrapedAt": "8:03 PM \u00b7 WU",
-  "ts": 1789070594364,
+  "scrapedAt": "10:28 PM \u00b7 WU",
+  "ts": 1789079288118,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 86,
-      "cloud": 43,
-      "hum": 54,
-      "wind": 14,
-      "dir": "SW",
-      "cond": "Partly Cloudy"
-    },
-    {
-      "time": "3:00 pm",
-      "temp": 84,
-      "cloud": 55,
-      "hum": 60,
-      "wind": 13,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
-    },
-    {
       "time": "4:00 pm",
-      "temp": 83,
-      "cloud": 48,
-      "hum": 60,
-      "wind": 12,
+      "temp": 85,
+      "cloud": 10,
+      "hum": 55,
+      "wind": 10,
       "dir": "WSW",
-      "cond": "Partly Cloudy"
+      "cond": "Sunny"
     },
     {
       "time": "5:00 pm",
       "temp": 83,
-      "cloud": 21,
-      "hum": 60,
-      "wind": 9,
+      "cloud": 9,
+      "hum": 57,
+      "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Sunny"
     },
     {
       "time": "6:00 pm",
       "temp": 81,
-      "cloud": 19,
-      "hum": 62,
-      "wind": 8,
+      "cloud": 8,
+      "hum": 60,
+      "wind": 9,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "7:00 pm",
-      "temp": 79,
-      "cloud": 8,
-      "hum": 67,
-      "wind": 7,
+      "temp": 80,
+      "cloud": 9,
+      "hum": 66,
+      "wind": 6,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "8:00 pm",
       "temp": 78,
-      "cloud": 8,
+      "cloud": 9,
       "hum": 71,
       "wind": 6,
       "dir": "SW",
@@ -71,25 +53,25 @@
     {
       "time": "9:00 pm",
       "temp": 77,
-      "cloud": 22,
-      "hum": 73,
-      "wind": 6,
-      "dir": "SW",
-      "cond": "Mostly Clear"
-    },
-    {
-      "time": "10:00 pm",
-      "temp": 77,
-      "cloud": 22,
-      "hum": 73,
+      "cloud": 20,
+      "hum": 74,
       "wind": 5,
       "dir": "SSW",
       "cond": "Mostly Clear"
     },
     {
+      "time": "10:00 pm",
+      "temp": 77,
+      "cloud": 20,
+      "hum": 74,
+      "wind": 5,
+      "dir": "S",
+      "cond": "Mostly Clear"
+    },
+    {
       "time": "11:00 pm",
       "temp": 77,
-      "cloud": 22,
+      "cloud": 24,
       "hum": 74,
       "wind": 5,
       "dir": "S",
