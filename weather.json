@@ -1,51 +1,33 @@
 {
   "station": "KLAX",
   "date": "September 11, 2026",
-  "scrapedAt": "9:53 PM \u00b7 WU",
-  "ts": 1789163604521,
+  "scrapedAt": "11:38 PM \u00b7 WU",
+  "ts": 1789169908726,
   "source": "WU live",
   "hourly": [
     {
-      "time": "3:00 pm",
-      "temp": 80,
-      "cloud": 21,
-      "hum": 70,
-      "wind": 11,
-      "dir": "WSW",
-      "cond": "Mostly Sunny"
-    },
-    {
-      "time": "4:00 pm",
-      "temp": 80,
-      "cloud": 34,
-      "hum": 71,
-      "wind": 10,
-      "dir": "WSW",
-      "cond": "Partly Cloudy"
-    },
-    {
       "time": "5:00 pm",
       "temp": 79,
-      "cloud": 28,
-      "hum": 70,
+      "cloud": 0,
+      "hum": 74,
       "wind": 10,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Sunny"
     },
     {
       "time": "6:00 pm",
-      "temp": 79,
-      "cloud": 8,
-      "hum": 69,
-      "wind": 10,
+      "temp": 77,
+      "cloud": 0,
+      "hum": 76,
+      "wind": 9,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "7:00 pm",
       "temp": 76,
-      "cloud": 6,
-      "hum": 75,
+      "cloud": 0,
+      "hum": 79,
       "wind": 8,
       "dir": "WSW",
       "cond": "Sunny"
@@ -53,38 +35,38 @@
     {
       "time": "8:00 pm",
       "temp": 75,
-      "cloud": 9,
+      "cloud": 24,
       "hum": 76,
       "wind": 6,
       "dir": "WSW",
-      "cond": "Clear"
+      "cond": "Mostly Clear"
     },
     {
       "time": "9:00 pm",
       "temp": 74,
-      "cloud": 20,
+      "cloud": 7,
       "hum": 79,
       "wind": 5,
       "dir": "SW",
-      "cond": "Mostly Clear"
+      "cond": "Clear"
     },
     {
       "time": "10:00 pm",
       "temp": 74,
-      "cloud": 29,
+      "cloud": 20,
       "hum": 80,
-      "wind": 5,
-      "dir": "SW",
+      "wind": 4,
+      "dir": "SSW",
       "cond": "Mostly Clear"
     },
     {
       "time": "11:00 pm",
       "temp": 74,
-      "cloud": 35,
+      "cloud": 29,
       "hum": 82,
-      "wind": 4,
-      "dir": "SW",
-      "cond": "Partly Cloudy"
+      "wind": 3,
+      "dir": "SSW",
+      "cond": "Mostly Clear"
     }
   ]
 }
