@@ -1,78 +1,51 @@
 {
   "station": "KLAX",
   "date": "September 12, 2026",
-  "scrapedAt": "10:59 AM \u00b7 WU",
-  "ts": 1789210777997,
+  "scrapedAt": "1:53 PM \u00b7 WU",
+  "ts": 1789221222469,
   "source": "WU live",
   "hourly": [
     {
-      "time": "4:00 am",
-      "temp": 71,
-      "cloud": 76,
-      "hum": 92,
-      "wind": 2,
-      "dir": "E",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "5:00 am",
-      "temp": 71,
-      "cloud": 74,
-      "hum": 92,
-      "wind": 3,
-      "dir": "ESE",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "6:00 am",
-      "temp": 71,
-      "cloud": 78,
-      "hum": 91,
-      "wind": 3,
-      "dir": "E",
-      "cond": "Mostly Cloudy"
-    },
-    {
       "time": "7:00 am",
-      "temp": 72,
-      "cloud": 86,
-      "hum": 88,
-      "wind": 3,
+      "temp": 70,
+      "cloud": 67,
+      "hum": 91,
+      "wind": 1,
       "dir": "E",
-      "cond": "Cloudy"
+      "cond": "Mostly Cloudy"
     },
     {
       "time": "8:00 am",
-      "temp": 73,
-      "cloud": 90,
-      "hum": 84,
-      "wind": 4,
+      "temp": 72,
+      "cloud": 71,
+      "hum": 87,
+      "wind": 2,
       "dir": "SE",
-      "cond": "Cloudy"
+      "cond": "Mostly Cloudy"
     },
     {
       "time": "9:00 am",
-      "temp": 75,
+      "temp": 74,
       "cloud": 59,
-      "hum": 79,
-      "wind": 4,
+      "hum": 81,
+      "wind": 3,
       "dir": "SE",
       "cond": "Partly Cloudy"
     },
     {
       "time": "10:00 am",
-      "temp": 76,
-      "cloud": 50,
-      "hum": 76,
+      "temp": 77,
+      "cloud": 39,
+      "hum": 74,
       "wind": 5,
-      "dir": "SSE",
+      "dir": "S",
       "cond": "Partly Cloudy"
     },
     {
       "time": "11:00 am",
-      "temp": 79,
-      "cloud": 45,
-      "hum": 69,
+      "temp": 80,
+      "cloud": 35,
+      "hum": 67,
       "wind": 6,
       "dir": "SSW",
       "cond": "Partly Cloudy"
@@ -80,44 +53,44 @@
     {
       "time": "12:00 pm",
       "temp": 80,
-      "cloud": 32,
-      "hum": 69,
-      "wind": 9,
-      "dir": "WSW",
+      "cloud": 33,
+      "hum": 68,
+      "wind": 8,
+      "dir": "SW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "1:00 pm",
       "temp": 80,
-      "cloud": 33,
-      "hum": 71,
-      "wind": 11,
+      "cloud": 30,
+      "hum": 70,
+      "wind": 10,
       "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "2:00 pm",
       "temp": 79,
-      "cloud": 29,
-      "hum": 72,
+      "cloud": 36,
+      "hum": 71,
       "wind": 11,
       "dir": "WSW",
-      "cond": "Mostly Sunny"
+      "cond": "Partly Cloudy"
     },
     {
       "time": "3:00 pm",
       "temp": 79,
-      "cloud": 31,
-      "hum": 72,
+      "cloud": 38,
+      "hum": 71,
       "wind": 12,
-      "dir": "W",
+      "dir": "WSW",
       "cond": "Partly Cloudy"
     },
     {
       "time": "4:00 pm",
       "temp": 78,
-      "cloud": 38,
-      "hum": 74,
+      "cloud": 42,
+      "hum": 75,
       "wind": 13,
       "dir": "W",
       "cond": "Partly Cloudy"
@@ -125,7 +98,7 @@
     {
       "time": "5:00 pm",
       "temp": 77,
-      "cloud": 32,
+      "cloud": 36,
       "hum": 74,
       "wind": 13,
       "dir": "W",
@@ -134,8 +107,8 @@
     {
       "time": "6:00 pm",
       "temp": 76,
-      "cloud": 27,
-      "hum": 75,
+      "cloud": 29,
+      "hum": 76,
       "wind": 13,
       "dir": "WSW",
       "cond": "Mostly Sunny"
@@ -143,17 +116,17 @@
     {
       "time": "7:00 pm",
       "temp": 75,
-      "cloud": 26,
-      "hum": 76,
+      "cloud": 28,
+      "hum": 78,
       "wind": 11,
       "dir": "WSW",
       "cond": "Mostly Sunny"
     },
     {
       "time": "8:00 pm",
-      "temp": 74,
-      "cloud": 28,
-      "hum": 80,
+      "temp": 73,
+      "cloud": 29,
+      "hum": 79,
       "wind": 10,
       "dir": "WSW",
       "cond": "Mostly Clear"
@@ -162,8 +135,8 @@
       "time": "9:00 pm",
       "temp": 73,
       "cloud": 28,
-      "hum": 81,
-      "wind": 7,
+      "hum": 82,
+      "wind": 8,
       "dir": "WSW",
       "cond": "Mostly Clear"
     },
