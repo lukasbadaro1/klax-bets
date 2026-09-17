@@ -1,88 +1,70 @@
 {
   "station": "KLAX",
   "date": "September 17, 2026",
-  "scrapedAt": "9:51 PM \u00b7 WU",
-  "ts": 1789681872426,
+  "scrapedAt": "11:46 PM \u00b7 WU",
+  "ts": 1789688803534,
   "source": "WU live",
   "hourly": [
     {
-      "time": "3:00 pm",
-      "temp": 75,
-      "cloud": 0,
-      "hum": 57,
-      "wind": 12,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
-      "time": "4:00 pm",
-      "temp": 74,
-      "cloud": 0,
-      "hum": 59,
-      "wind": 13,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
       "time": "5:00 pm",
-      "temp": 73,
-      "cloud": 0,
-      "hum": 61,
-      "wind": 13,
+      "temp": 74,
+      "cloud": 1,
+      "hum": 60,
+      "wind": 14,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "6:00 pm",
       "temp": 72,
-      "cloud": 6,
-      "hum": 65,
-      "wind": 12,
-      "dir": "WSW",
+      "cloud": 2,
+      "hum": 63,
+      "wind": 13,
+      "dir": "W",
       "cond": "Sunny"
     },
     {
       "time": "7:00 pm",
       "temp": 71,
       "cloud": 2,
-      "hum": 71,
-      "wind": 10,
-      "dir": "WSW",
-      "cond": "Clear"
-    },
-    {
-      "time": "8:00 pm",
-      "temp": 69,
-      "cloud": 8,
-      "hum": 74,
-      "wind": 9,
+      "hum": 68,
+      "wind": 12,
       "dir": "W",
       "cond": "Clear"
     },
     {
+      "time": "8:00 pm",
+      "temp": 70,
+      "cloud": 20,
+      "hum": 74,
+      "wind": 10,
+      "dir": "W",
+      "cond": "Mostly Clear"
+    },
+    {
       "time": "9:00 pm",
       "temp": 69,
-      "cloud": 9,
+      "cloud": 24,
       "hum": 76,
+      "wind": 8,
+      "dir": "WSW",
+      "cond": "Mostly Clear"
+    },
+    {
+      "time": "10:00 pm",
+      "temp": 69,
+      "cloud": 9,
+      "hum": 75,
       "wind": 7,
       "dir": "WSW",
       "cond": "Clear"
     },
     {
-      "time": "10:00 pm",
-      "temp": 69,
-      "cloud": 22,
-      "hum": 75,
-      "wind": 9,
-      "dir": "WSW",
-      "cond": "Mostly Clear"
-    },
-    {
       "time": "11:00 pm",
       "temp": 69,
-      "cloud": 8,
+      "cloud": 9,
       "hum": 76,
-      "wind": 6,
+      "wind": 5,
       "dir": "W",
       "cond": "Clear"
     }
