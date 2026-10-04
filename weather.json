@@ -1,68 +1,41 @@
 {
   "station": "KLAX",
   "date": "October 4, 2026",
-  "scrapedAt": "8:29 PM \u00b7 WU",
-  "ts": 1791145754946,
+  "scrapedAt": "11:27 PM \u00b7 WU",
+  "ts": 1791156428379,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 98,
+      "time": "5:00 pm",
+      "temp": 90,
       "cloud": 9,
-      "hum": 24,
-      "wind": 10,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
-      "time": "3:00 pm",
-      "temp": 97,
-      "cloud": 7,
-      "hum": 25,
+      "hum": 31,
       "wind": 11,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
-      "time": "4:00 pm",
-      "temp": 95,
-      "cloud": 7,
-      "hum": 26,
-      "wind": 10,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
-      "time": "5:00 pm",
-      "temp": 91,
-      "cloud": 1,
-      "hum": 30,
-      "wind": 9,
-      "dir": "WSW",
-      "cond": "Sunny"
-    },
-    {
       "time": "6:00 pm",
-      "temp": 87,
-      "cloud": 1,
-      "hum": 36,
-      "wind": 8,
+      "temp": 86,
+      "cloud": 8,
+      "hum": 38,
+      "wind": 10,
       "dir": "W",
       "cond": "Sunny"
     },
     {
       "time": "7:00 pm",
-      "temp": 83,
-      "cloud": 1,
-      "hum": 42,
-      "wind": 7,
+      "temp": 82,
+      "cloud": 7,
+      "hum": 45,
+      "wind": 9,
       "dir": "W",
       "cond": "Clear"
     },
     {
       "time": "8:00 pm",
       "temp": 82,
-      "cloud": 1,
+      "cloud": 2,
       "hum": 47,
       "wind": 6,
       "dir": "W",
@@ -71,27 +44,27 @@
     {
       "time": "9:00 pm",
       "temp": 81,
-      "cloud": 2,
+      "cloud": 0,
       "hum": 51,
-      "wind": 6,
+      "wind": 5,
       "dir": "WSW",
       "cond": "Clear"
     },
     {
       "time": "10:00 pm",
       "temp": 80,
-      "cloud": 2,
+      "cloud": 0,
       "hum": 55,
-      "wind": 5,
+      "wind": 4,
       "dir": "WSW",
       "cond": "Clear"
     },
     {
       "time": "11:00 pm",
       "temp": 79,
-      "cloud": 3,
-      "hum": 59,
-      "wind": 4,
+      "cloud": 0,
+      "hum": 58,
+      "wind": 3,
       "dir": "WSW",
       "cond": "Clear"
     }
