@@ -1,99 +1,72 @@
 {
   "station": "KLAX",
   "date": "October 11, 2026",
-  "scrapedAt": "8:35 PM \u00b7 WU",
-  "ts": 1791750940118,
+  "scrapedAt": "11:55 PM \u00b7 WU",
+  "ts": 1791762928652,
   "source": "WU live",
   "hourly": [
     {
-      "time": "2:00 pm",
-      "temp": 70,
-      "cloud": 74,
-      "hum": 59,
-      "wind": 14,
-      "dir": "SW",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "3:00 pm",
-      "temp": 70,
-      "cloud": 70,
+      "time": "5:00 pm",
+      "temp": 68,
+      "cloud": 100,
       "hum": 60,
-      "wind": 14,
+      "wind": 8,
       "dir": "SW",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "4:00 pm",
-      "temp": 69,
-      "cloud": 84,
-      "hum": 58,
-      "wind": 13,
-      "dir": "WSW",
       "cond": "Cloudy"
     },
     {
-      "time": "5:00 pm",
-      "temp": 69,
-      "cloud": 78,
-      "hum": 61,
-      "wind": 11,
-      "dir": "WSW",
-      "cond": "Mostly Cloudy"
-    },
-    {
       "time": "6:00 pm",
-      "temp": 67,
-      "cloud": 81,
-      "hum": 64,
-      "wind": 10,
+      "temp": 66,
+      "cloud": 100,
+      "hum": 65,
+      "wind": 7,
       "dir": "WSW",
       "cond": "Cloudy"
     },
     {
       "time": "7:00 pm",
       "temp": 66,
-      "cloud": 80,
-      "hum": 66,
-      "wind": 8,
+      "cloud": 81,
+      "hum": 65,
+      "wind": 6,
       "dir": "WSW",
       "cond": "Cloudy"
     },
     {
       "time": "8:00 pm",
       "temp": 65,
-      "cloud": 77,
-      "hum": 67,
+      "cloud": 89,
+      "hum": 69,
       "wind": 8,
-      "dir": "WSW",
-      "cond": "Mostly Cloudy"
-    },
-    {
-      "time": "9:00 pm",
-      "temp": 66,
-      "cloud": 83,
-      "hum": 65,
-      "wind": 9,
       "dir": "WSW",
       "cond": "Cloudy"
     },
     {
-      "time": "10:00 pm",
-      "temp": 66,
-      "cloud": 93,
-      "hum": 68,
-      "wind": 9,
+      "time": "9:00 pm",
+      "temp": 65,
+      "cloud": 92,
+      "hum": 69,
+      "wind": 7,
       "dir": "SW",
-      "cond": "Few Showers"
+      "cond": "Cloudy"
+    },
+    {
+      "time": "10:00 pm",
+      "temp": 65,
+      "cloud": 90,
+      "hum": 71,
+      "wind": 8,
+      "dir": "SW",
+      "cond": "Cloudy"
     },
     {
       "time": "11:00 pm",
-      "temp": 65,
-      "cloud": 94,
-      "hum": 71,
-      "wind": 9,
+      "temp": 64,
+      "cloud": 96,
+      "hum": 73,
+      "wind": 7,
       "dir": "WSW",
-      "cond": "Few Showers"
+      "cond": "Cloudy"
     }
   ]
 }
