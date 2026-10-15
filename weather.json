@@ -1,60 +1,42 @@
 {
   "station": "KLAX",
   "date": "October 15, 2026",
-  "scrapedAt": "9:33 PM \u00b7 WU",
-  "ts": 1792100013046,
+  "scrapedAt": "11:47 PM \u00b7 WU",
+  "ts": 1792108056687,
   "source": "WU live",
   "hourly": [
     {
-      "time": "3:00 pm",
+      "time": "5:00 pm",
       "temp": 84,
       "cloud": 10,
       "hum": 24,
-      "wind": 11,
-      "dir": "W",
-      "cond": "Sunny"
-    },
-    {
-      "time": "4:00 pm",
-      "temp": 83,
-      "cloud": 9,
-      "hum": 25,
-      "wind": 10,
-      "dir": "W",
-      "cond": "Sunny"
-    },
-    {
-      "time": "5:00 pm",
-      "temp": 83,
-      "cloud": 8,
-      "hum": 25,
       "wind": 10,
       "dir": "W",
       "cond": "Sunny"
     },
     {
       "time": "6:00 pm",
-      "temp": 85,
-      "cloud": 2,
-      "hum": 24,
-      "wind": 6,
-      "dir": "WNW",
+      "temp": 82,
+      "cloud": 9,
+      "hum": 26,
+      "wind": 8,
+      "dir": "W",
       "cond": "Sunny"
     },
     {
       "time": "7:00 pm",
-      "temp": 82,
-      "cloud": 2,
-      "hum": 26,
-      "wind": 5,
-      "dir": "NNW",
+      "temp": 80,
+      "cloud": 8,
+      "hum": 28,
+      "wind": 6,
+      "dir": "NW",
       "cond": "Clear"
     },
     {
       "time": "8:00 pm",
-      "temp": 79,
+      "temp": 78,
       "cloud": 0,
-      "hum": 29,
+      "hum": 31,
       "wind": 4,
       "dir": "NW",
       "cond": "Clear"
@@ -71,16 +53,16 @@
     {
       "time": "10:00 pm",
       "temp": 76,
-      "cloud": 3,
-      "hum": 33,
+      "cloud": 0,
+      "hum": 34,
       "wind": 5,
       "dir": "WNW",
       "cond": "Clear"
     },
     {
       "time": "11:00 pm",
-      "temp": 76,
-      "cloud": 2,
+      "temp": 75,
+      "cloud": 0,
       "hum": 34,
       "wind": 4,
       "dir": "NW",
