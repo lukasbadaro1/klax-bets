@@ -1,32 +1,14 @@
 {
   "station": "KLAX",
   "date": "October 24, 2026",
-  "scrapedAt": "7:43 PM \u00b7 WU",
-  "ts": 1792871006609,
+  "scrapedAt": "9:55 PM \u00b7 WU",
+  "ts": 1792878914136,
   "source": "WU live",
   "hourly": [
     {
-      "time": "1:00 pm",
-      "temp": 75,
-      "cloud": 10,
-      "hum": 46,
-      "wind": 8,
-      "dir": "SW",
-      "cond": "Sunny"
-    },
-    {
-      "time": "2:00 pm",
-      "temp": 75,
-      "cloud": 10,
-      "hum": 48,
-      "wind": 9,
-      "dir": "SW",
-      "cond": "Sunny"
-    },
-    {
       "time": "3:00 pm",
-      "temp": 75,
-      "cloud": 8,
+      "temp": 74,
+      "cloud": 9,
       "hum": 52,
       "wind": 10,
       "dir": "WSW",
@@ -35,17 +17,17 @@
     {
       "time": "4:00 pm",
       "temp": 73,
-      "cloud": 2,
-      "hum": 58,
+      "cloud": 8,
+      "hum": 53,
       "wind": 11,
       "dir": "WSW",
       "cond": "Sunny"
     },
     {
       "time": "5:00 pm",
-      "temp": 72,
-      "cloud": 3,
-      "hum": 58,
+      "temp": 73,
+      "cloud": 7,
+      "hum": 55,
       "wind": 11,
       "dir": "WSW",
       "cond": "Sunny"
@@ -54,7 +36,7 @@
       "time": "6:00 pm",
       "temp": 71,
       "cloud": 2,
-      "hum": 62,
+      "hum": 60,
       "wind": 9,
       "dir": "WSW",
       "cond": "Sunny"
@@ -63,26 +45,26 @@
       "time": "7:00 pm",
       "temp": 70,
       "cloud": 2,
-      "hum": 67,
-      "wind": 8,
+      "hum": 65,
+      "wind": 7,
       "dir": "W",
       "cond": "Clear"
     },
     {
       "time": "8:00 pm",
-      "temp": 70,
+      "temp": 69,
       "cloud": 0,
       "hum": 70,
-      "wind": 8,
+      "wind": 6,
       "dir": "W",
       "cond": "Clear"
     },
     {
       "time": "9:00 pm",
-      "temp": 69,
+      "temp": 68,
       "cloud": 0,
-      "hum": 72,
-      "wind": 7,
+      "hum": 74,
+      "wind": 5,
       "dir": "W",
       "cond": "Clear"
     },
@@ -90,7 +72,7 @@
       "time": "10:00 pm",
       "temp": 68,
       "cloud": 0,
-      "hum": 71,
+      "hum": 73,
       "wind": 6,
       "dir": "WSW",
       "cond": "Clear"
@@ -99,7 +81,7 @@
       "time": "11:00 pm",
       "temp": 67,
       "cloud": 0,
-      "hum": 73,
+      "hum": 75,
       "wind": 4,
       "dir": "WNW",
       "cond": "Clear"
